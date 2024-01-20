@@ -1,69 +1,53 @@
-
+import 'package:bhedhuk_app/data/models/foods_and_drinks.dart';
+import 'package:bhedhuk_app/data/models/menus.dart';
 
 class Restaurant {
-  final String restaurantId,
-      restaurantName,
-      restaurantDescription,
-      restaurantPicture,
-      restaurantCity;
-  final double restaurantRating;
-  final Menus menus;
+  final String id;
+  final String name;
+  final String description;
+  final String pictureId;
+  final String city;
+  final num rating;
+  final List<Menus> menus;
 
   Restaurant({
-    required this.restaurantId,
-    required this.restaurantName,
-    required this.restaurantDescription,
-    required this.restaurantPicture,
-    required this.restaurantCity,
-    required this.restaurantRating,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.pictureId,
+    required this.city,
+    required this.rating,
     required this.menus,
   });
 
-  factory Restaurant.fromJson(Map<String, dynamic> restaurant) => Restaurant(
-        restaurantId: restaurant['id'],
-        restaurantName: restaurant['name'],
-        restaurantDescription: restaurant['description'],
-        restaurantPicture: restaurant['pictureId'],
-        restaurantCity: restaurant['city'],
-        restaurantRating: restaurant['rating'],
-        menus: Menus(
-          foods: restaurant['menus']['foods'],
-          drinks: restaurant['menus']['drinks'],
-        ),
-      );
+  factory Restaurant.fromJson(Map<String, dynamic> parsedJson) {
+    var menusJson = parsedJson['menus'] as Map<String, dynamic>;
+    Menus menus = Menus.fromJson(menusJson);
+    return Restaurant(
+      id: parsedJson['id'] ?? '',
+      name: parsedJson['name'] ?? '',
+      description: parsedJson['description'] ?? '',
+      pictureId: parsedJson['pictureId'] ?? '',
+      city: parsedJson['city'] ?? '',
+      rating: parsedJson['rating'] ?? 0,
+      menus: [menus],
+    );
+  }
 
+  String get getId => id;
 
-  
+  String get getName => name;
+
+  String get getPictureId => pictureId;
+
+  num get getRating => rating;
+
+  String get getMenuFoods => _getMenuItems(menus, (menus) => menus.foods);
+
+  String get getMenuDrinks => _getMenuItems(menus, (menus) => menus.drinks);
+
+  String _getMenuItems(
+      List<Menus> menus, List<FoodsAndDrinks> Function(Menus) getter) {
+    return menus.expand(getter).map((item) => item.name).join('\n');
+  }
 }
-
-class Menus {
-  final List<FoodsAndDrinks> foods;
-  final List<FoodsAndDrinks> drinks;
-
-  Menus({
-    required this.foods,
-    required this.drinks,
-  });
-
-  factory Menus.fromJson(Map<String, dynamic> menus) => Menus(
-        foods: List<FoodsAndDrinks>.from(
-            menus['foods'].map((foods) => FoodsAndDrinks.fromJson(foods))),
-        drinks: List<FoodsAndDrinks>.from(
-            menus['drinks'].map((drinks) => FoodsAndDrinks.fromJson(drinks))),
-      );
-}
-
-class FoodsAndDrinks {
-  final String name;
-
-  FoodsAndDrinks({
-    required this.name,
-  });
-
-  factory FoodsAndDrinks.fromJson(Map<String, dynamic> foodsAndDrinks) =>
-      FoodsAndDrinks(
-        name: foodsAndDrinks['name'],
-      );
-}
-
-
