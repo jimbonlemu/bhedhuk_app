@@ -22,11 +22,11 @@ class Menus {
     );
   }
 
-  List<String> get foodNames {
-    return foods.map((foods) => foods.name).toList();
-  }
+  // List<String> get foodNames {
+  //   return foods.map((foods) => foods.name).toList();
+  // }
 
-  List<String> get drinkNames {
-    return drinks.map((drinks) => drinks.name).toList();
-  }
+  // List<String> get drinkNames {
+  //   return drinks.map((drinks) => drinks.name).toList();
+  // }
 }
