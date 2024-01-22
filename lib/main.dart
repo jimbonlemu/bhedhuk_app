@@ -1,10 +1,13 @@
 import 'package:bhedhuk_app/data/models/list_restaurant.dart';
 import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/pages/favorites_detail_page.dart';
+import 'package:bhedhuk_app/pages/feed_detail_page.dart';
+import 'package:bhedhuk_app/pages/navbar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(BhedhukApp());
+  runApp(const BhedhukApp());
 }
 
 class BhedhukApp extends StatelessWidget {
@@ -17,11 +20,23 @@ class BhedhukApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
-        title: 'Bhedhuk App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: TestView());
+      title: 'Bhedhuk App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: NavBarPage.route,
+      routes: {
+        NavBarPage.route: (context) => const NavBarPage(),
+        FavoritesDetailPage.route: (context) => FavoritesDetailPage(
+              restaurant:
+                  ModalRoute.of(context)?.settings.arguments as Restaurant,
+            ),
+        FeedDetailPage.route: (context) => FeedDetailPage(
+              restaurantId: ModalRoute.of(context)?.settings.arguments
+                  as ListOfRestaurant,
+            ),
+      },
+    );
   }
 }
 
@@ -66,7 +81,7 @@ class TestView extends StatelessWidget {
           return Text("${snapshot.error}");
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
