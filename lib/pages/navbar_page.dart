@@ -18,7 +18,8 @@ class NavBarPage extends StatefulWidget {
 class _NavBarPageState extends State<NavBarPage> {
   final List<BottomNavigationBarItem> _navBarPageItem = [
     BottomNavigationBarItem(
-      icon: Icon(Platform.isIOS ? CupertinoIcons.home : Icons.feed),
+      icon: Icon(
+          Platform.isIOS ? CupertinoIcons.square_favorites_fill : Icons.feed),
       label: 'Feeds',
     ),
     BottomNavigationBarItem(

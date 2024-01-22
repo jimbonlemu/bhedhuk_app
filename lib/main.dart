@@ -1,5 +1,6 @@
 import 'package:bhedhuk_app/data/models/list_restaurant.dart';
 import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/data/utils/styles.dart';
 import 'package:bhedhuk_app/pages/favorites_detail_page.dart';
 import 'package:bhedhuk_app/pages/feed_detail_page.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
@@ -22,7 +23,30 @@ class BhedhukApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bhedhuk App',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+              primary: primaryColor,
+              onPrimary: onPrimaryColor,
+              secondary: secondaryColor,
+            ),
+        scaffoldBackgroundColor: Colors.white70,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        appBarTheme: AppBarTheme(
+          color: Colors.amber[400],
+          elevation: 0,
+        ),
+        textTheme: bhedhukTextTheme,
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: primaryColor,
+            foregroundColor: secondaryColor,
+            textStyle: const TextStyle(),
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(0),
+              ),
+            ),
+          ),
+        ),
       ),
       initialRoute: NavBarPage.route,
       routes: {
