@@ -52,7 +52,6 @@ class _FeedListPageState extends State<FeedListPage> {
             );
           } else if (snapshot.hasError) {
             print('Error: ${snapshot.error}');
-
             return Text("${snapshot.error}");
           }
           return const Center(
@@ -108,10 +107,10 @@ class _FeedListPageState extends State<FeedListPage> {
               child: Container(
                 color: Colors.white.withOpacity(0.3),
                 child: Padding(
-                  padding: EdgeInsets.only(left: 20),
+                  padding: const EdgeInsets.only(left: 20),
                   child: Text(
                     restaurant.name,
-                    style: TextStyle(color: Colors.white, fontSize: 35),
+                    style: const TextStyle(color: Colors.white, fontSize: 35),
                   ),
                 ),
               ),
@@ -128,24 +127,7 @@ class _FeedListPageState extends State<FeedListPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: RatingBar.builder(
-              ignoreGestures: true,
-              unratedColor: secondaryColor,
-              itemSize: 30,
-              initialRating: restaurant.rating.toDouble(),
-              allowHalfRating: true,
-              itemCount: 5,
-              itemBuilder: (context, _) => const Icon(
-                Icons.star,
-                size: 5,
-                color: Colors.amber,
-              ),
-              onRatingUpdate: (rating) {
-                print(rating);
-              },
-            ),
-          ),
+          _buildRatingBar(restaurant.rating.toDouble()),
           const SizedBox(height: 5),
           Text(
             'Our Rating : ${restaurant.rating}/5',
@@ -159,6 +141,25 @@ class _FeedListPageState extends State<FeedListPage> {
             'We serves ${restaurant.getMenuDrinks.length} drinks',
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildRatingBar(double restaurantRating) {
+    return Center(
+      child: RatingBar.builder(
+        ignoreGestures: true,
+        unratedColor: secondaryColor,
+        itemSize: 30,
+        initialRating: restaurantRating,
+        allowHalfRating: true,
+        itemCount: 5,
+        itemBuilder: (context, _) => const Icon(
+          Icons.star,
+          size: 5,
+          color: Colors.amber,
+        ),
+        onRatingUpdate: (rating) {},
       ),
     );
   }
