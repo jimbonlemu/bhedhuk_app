@@ -42,12 +42,14 @@ class Restaurant {
 
   num get getRating => rating;
 
-  String get getMenuFoods => _getMenuItems(menus, (menus) => menus.foods);
+  List<dynamic> get getMenuFoods =>
+      _getMenuItems(menus, (menus) => menus.foods);
 
-  String get getMenuDrinks => _getMenuItems(menus, (menus) => menus.drinks);
+  List<dynamic> get getMenuDrinks =>
+      _getMenuItems(menus, (menus) => menus.drinks);
 
-  String _getMenuItems(
+  List<dynamic> _getMenuItems(
       List<Menus> menus, List<FoodsAndDrinks> Function(Menus) getter) {
-    return menus.expand(getter).map((item) => item.name).join('\n');
+    return menus.expand(getter).map((item) => item.name).toList();
   }
 }

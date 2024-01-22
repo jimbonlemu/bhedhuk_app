@@ -1,5 +1,3 @@
-
-
 class FoodsAndDrinks {
   final String name;
 
