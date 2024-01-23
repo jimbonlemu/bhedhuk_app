@@ -5,10 +5,17 @@ import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 
-class FeedDetailPage extends StatelessWidget {
+class FeedDetailPage extends StatefulWidget {
   static const route = '/feed_detail_page';
   final Restaurant restaurant;
   const FeedDetailPage({super.key, required this.restaurant});
+
+  @override
+  State<FeedDetailPage> createState() => _FeedDetailPageState();
+}
+
+class _FeedDetailPageState extends State<FeedDetailPage> {
+  bool _filledAsFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +23,11 @@ class FeedDetailPage extends StatelessWidget {
       body: CustomAppBarWidget(
         disappearWhenScrolled: true,
         image: Image.network(
-          restaurant.pictureId,
+          widget.restaurant.pictureId,
           fit: BoxFit.cover,
         ),
         imageTitle: Text(
-          restaurant.name,
+          widget.restaurant.name,
           style: bhedhukTextTheme.headlineSmall,
         ),
         slivers: [
@@ -60,15 +67,25 @@ class FeedDetailPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         IconTitleWidget(
-          restaurant: restaurant,
+          restaurant: widget.restaurant,
           icon: Icons.place_outlined,
-          text: restaurant.city,
+          text: widget.restaurant.city,
         ),
         IconTitleWidget(
-          restaurant: restaurant,
+          restaurant: widget.restaurant,
           icon: Icons.star_border,
-          text: restaurant.rating.toString(),
+          text: widget.restaurant.rating.toString(),
         ),
+        IconButton(
+            onPressed: () {
+              setState(() {
+                _filledAsFavorite = !_filledAsFavorite;
+              });
+            },
+            icon: Icon(
+              _filledAsFavorite ? Icons.favorite : Icons.favorite_border,
+              color: primaryColor,
+            ))
       ],
     );
   }
@@ -77,9 +94,10 @@ class FeedDetailPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('About ${restaurant.name} :', style: bhedhukTextTheme.titleLarge),
+        Text('About ${widget.restaurant.name} :',
+            style: bhedhukTextTheme.titleLarge),
         const SizedBox(height: 10),
-        Text(restaurant.description),
+        Text(widget.restaurant.description),
       ],
     );
   }
@@ -90,9 +108,11 @@ class FeedDetailPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         MenuWidget(
-            title: 'Our Foods Menu : ', objectToList: restaurant.getMenuFoods),
+            title: 'Our Foods Menu : ',
+            objectToList: widget.restaurant.getMenuFoods),
         MenuWidget(
-            title: 'Our Drinks Menu :', objectToList: restaurant.getMenuDrinks),
+            title: 'Our Drinks Menu :',
+            objectToList: widget.restaurant.getMenuDrinks),
       ],
     );
   }

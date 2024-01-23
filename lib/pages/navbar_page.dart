@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bhedhuk_app/pages/favorites_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_list_page.dart';
+import 'package:bhedhuk_app/widgets/custom_alert_dialog_widget.dart';
 import 'package:bhedhuk_app/widgets/platform_of_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,11 +31,17 @@ class _NavBarPageState extends State<NavBarPage> {
   ];
 
   final List<Widget> _listPage = [
-    FeedListPage(),
-    FavoritesListPage(),
+    const FeedListPage(),
+    const FavoritesListPage(),
   ];
 
   int _navBarIndex = 0;
+  Future<bool> onWillPop() async {
+    return await showDialog(
+            context: context,
+            builder: (context) => const CustomAlertDialog()) ??
+        false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +52,19 @@ class _NavBarPageState extends State<NavBarPage> {
   }
 
   Widget _buildAndroidUser(BuildContext context) {
-    return Scaffold(
-      body: _listPage[_navBarIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: _navBarPageItem,
-        currentIndex: _navBarIndex,
-        onTap: (selected) {
-          setState(() {
-            _navBarIndex = selected;
-          });
-        },
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
+        body: _listPage[_navBarIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          items: _navBarPageItem,
+          currentIndex: _navBarIndex,
+          onTap: (selected) {
+            setState(() {
+              _navBarIndex = selected;
+            });
+          },
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bhedhuk_app/data/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class FavoritesListPage extends StatefulWidget {
@@ -12,8 +13,13 @@ class FavoritesListPage extends StatefulWidget {
 class _FavoritesListPageState extends State<FavoritesListPage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('Coming Soon !'),
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Coming Soon !',
+          style: bhedhukTextTheme.titleLarge,
+        ),
+      ),
     );
   }
 }

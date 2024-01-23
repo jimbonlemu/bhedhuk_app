@@ -1,8 +1,10 @@
+import 'dart:ui';
 import 'package:bhedhuk_app/data/models/list_restaurant.dart';
 import 'package:bhedhuk_app/data/models/restaurant.dart';
-
+import 'package:bhedhuk_app/pages/error_page.dart';
 import 'package:bhedhuk_app/pages/feed_detail_page.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
+import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -34,8 +36,7 @@ class _FeedListPageState extends State<FeedListPage> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
-              print('Error: ${snapshot.error}');
-              return Text("${snapshot.error}");
+              return const ErrorPage();
             } else if (snapshot.hasData) {
               return ListView.builder(
                 itemCount: snapshot.data!.restaurants.length,
@@ -53,7 +54,7 @@ class _FeedListPageState extends State<FeedListPage> {
                 },
               );
             } else {
-              return Text("No data available");
+              return const ErrorPage();
             }
           } else {
             return Shimmer.fromColors(
@@ -107,6 +108,33 @@ class _FeedListPageState extends State<FeedListPage> {
 
   Widget _buildFeedItem(BuildContext context, Restaurant restaurant) {
     return GestureDetector(
+      onLongPress: () {
+        showGeneralDialog(
+          context: context,
+          barrierDismissible: true,
+          barrierLabel:
+              MaterialLocalizations.of(context).modalBarrierDismissLabel,
+          barrierColor: Colors.black45,
+          transitionDuration: const Duration(milliseconds: 200),
+          pageBuilder: (BuildContext buildContext, Animation animation,
+              Animation secondaryAnimation) {
+            return Center(
+              child: InteractiveViewer(
+                  clipBehavior: Clip.none,
+                  minScale: 0.1,
+                  maxScale: 2.0,
+                  child: Image.network(restaurant.pictureId)),
+            );
+          },
+          transitionBuilder: (context, animation, secondaryAnimation, child) {
+            return BackdropFilter(
+              filter: ImageFilter.blur(
+                  sigmaX: 4 * animation.value, sigmaY: 4 * animation.value),
+              child: child,
+            );
+          },
+        );
+      },
       onTap: () {
         Navigator.pushNamed(context, FeedDetailPage.route,
             arguments: restaurant);
@@ -122,7 +150,17 @@ class _FeedListPageState extends State<FeedListPage> {
               child: Wrap(
                 children: [
                   _buildImageHeader(context, restaurant),
-                  _buildDescription(context, restaurant)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _buildDescription(context, restaurant),
+                      IconTitleWidget(
+                        restaurant: restaurant,
+                        icon: Icons.place_outlined,
+                        text: restaurant.city,
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
