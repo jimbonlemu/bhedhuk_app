@@ -12,6 +12,8 @@ class FavoritesListPage extends StatefulWidget {
 class _FavoritesListPageState extends State<FavoritesListPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: Text('Coming Soon !'),
+    );
   }
 }

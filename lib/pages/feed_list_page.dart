@@ -32,68 +32,74 @@ class _FeedListPageState extends State<FeedListPage> {
       child: FutureBuilder<ListOfRestaurant>(
         future: fetchListOfRestaurant(),
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.restaurants.length,
-              itemBuilder: (context, index) {
-                var restaurant = snapshot.data!.restaurants[index];
-                return Column(
-                  children: [
-                    _buildFeedItem(context, restaurant),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ],
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            print('Error: ${snapshot.error}');
-            return Text("${snapshot.error}");
-          }
-          return Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
-            child: ListView.builder(
-              itemCount: snapshot.data?.restaurants.length,
-              itemBuilder: (_, __) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: double.infinity,
-                                height: 200,
-                                color: Colors.white,
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 5.0),
-                            ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: Container(
-                                width: double.infinity,
-                                height: 40,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              print('Error: ${snapshot.error}');
+              return Text("${snapshot.error}");
+            } else if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.restaurants.length,
+                itemBuilder: (context, index) {
+                  var restaurant = snapshot.data!.restaurants[index];
+                  precacheImage(NetworkImage(restaurant.pictureId), context);
+                  return Column(
+                    children: [
+                      _buildFeedItem(context, restaurant),
+                      const SizedBox(
+                        height: 20,
                       )
                     ],
-                  ),
-                );
-              },
-            ),
-          );
+                  );
+                },
+              );
+            } else {
+              return Text("No data available");
+            }
+          } else {
+            return Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: ListView.builder(
+                itemCount: snapshot.data?.restaurants.length,
+                itemBuilder: (_, __) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 200,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 5.0),
+                              ),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 40,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              ),
+            );
+          }
         },
       ),
     );

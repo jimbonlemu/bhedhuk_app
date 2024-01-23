@@ -34,14 +34,6 @@ class Restaurant {
     );
   }
 
-  String get getId => id;
-
-  String get getName => name;
-
-  String get getPictureId => pictureId;
-
-  num get getRating => rating;
-
   List<dynamic> get getMenuFoods =>
       _getMenuItems(menus, (menus) => menus.foods);
 

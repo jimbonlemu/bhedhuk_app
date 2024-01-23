@@ -9,24 +9,16 @@ class ListOfRestaurant {
   ListOfRestaurant({required this.restaurants});
 
   factory ListOfRestaurant.fromJson(Map<String, dynamic> parsedJson) {
-    // List<Restaurant> restaurantList = (parsedJson['restaurants'] as List)
-    //     .map((i) => Restaurant.fromJson(i))
-    //     .toList();
-
     return ListOfRestaurant(
       restaurants: parser(parsedJson['restaurants'], Restaurant.fromJson),
     );
   }
 }
 
-
-
-
 Future<ListOfRestaurant> fetchListOfRestaurant() async {
+  await Future.delayed(Duration(seconds: 2));
   final response = await rootBundle.loadString('assets/local_restaurant.json');
 
   final data = jsonDecode(response);
   return ListOfRestaurant.fromJson(data);
 }
-
-
