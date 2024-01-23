@@ -153,11 +153,13 @@ class _FeedListPageState extends State<FeedListPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _buildDescription(context, restaurant),
-                      IconTitleWidget(
-                        restaurant: restaurant,
-                        icon: Icons.place_outlined,
-                        text: restaurant.city,
+                      Expanded(child: _buildDescription(context, restaurant)),
+                      Expanded(
+                        child: IconTitleWidget(
+                          restaurant: restaurant,
+                          icon: Icons.place_outlined,
+                          text: restaurant.city,
+                        ),
                       ),
                     ],
                   ),

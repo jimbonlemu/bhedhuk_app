@@ -66,26 +66,32 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        IconTitleWidget(
-          restaurant: widget.restaurant,
-          icon: Icons.place_outlined,
-          text: widget.restaurant.city,
+        Expanded(
+          child: IconTitleWidget(
+            restaurant: widget.restaurant,
+            icon: Icons.place_outlined,
+            text: widget.restaurant.city,
+          ),
         ),
-        IconTitleWidget(
-          restaurant: widget.restaurant,
-          icon: Icons.star_border,
-          text: widget.restaurant.rating.toString(),
+        Expanded(
+          child: IconTitleWidget(
+            restaurant: widget.restaurant,
+            icon: Icons.star_border,
+            text: widget.restaurant.rating.toString(),
+          ),
         ),
-        IconButton(
-            onPressed: () {
-              setState(() {
-                _filledAsFavorite = !_filledAsFavorite;
-              });
-            },
-            icon: Icon(
-              _filledAsFavorite ? Icons.favorite : Icons.favorite_border,
-              color: primaryColor,
-            ))
+        Expanded(
+          child: IconButton(
+              onPressed: () {
+                setState(() {
+                  _filledAsFavorite = !_filledAsFavorite;
+                });
+              },
+              icon: Icon(
+                _filledAsFavorite ? Icons.favorite : Icons.favorite_border,
+                color: primaryColor,
+              )),
+        )
       ],
     );
   }
@@ -107,12 +113,16 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MenuWidget(
-            title: 'Our Foods Menu : ',
-            objectToList: widget.restaurant.getMenuFoods),
-        MenuWidget(
-            title: 'Our Drinks Menu :',
-            objectToList: widget.restaurant.getMenuDrinks),
+        Expanded(
+          child: MenuWidget(
+              title: 'Our Foods Menu : ',
+              objectToList: widget.restaurant.getMenuFoods),
+        ),
+        Expanded(
+          child: MenuWidget(
+              title: 'Our Drinks Menu :',
+              objectToList: widget.restaurant.getMenuDrinks),
+        ),
       ],
     );
   }
