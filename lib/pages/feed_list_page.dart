@@ -1,8 +1,10 @@
 import 'package:bhedhuk_app/data/models/list_restaurant.dart';
 import 'package:bhedhuk_app/data/models/restaurant.dart';
-import 'package:bhedhuk_app/data/utils/styles.dart';
+
+import 'package:bhedhuk_app/pages/feed_detail_page.dart';
+import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
+import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class FeedListPage extends StatefulWidget {
   static const route = '/feeds_page';
@@ -16,14 +18,8 @@ class _FeedListPageState extends State<FeedListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Feeds For You',
-          style: TextStyle(
-            fontSize: 25,
-          ),
-        ),
+      appBar: CustomAppBarWidget(
+        title: 'Feeds For You',
       ),
       body: _buildListFeedItem(context),
     );
@@ -63,19 +59,25 @@ class _FeedListPageState extends State<FeedListPage> {
   }
 
   Widget _buildFeedItem(BuildContext context, Restaurant restaurant) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Material(
-        color: Colors.white38,
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Wrap(
-              children: [
-                _buildImageHeader(context, restaurant),
-                _buildDescription(context, restaurant)
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, FeedDetailPage.route,
+            arguments: restaurant);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Material(
+          color: Colors.white38,
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Wrap(
+                children: [
+                  _buildImageHeader(context, restaurant),
+                  _buildDescription(context, restaurant)
+                ],
+              ),
             ),
           ),
         ),
@@ -147,20 +149,8 @@ class _FeedListPageState extends State<FeedListPage> {
 
   Widget _buildRatingBar(double restaurantRating) {
     return Center(
-      child: RatingBar.builder(
-        ignoreGestures: true,
-        unratedColor: secondaryColor,
-        itemSize: 30,
-        initialRating: restaurantRating,
-        allowHalfRating: true,
-        itemCount: 5,
-        itemBuilder: (context, _) => const Icon(
-          Icons.star,
-          size: 5,
-          color: Colors.amber,
-        ),
-        onRatingUpdate: (rating) {},
-      ),
-    );
+        child: RatingBarWidget(
+      rating: restaurantRating,
+    ));
   }
 }

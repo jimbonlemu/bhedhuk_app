@@ -6,6 +6,6 @@ class FoodsAndDrinks {
   });
 
   factory FoodsAndDrinks.fromJson(Map<String, dynamic> parsedJson) {
-    return FoodsAndDrinks(name: parsedJson['name']);
+    return FoodsAndDrinks(name: parsedJson['name'] ?? '');
   }
 }

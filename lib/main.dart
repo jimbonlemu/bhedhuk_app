@@ -56,8 +56,8 @@ class BhedhukApp extends StatelessWidget {
                   ModalRoute.of(context)?.settings.arguments as Restaurant,
             ),
         FeedDetailPage.route: (context) => FeedDetailPage(
-              restaurantId: ModalRoute.of(context)?.settings.arguments
-                  as ListOfRestaurant,
+              restaurant:
+                  ModalRoute.of(context)?.settings.arguments as Restaurant,
             ),
       },
     );
