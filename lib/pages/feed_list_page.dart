@@ -5,6 +5,7 @@ import 'package:bhedhuk_app/pages/feed_detail_page.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class FeedListPage extends StatefulWidget {
   static const route = '/feeds_page';
@@ -50,8 +51,48 @@ class _FeedListPageState extends State<FeedListPage> {
             print('Error: ${snapshot.error}');
             return Text("${snapshot.error}");
           }
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Shimmer.fromColors(
+            baseColor: Colors.grey[300]!,
+            highlightColor: Colors.grey[100]!,
+            child: ListView.builder(
+              itemCount: snapshot.data?.restaurants.length,
+              itemBuilder: (_, __) {
+                return Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                width: double.infinity,
+                                height: 200,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.0),
+                            ),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Container(
+                                width: double.infinity,
+                                height: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
