@@ -48,11 +48,9 @@ class BhedhukApp extends StatelessWidget {
           ),
         ),
       ),
-      home:const  SplashPage(),
-      
+      home: const SplashPage(),
       routes: {
         NavBarPage.route: (context) => const NavBarPage(),
-      
         FeedDetailPage.route: (context) => FeedDetailPage(
               restaurant:
                   ModalRoute.of(context)?.settings.arguments as Restaurant,
