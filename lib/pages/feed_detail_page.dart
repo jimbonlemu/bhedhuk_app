@@ -39,7 +39,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  padding: EdgeInsets.all(50),
+                  padding: const EdgeInsets.all(50),
                   color: Colors.white,
                   child: SingleChildScrollView(
                     child: Column(

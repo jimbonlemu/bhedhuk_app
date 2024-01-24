@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-final Color primaryColor = Color(0xFFFED801);
-final Color onPrimaryColor = Color(0xFFFADB06);
-final Color secondaryColor = Color(0xF060000);
+const Color primaryColor = Color(0xFFFED801);
+const Color onPrimaryColor = Color(0xFFFADB06);
+const Color secondaryColor = Color(0x0f060000);
 
 final TextTheme bhedhukTextTheme = TextTheme(
   displayLarge: GoogleFonts.lobsterTwo(

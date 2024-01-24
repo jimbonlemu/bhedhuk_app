@@ -21,7 +21,7 @@ class _FeedListPageState extends State<FeedListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBarWidget(
+      appBar: const CustomAppBarWidget(
         title: 'Feeds For You',
       ),
       body: _buildListFeedItem(context),

@@ -16,7 +16,7 @@ class ListOfRestaurant {
 }
 
 Future<ListOfRestaurant> fetchListOfRestaurant() async {
-  await Future.delayed(Duration(seconds: 2));
+  await Future.delayed(const Duration(seconds: 2));
   final response = await rootBundle.loadString('assets/local_restaurant.json');
 
   final data = jsonDecode(response);

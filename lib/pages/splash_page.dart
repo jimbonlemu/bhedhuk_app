@@ -42,12 +42,12 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: AnimatedOpacity(
           opacity: _opacity,
-          duration: Duration(seconds: 1),
+          duration: const Duration(seconds: 1),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                  padding: EdgeInsets.all(40),
+                  padding: const EdgeInsets.all(40),
                   child: Image.asset(Images.app_logo))
             ],
           ),

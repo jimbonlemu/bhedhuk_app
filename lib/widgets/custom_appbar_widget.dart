@@ -13,7 +13,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final Color? color;
   final Widget? imageTitle;
 
-  CustomAppBarWidget(
+  const CustomAppBarWidget(
       {Key? key,
       this.title,
       this.titleWidget,
@@ -28,7 +28,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
       : super(key: key);
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   _CustomAppBarWidgetState createState() => _CustomAppBarWidgetState();

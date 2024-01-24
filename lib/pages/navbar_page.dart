@@ -14,11 +14,11 @@ class NavBarPage extends StatefulWidget {
 
 class _NavBarPageState extends State<NavBarPage> {
   final List<BottomNavigationBarItem> _navBarPageItem = [
-     BottomNavigationBarItem(
+     const BottomNavigationBarItem(
       icon: Icon(Icons.feed),
       label: 'Feeds',
     ),
-     BottomNavigationBarItem(
+     const BottomNavigationBarItem(
       icon: Icon(Icons.favorite),
       label: 'Favorites',
     ),
