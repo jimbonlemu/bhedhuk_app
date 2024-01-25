@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
       setState(() {
         _opacity = 0;
       });
-      await Future.delayed(const Duration(seconds: 1)); 
+      await Future.delayed(const Duration(seconds: 1));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) {
           return const NavBarPage();
@@ -48,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
             children: [
               Padding(
                   padding: const EdgeInsets.all(40),
-                  child: Image.asset(Images.app_logo))
+                  child: Image.asset(Images.appLogo))
             ],
           ),
         ),

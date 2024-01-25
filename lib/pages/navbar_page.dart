@@ -14,11 +14,11 @@ class NavBarPage extends StatefulWidget {
 
 class _NavBarPageState extends State<NavBarPage> {
   final List<BottomNavigationBarItem> _navBarPageItem = [
-     const BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(Icons.feed),
       label: 'Feeds',
     ),
-     const BottomNavigationBarItem(
+    const BottomNavigationBarItem(
       icon: Icon(Icons.favorite),
       label: 'Favorites',
     ),
@@ -30,17 +30,15 @@ class _NavBarPageState extends State<NavBarPage> {
   ];
 
   int _navBarIndex = 0;
-  Future<bool> onWillPop() async {
-    return await showDialog(
-            context: context,
-            builder: (context) => const CustomAlertDialog()) ??
-        false;
-  }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) => showDialog(
+        context: context,
+        builder: (context) => const CustomAlertDialog(),
+      ),
       child: Scaffold(
         body: _listPage[_navBarIndex],
         bottomNavigationBar: BottomNavigationBar(
