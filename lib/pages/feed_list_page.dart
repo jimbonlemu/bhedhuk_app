@@ -28,14 +28,12 @@ class _FeedListPageState extends State<FeedListPage> {
     );
   }
 
- 
-
   Widget _buildListFeedList(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: FutureBuilder<ListOfRestaurant>(
         future: fetchListOfRestaurant(),
-        builder: (context, AsyncSnapshot<ListOfRestaurant> snapshot) {
+        builder: (context, snapshot) {
           var state = snapshot.connectionState;
           if (state != ConnectionState.done) {
             return _buildShimmer(snapshot);
@@ -207,7 +205,7 @@ class _FeedListPageState extends State<FeedListPage> {
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
       child: ListView.builder(
-        itemCount: snapshot.data,
+        itemCount: 3,
         itemBuilder: (_, __) {
           return Padding(
             padding: const EdgeInsets.all(20),
