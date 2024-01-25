@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/data/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/icon_title_widget.dart';

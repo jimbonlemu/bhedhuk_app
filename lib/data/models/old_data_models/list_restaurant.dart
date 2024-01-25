@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/data/utils/model_parser.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';

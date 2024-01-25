@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:bhedhuk_app/data/models/list_restaurant.dart';
-import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/data/models/old_data_models/list_restaurant.dart';
+import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/pages/error_page.dart';
 import 'package:bhedhuk_app/pages/feed_detail_page.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';

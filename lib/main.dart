@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/restaurant.dart';
+import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/data/utils/styles.dart';
 import 'package:bhedhuk_app/pages/feed_detail_page.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
@@ -49,6 +49,7 @@ class BhedhukApp extends StatelessWidget {
         ),
       ),
       home: const SplashPage(),
+      // initialRoute: SplashPage.route,
       routes: {
         NavBarPage.route: (context) => const NavBarPage(),
         FeedDetailPage.route: (context) => FeedDetailPage(
