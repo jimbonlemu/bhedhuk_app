@@ -13,7 +13,14 @@ class ListOfRestaurant {
       restaurants: parser(parsedJson['restaurants'], Restaurant.fromJson),
     );
   }
+
+   ListOfRestaurant sublist(int start, int end) {
+    return ListOfRestaurant(
+      restaurants: restaurants.sublist(start, end),
+    );
+  }
 }
+
 
 Future<ListOfRestaurant> fetchListOfRestaurant() async {
   await Future.delayed(const Duration(seconds: 2));

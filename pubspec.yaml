@@ -38,6 +38,9 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_rating_bar: ^4.0.1
   shimmer: ^3.0.0
+  http: ^1.2.0
+  flutter_dotenv: ^5.1.0
+  pagination_flutter: ^0.0.8
   
 
 dev_dependencies:
@@ -66,6 +69,7 @@ flutter:
   assets:
     - assets/images/
     - assets/local_restaurant.json
+    - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
