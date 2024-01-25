@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bhedhuk_app/data/utils/images.dart';
+import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
 import 'package:flutter/material.dart';
 

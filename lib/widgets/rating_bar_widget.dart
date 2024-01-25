@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/utils/styles.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 

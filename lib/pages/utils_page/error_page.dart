@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/utils/styles.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {

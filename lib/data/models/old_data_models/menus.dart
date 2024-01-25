@@ -1,5 +1,5 @@
 import 'package:bhedhuk_app/data/models/old_data_models/foods_and_drinks.dart';
-import 'package:bhedhuk_app/data/utils/model_parser.dart';
+import 'package:bhedhuk_app/utils/model_parser.dart';
 
 class Menus {
   final List<FoodsAndDrinks> foods;

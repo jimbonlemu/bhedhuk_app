@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:bhedhuk_app/data/models/old_data_models/list_restaurant.dart';
 import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
-import 'package:bhedhuk_app/pages/error_page.dart';
-import 'package:bhedhuk_app/pages/feed_detail_page.dart';
+import 'package:bhedhuk_app/pages/utils_page/error_page.dart';
+import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';

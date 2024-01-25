@@ -1,5 +1,5 @@
 import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
-import 'package:bhedhuk_app/data/utils/styles.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class IconTitleWidget extends StatelessWidget {

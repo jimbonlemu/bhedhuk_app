@@ -1,5 +1,5 @@
 import 'package:bhedhuk_app/pages/favorites_list_page.dart';
-import 'package:bhedhuk_app/pages/feed_list_page.dart';
+import 'package:bhedhuk_app/pages/feed_page/feed_list_page.dart';
 import 'package:bhedhuk_app/widgets/custom_alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 
