@@ -1,10 +1,12 @@
 import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
+import 'package:bhedhuk_app/utils/navigation_service.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
 import 'package:bhedhuk_app/pages/utils_page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 
 void main() {
   runApp(const BhedhukApp());
@@ -20,6 +22,7 @@ class BhedhukApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Bhedhuk App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

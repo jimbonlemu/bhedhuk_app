@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
+import 'package:bhedhuk_app/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  double _opacity = 1;
+  double _opacity = 0;
 
   @override
   void initState() {
@@ -22,17 +23,13 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   splashScreenTransition() async {
-    var duration = const Duration(seconds: 2);
+    var duration = const Duration(seconds: 3);
     Timer(duration, () async {
       setState(() {
-        _opacity = 0;
+        _opacity = 1;
       });
-      await Future.delayed(const Duration(seconds: 1));
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) {
-          return const NavBarPage();
-        },
-      ));
+      await Future.delayed(const Duration(seconds: 2));
+      Navigate.me(destination: NavBarPage.route);
     });
   }
 
@@ -43,7 +40,7 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: AnimatedOpacity(
           opacity: _opacity,
-          duration: const Duration(seconds: 1),
+          duration: const Duration(seconds: 2),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
