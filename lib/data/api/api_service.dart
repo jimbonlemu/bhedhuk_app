@@ -17,7 +17,7 @@ class ApiService {
       'https://restaurant-api.dicoding.dev/images/large/';
 
   Future<ListOfRestaurant> getListOfRestaurant() async {
-    final response = await http.get(Uri.parse(_baseUrl  + _getListOfRestaurant));
+    final response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
 
     if (response.statusCode == 200) {
       return ListOfRestaurant.fromJson(jsonDecode(response.body));
