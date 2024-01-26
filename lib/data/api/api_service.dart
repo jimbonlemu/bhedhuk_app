@@ -13,40 +13,33 @@ class ApiService implements InterfaceApiService {
   static const String _searchListOfRestaurant = 'search?q=';
   static const String _postReview = 'review';
 
+  Future<dynamic> _get(String url, Function fromJson) async {
+    var response = await http.get(Uri.parse(_baseUrl + url));
+    if (response.statusCode == 200) {
+      return fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to Get Data');
+    }
+  }
+
   @override
   Future<ListOfRestaurantObjectResponse> getListOfRestaurant() async {
-    var response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
-    if (response.statusCode == 200) {
-      return ListOfRestaurantObjectResponse.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to Get List Of Restaurant');
-    }
+    return await _get(
+        _getListOfRestaurant, ListOfRestaurantObjectResponse.fromJson);
   }
 
   @override
   Future<ObjectOfRestaurantDetailObjectResponse> getRestaurantDetail(
       String restaurantId) async {
-    var response = await http
-        .get(Uri.parse(_baseUrl + _getDetailOfRestaurant + restaurantId));
-    if (response.statusCode == 200) {
-      return ObjectOfRestaurantDetailObjectResponse.fromJson(
-          jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to Get Restaurant Detail');
-    }
+    return await _get(_getDetailOfRestaurant + restaurantId,
+        ObjectOfRestaurantDetailObjectResponse.fromJson);
   }
 
   @override
   Future<ListOfRestaurantObjectResponse> searchListOfRestaurant(
       String keyword) async {
-    var response =
-        await http.get(Uri.parse(_baseUrl + _searchListOfRestaurant + keyword));
-
-    if (response.statusCode == 200) {
-      return ListOfRestaurantObjectResponse.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to Search List Of Restaurant');
-    }
+    return await _get(_searchListOfRestaurant + keyword,
+        ListOfRestaurantObjectResponse.fromJson);
   }
 
   @override
