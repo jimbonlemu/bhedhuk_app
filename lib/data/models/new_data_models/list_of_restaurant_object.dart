@@ -1,17 +1,25 @@
-// class Restaurant {
-//   String id;
-//   String name;
-//   String description;
-//   String pictureId;
-//   String city;
-//   num rating;
+import 'package:bhedhuk_app/data/models/new_data_models/object_of_api_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
+import 'package:bhedhuk_app/utils/model_parser.dart';
 
-//   Restaurant({
-//     required this.id,
-//     required this.name,
-//     required this.description,
-//     required this.pictureId,
-//     required this.city,
-//     required this.rating,
-//   });
-// }
+class ListOfRestaurantObject extends ObjectOfApiResponse {
+  List<ObjectOfRestaurant> objectOfRestaurant;
+
+  ListOfRestaurantObject({
+    required bool error,
+    required String message,
+    required this.objectOfRestaurant,
+  }) : super(
+          error: error,
+          message: message,
+        );
+
+  factory ListOfRestaurantObject.fromJson(Map<String, dynamic> json) {
+    return ListOfRestaurantObject(
+      error: json['error'],
+      message: json['message'],
+      objectOfRestaurant:
+          parser(json['restaurants'], ObjectOfRestaurant.fromJson),
+    );
+  }
+}
