@@ -12,4 +12,14 @@ class ObjectOfRestaurantDetailObjectResponse extends ObjectOfApiResponse {
           error: error,
           message: message,
         );
+
+  factory ObjectOfRestaurantDetailObjectResponse.fromJson(
+      Map<String, dynamic> parsed) {
+    return ObjectOfRestaurantDetailObjectResponse(
+      error: parsed['error'],
+      message: parsed['message'],
+      objectOfRestaurantDetail:
+          ObjectOfRestaurantDetail.fromJson(parsed['restaurant']),
+    );
+  }
 }
