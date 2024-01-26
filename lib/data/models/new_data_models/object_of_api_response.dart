@@ -1,6 +1,7 @@
 class ObjectOfApiResponse {
   bool error;
   String message;
+  
 
   ObjectOfApiResponse({
     required this.error,

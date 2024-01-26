@@ -6,7 +6,6 @@ import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/pages/utils_page/error_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/provider/restaurant_provider.dart';
-import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/pagination_widget.dart';
@@ -39,54 +38,54 @@ class _FeedListPageState extends State<FeedListPage> {
       appBar: const CustomAppBarWidget(
         title: 'Feeds For You',
       ),
-      body: _buildProvider(),
+      // body: _buildProvider(), 
     );
   }
 
-  Widget _buildProvider() {
-    return Consumer<RestaurantProvider>(
-      builder: (context, response, _) {
-        if (response.responseResult == ResponseResult.loading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.red,
-            ),
-          );
-        } else if (response.responseResult == ResponseResult.hasData) {
-          return ListView.builder(
-            shrinkWrap: true,
-            itemCount: response.getListOfRestaurantObjectResponse
-                .listobjectOfRestaurant.length,
-            itemBuilder: (context, index) {
-              var listResponseRestaurant = response
-                  .getListOfRestaurantObjectResponse
-                  .listobjectOfRestaurant[index];
-              return _buildText(listResponseRestaurant);
-            },
-          );
-        } else if (response.responseResult == ResponseResult.noData) {
-          return Center(
-            child: Material(
-              child: Text(response.messageResponse),
-            ),
-          );
-        } else if (response.responseResult == ResponseResult.error) {
-          print(response.messageResponse);
-          return Center(
-            child: Material(
-              child: Text(response.messageResponse),
-            ),
-          );
-        } else {
-          return const Center(
-            child: Material(
-              child: Text(''),
-            ),
-          );
-        }
-      },
-    );
-  }
+  // Widget _buildProvider() {
+  //   return Consumer<RestaurantProvider>(
+  //     builder: (context, response, _) {
+  //       if (response.responseResult == ResponseResult.loading) {
+  //         return const Center(
+  //           child: CircularProgressIndicator(
+  //             color: Colors.red,
+  //           ),
+  //         );
+  //       } else if (response.responseResult == ResponseResult.hasData) {
+  //         return ListView.builder(
+  //           shrinkWrap: true,
+  //           itemCount: response.getListOfRestaurantObjectResponse
+  //               .listobjectOfRestaurant.length,
+  //           itemBuilder: (context, index) {
+  //             var listResponseRestaurant = response
+  //                 .getListOfRestaurantObjectResponse
+  //                 .listobjectOfRestaurant[index];
+  //             return _buildText(listResponseRestaurant);
+  //           },
+  //         );
+  //       } else if (response.responseResult == ResponseResult.noData) {
+  //         return Center(
+  //           child: Material(
+  //             child: Text(response.messageResponse),
+  //           ),
+  //         );
+  //       } else if (response.responseResult == ResponseResult.error) {
+  //         print(response.messageResponse);
+  //         return Center(
+  //           child: Material(
+  //             child: Text(response.messageResponse),
+  //           ),
+  //         );
+  //       } else {
+  //         return const Center(
+  //           child: Material(
+  //             child: Text(''),
+  //           ),
+  //         );
+  //       }
+  //     },
+  //   );
+  // }
 
   Widget _buildText(ObjectOfRestaurant restaurant) {
     return Material(

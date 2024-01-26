@@ -44,9 +44,10 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
         'drinks':parser(parsed['menus']['drinks'], (parsing) => parsing['name']),
             // List<String>.from(parsed['menus']['drinks'].map((x) => x['name'])),
       },
-      listObjectOfCustomerReviews: List<ObjectOfCustomerReview>.from(
-          parsed['customerReviews']
-              .map((x) => ObjectOfCustomerReview.fromJson(x))),
+      listObjectOfCustomerReviews: parser(parsed['customerReviews'], ObjectOfCustomerReview.fromJson),
+      // List<ObjectOfCustomerReview>.from(
+      //     parsed['customerReviews']
+      //         .map((x) => ObjectOfCustomerReview.fromJson(x))),
     );
   }
 }
