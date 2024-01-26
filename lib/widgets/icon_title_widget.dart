@@ -1,4 +1,3 @@
-import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +18,11 @@ class IconTitleWidget extends StatelessWidget {
         Icon(
           icon,
           color: primaryColor,
-          size: 25,
+          size: 50,
         ),
         Text(
           text,
-          style: bhedhukTextTheme.titleLarge,
+          style: bhedhukTextTheme.headlineSmall,
         ),
       ],
     );

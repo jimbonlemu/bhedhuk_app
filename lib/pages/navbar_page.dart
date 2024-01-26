@@ -25,7 +25,7 @@ class _NavBarPageState extends State<NavBarPage> {
   ];
 
   final List<Widget> _listPage = [
-    const FeedListPage(),
+    FeedListPage(),
     const FavoritesListPage(),
   ];
 

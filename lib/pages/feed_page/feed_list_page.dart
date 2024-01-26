@@ -11,7 +11,8 @@ import 'package:shimmer/shimmer.dart';
 
 class FeedListPage extends StatelessWidget {
   static const route = '/feeds_page';
-  const FeedListPage({super.key});
+  FeedListPage({super.key});
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class FeedListPage extends StatelessWidget {
               .getListOfRestaurantObjectResponse.listobjectOfRestaurant
               .sublist(startIndex, endIndex);
           return ListView.builder(
+            controller: _scrollController,
             itemCount: pageItems.length + 1,
             itemBuilder: (context, index) {
               if (index < pageItems.length) {
@@ -99,6 +101,11 @@ class FeedListPage extends StatelessWidget {
         onChanged: (page) {
           if (page != selectedPage) {
             feedListPageProvider.setSelectedPage(page);
+            _scrollController.animateTo(
+              0.0,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeOut,
+            );
           }
         },
       ),

@@ -1,7 +1,9 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 import 'package:bhedhuk_app/utils/images.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
 import 'package:flutter/material.dart';
@@ -117,23 +119,38 @@ class FeedItemWidget extends StatelessWidget {
   }
 
   Widget _buildDescription() {
+    var titles = [
+      "Overview of the ${restaurant.name} : ",
+      "${restaurant.name} at a Glance ! ",
+      "About ${restaurant.name} : "
+    ];
+    var random = Random();
+    var title = titles[random.nextInt(titles.length)];
+
     return Padding(
-      padding: const EdgeInsets.only(left: 25),
+      padding: const EdgeInsets.only(left: 25, bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           RatingBarWidget(
             rating: restaurant.rating.toDouble(),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           Text(
             'Our Rating : ${restaurant.rating}/5',
+            style: bhedhukTextTheme.titleMedium,
           ),
           const SizedBox(height: 5),
           Text(
-            '${restaurant.description} meal options ',
+            title,
+            style: bhedhukTextTheme.titleLarge,
           ),
           const SizedBox(height: 5),
+          Text(
+            restaurant.description,
+            maxLines: 4,
+            overflow: TextOverflow.ellipsis,
+          ),
         ],
       ),
     );
