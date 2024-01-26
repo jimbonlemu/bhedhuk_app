@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_response.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 
 class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
