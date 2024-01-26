@@ -14,11 +14,11 @@ class ListOfRestaurant {
     );
   }
 
-  ListOfRestaurant sublist(int start, int end) {
-    return ListOfRestaurant(
-      restaurants: restaurants.sublist(start, end),
-    );
-  }
+  // ListOfRestaurant sublist(int start, int end) {
+  //   return ListOfRestaurant(
+  //     restaurants: restaurants.sublist(start, end),
+  //   );
+  // }
 }
 
 Future<ListOfRestaurant> fetchListOfRestaurant() async {

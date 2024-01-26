@@ -1,36 +1,17 @@
-import 'dart:ui';
 import 'dart:math';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
-import 'package:bhedhuk_app/data/models/old_data_models/list_restaurant.dart';
-import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
-import 'package:bhedhuk_app/pages/utils_page/error_page.dart';
-import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
+import 'package:bhedhuk_app/provider/feed_list_page_provider.dart';
 import 'package:bhedhuk_app/provider/restaurant_provider.dart';
+import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
-import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
+import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:bhedhuk_app/widgets/pagination_widget.dart';
-import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
-class FeedListPage extends StatefulWidget {
+class FeedListPage extends StatelessWidget {
   static const route = '/feeds_page';
   const FeedListPage({super.key});
-
-  @override
-  State<FeedListPage> createState() => _FeedListPageState();
-}
-
-class _FeedListPageState extends State<FeedListPage> {
-  int selectedPage = 1;
-  int itemsPerPage = 3;
-
-  setSelectedPage(int index) {
-    setState(() {
-      selectedPage = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,255 +19,93 @@ class _FeedListPageState extends State<FeedListPage> {
       appBar: const CustomAppBarWidget(
         title: 'Feeds For You',
       ),
-      // body: _buildProvider(), 
+      body: _buildListRestaurant(context),
     );
   }
 
-  // Widget _buildProvider() {
-  //   return Consumer<RestaurantProvider>(
-  //     builder: (context, response, _) {
-  //       if (response.responseResult == ResponseResult.loading) {
-  //         return const Center(
-  //           child: CircularProgressIndicator(
-  //             color: Colors.red,
-  //           ),
-  //         );
-  //       } else if (response.responseResult == ResponseResult.hasData) {
-  //         return ListView.builder(
-  //           shrinkWrap: true,
-  //           itemCount: response.getListOfRestaurantObjectResponse
-  //               .listobjectOfRestaurant.length,
-  //           itemBuilder: (context, index) {
-  //             var listResponseRestaurant = response
-  //                 .getListOfRestaurantObjectResponse
-  //                 .listobjectOfRestaurant[index];
-  //             return _buildText(listResponseRestaurant);
-  //           },
-  //         );
-  //       } else if (response.responseResult == ResponseResult.noData) {
-  //         return Center(
-  //           child: Material(
-  //             child: Text(response.messageResponse),
-  //           ),
-  //         );
-  //       } else if (response.responseResult == ResponseResult.error) {
-  //         print(response.messageResponse);
-  //         return Center(
-  //           child: Material(
-  //             child: Text(response.messageResponse),
-  //           ),
-  //         );
-  //       } else {
-  //         return const Center(
-  //           child: Material(
-  //             child: Text(''),
-  //           ),
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
+  Widget _buildListRestaurant(BuildContext context) {
+    int itemsPerPage = 3;
+    return Consumer2<RestaurantProvider, FeedListPageProvider>(
+      builder: (context, restaurantProvider, feedListPageProvider, _) {
+        int selectedPage = feedListPageProvider.selectedPage;
+        if (restaurantProvider.responseResult == ResponseResult.loading) {
+          return _buildShimmer();
+        } else if (restaurantProvider.responseResult ==
+            ResponseResult.hasData) {
+          int startIndex = (selectedPage - 1) * itemsPerPage;
+          int endIndex = min(startIndex + itemsPerPage,
+              restaurantProvider.getListOfRestaurantObjectResponse.count);
 
-  Widget _buildText(ObjectOfRestaurant restaurant) {
-    return Material(
-      color: Colors.white,
-      child: ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-        leading: Image.network(
-          "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}",
-          width: 100,
-        ),
-        title: Text(restaurant.name),
-        subtitle: Text(restaurant.rating.toString()),
-      ),
-    );
-  }
-
-  Widget _buildListFeedList(BuildContext context) {
-    return FutureBuilder<ListOfRestaurant>(
-      future: fetchListOfRestaurant(),
-      builder: (context, snapshot) {
-        var state = snapshot.connectionState;
-        if (state != ConnectionState.done) {
-          return _buildShimmer(snapshot);
+          var pageItems = restaurantProvider
+              .getListOfRestaurantObjectResponse.listobjectOfRestaurant
+              .sublist(startIndex, endIndex);
+          return ListView.builder(
+            itemCount: pageItems.length + 1,
+            itemBuilder: (context, index) {
+              if (index < pageItems.length) {
+                var restaurant = pageItems[index];
+                precacheImage(
+                    NetworkImage(Images.instanceImages
+                        .getImageSize(restaurant.pictureId, 'medium')),
+                    context);
+                return FeedItemWidget(restaurant: restaurant);
+              } else {
+                return _buildPagination(
+                    restaurantProvider: restaurantProvider,
+                    selectedPage: selectedPage,
+                    itemsPerPage: itemsPerPage,
+                    feedListPageProvider: feedListPageProvider);
+              }
+            },
+          );
+        } else if (restaurantProvider.responseResult == ResponseResult.noData) {
+          return Center(
+            child: Material(
+              child: Text(restaurantProvider.messageResponse),
+            ),
+          );
+        } else if (restaurantProvider.responseResult == ResponseResult.error) {
+          print(restaurantProvider.messageResponse);
+          return Center(
+            child: Material(
+              child: Text(restaurantProvider.messageResponse),
+            ),
+          );
         } else {
-          if (snapshot.hasData) {
-            int startIndex = (selectedPage - 1) * itemsPerPage;
-            int endIndex = min(
-                startIndex + itemsPerPage, snapshot.data!.restaurants.length);
-
-            var pageItems =
-                snapshot.data!.restaurants.sublist(startIndex, endIndex);
-            return ListView.builder(
-              itemCount: pageItems.length + 1,
-              itemBuilder: (context, index) {
-                if (index < pageItems.length) {
-                  var restaurant = pageItems[index];
-                  precacheImage(NetworkImage(restaurant.pictureId), context);
-                  return _buildFeedItem(context, restaurant);
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 20),
-                    child: PaginationWidget(
-                      pageCount:
-                          (snapshot.data!.restaurants.length / itemsPerPage)
-                              .ceil(),
-                      selectedPage: selectedPage,
-                      itemToDisplay: 3,
-                      onChanged: (page) {
-                        if (page != selectedPage) {
-                          setState(() {
-                            selectedPage = page;
-                          });
-                        }
-                      },
-                    ),
-                  );
-                }
-              },
-            );
-          } else if (snapshot.hasError) {
-            return const ErrorPage();
-          } else {
-            return const Material(child: Text(''));
-          }
+          return const Center(
+            child: Material(
+              child: Text(''),
+            ),
+          );
         }
       },
     );
   }
 
-  Widget _buildFeedItem(BuildContext context, Restaurant restaurant) {
-    return GestureDetector(
-      onLongPress: () {
-        showGeneralDialog(
-          context: context,
-          barrierDismissible: true,
-          barrierLabel:
-              MaterialLocalizations.of(context).modalBarrierDismissLabel,
-          barrierColor: Colors.black45,
-          transitionDuration: const Duration(milliseconds: 200),
-          pageBuilder: (BuildContext buildContext, Animation animation,
-              Animation secondaryAnimation) {
-            return Center(
-              child: InteractiveViewer(
-                  clipBehavior: Clip.none,
-                  minScale: 0.1,
-                  maxScale: 2.0,
-                  child: Image.network(restaurant.pictureId)),
-            );
-          },
-          transitionBuilder: (context, animation, secondaryAnimation, child) {
-            return BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaX: 4 * animation.value, sigmaY: 4 * animation.value),
-              child: child,
-            );
-          },
-        );
-      },
-      onTap: () {
-        Navigator.pushNamed(context, FeedDetailPage.route,
-            arguments: restaurant);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Material(
-            color: Colors.white38,
-            child: Wrap(
-              children: [
-                _buildImageHeader(context, restaurant),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(child: _buildDescription(context, restaurant)),
-                    Expanded(
-                      child: IconTitleWidget(
-                        restaurant: restaurant,
-                        icon: Icons.place_outlined,
-                        text: restaurant.city,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildImageHeader(BuildContext context, Restaurant restaurant) {
+  Widget _buildPagination(
+      {required RestaurantProvider restaurantProvider,
+      required int selectedPage,
+      required int itemsPerPage,
+      required FeedListPageProvider feedListPageProvider}) {
     return Padding(
-      padding: const EdgeInsets.all(20),
-      child: ClipRRect(
-        borderRadius: const BorderRadius.all(Radius.circular(20)),
-        child: Stack(
-          children: [
-            Image.network(
-              restaurant.pictureId,
-              color: Colors.amber[200],
-              colorBlendMode: BlendMode.darken,
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(40),
-                ),
-                child: Container(
-                  color: Colors.white.withOpacity(0.3),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      restaurant.name,
-                      style: const TextStyle(color: Colors.white, fontSize: 35),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
+      padding: const EdgeInsets.only(bottom: 20),
+      child: PaginationWidget(
+        pageCount: (restaurantProvider.getListOfRestaurantObjectResponse
+                    .listobjectOfRestaurant.length /
+                itemsPerPage)
+            .ceil(),
+        selectedPage: selectedPage,
+        itemToDisplay: 3,
+        onChanged: (page) {
+          if (page != selectedPage) {
+            feedListPageProvider.setSelectedPage(page);
+          }
+        },
       ),
     );
   }
 
-  Widget _buildDescription(BuildContext context, Restaurant restaurant) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          RatingBarWidget(
-            rating: restaurant.rating.toDouble(),
-          ),
-          const SizedBox(height: 5),
-          Text(
-            'Our Rating : ${restaurant.rating}/5',
-          ),
-          const SizedBox(height: 5),
-          Text(
-            'We provides ${restaurant.getMenuFoods.length} meal options ',
-          ),
-          const SizedBox(height: 5),
-          Text(
-            'We serves ${restaurant.getMenuDrinks.length} drinks',
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildShimmer(AsyncSnapshot snapshot) {
+  Widget _buildShimmer() {
     return Shimmer.fromColors(
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,

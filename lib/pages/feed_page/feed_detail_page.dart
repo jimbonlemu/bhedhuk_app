@@ -68,14 +68,12 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
       children: [
         Expanded(
           child: IconTitleWidget(
-            restaurant: widget.restaurant,
             icon: Icons.place_outlined,
             text: widget.restaurant.city,
           ),
         ),
         Expanded(
           child: IconTitleWidget(
-            restaurant: widget.restaurant,
             icon: Icons.star_border,
             text: widget.restaurant.rating.toString(),
           ),

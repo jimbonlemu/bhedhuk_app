@@ -1,6 +1,7 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
 import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
+import 'package:bhedhuk_app/provider/feed_list_page_provider.dart';
 import 'package:bhedhuk_app/provider/restaurant_provider.dart';
 import 'package:bhedhuk_app/utils/navigation_service.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
@@ -20,6 +21,9 @@ Future main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => RestaurantProvider(apiService: apiService),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FeedListPageProvider(),
         ),
       ],
       child: const BhedhukApp(),
