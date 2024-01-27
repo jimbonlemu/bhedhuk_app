@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../data/models/new_data_models/restaurant_detail_object_response.dart';
 import '../utils/response_result.dart';
 
-
 class DetailFeedProvider extends ChangeNotifier {
   final ApiService apiService;
   final String id;

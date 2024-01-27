@@ -14,7 +14,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   ApiService apiService = ApiService();
-    runApp(
+  runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -23,7 +23,6 @@ Future main() async {
         ChangeNotifierProvider(
           create: (context) => UtilsProvider(),
         ),
-        
       ],
       child: const BhedhukApp(),
     ),

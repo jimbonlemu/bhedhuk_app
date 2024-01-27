@@ -12,8 +12,10 @@ class ObjectOfMenus {
 
   factory ObjectOfMenus.fromJson(Map<String, dynamic> parsedJson) {
     return ObjectOfMenus(
-      foods: parser((parsedJson['foods'] as List), ObjectOfFoodsAndDrinks.fromJson),
-      drinks: parser((parsedJson['drinks'] as List), ObjectOfFoodsAndDrinks.fromJson),
+      foods: parser(
+          (parsedJson['foods'] as List), ObjectOfFoodsAndDrinks.fromJson),
+      drinks: parser(
+          (parsedJson['drinks'] as List), ObjectOfFoodsAndDrinks.fromJson),
     );
   }
 }

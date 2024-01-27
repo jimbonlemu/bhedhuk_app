@@ -13,7 +13,7 @@ class ObjectOfApiResponse {
       message: parsed['message'] ?? '',
     );
   }
-   Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'error': error,
       'message': message,
