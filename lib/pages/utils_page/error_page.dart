@@ -12,12 +12,12 @@ class ErrorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '404',
+            "Hi i'm sorry..",
             style: bhedhukTextTheme.displaySmall,
           ),
           Center(
             child: Text(
-              'Page Not Found',
+              'Something Went Wrong!',
               style: bhedhukTextTheme.titleLarge,
             ),
           ),

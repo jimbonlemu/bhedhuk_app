@@ -1,21 +1,25 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_response.dart';
+import 'package:bhedhuk_app/utils/response_result.dart';
 import 'package:flutter/material.dart';
 
-enum ResponseResult { loading, noData, hasData, error }
-
-class RestaurantProvider extends ChangeNotifier {
+class FeedListProvider extends ChangeNotifier {
   final ApiService apiService;
 
-  RestaurantProvider({required this.apiService}) {
+  FeedListProvider({
+    required this.apiService,
+  }) {
     _fetchListOfRestaurant();
   }
 
   late ListOfRestaurantObjectResponse _listOfRestaurantObjectResponse;
+
   late ResponseResult _response;
+
   String _messageResponse = '';
 
   String get messageResponse => _messageResponse;
+
   ListOfRestaurantObjectResponse get getListOfRestaurantObjectResponse =>
       _listOfRestaurantObjectResponse;
 

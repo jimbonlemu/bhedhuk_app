@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/old_data_models/foods_and_drinks.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/foods_and_drinks.dart';
 import 'package:bhedhuk_app/data/models/old_data_models/menus.dart';
 
 class Restaurant {
@@ -41,7 +41,7 @@ class Restaurant {
       _getMenuItems(menus, (menus) => menus.drinks);
 
   List<dynamic> _getMenuItems(
-      List<Menus> menus, List<FoodsAndDrinks> Function(Menus) getter) {
+      List<Menus> menus, List<ObjectOfFoodsAndDrinks> Function(Menus) getter) {
     return menus.expand(getter).map((item) => item.name).toList();
   }
 }

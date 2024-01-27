@@ -1,17 +1,20 @@
 import 'dart:math';
-import 'package:bhedhuk_app/provider/feed_list_page_provider.dart';
-import 'package:bhedhuk_app/provider/restaurant_provider.dart';
+import 'package:bhedhuk_app/provider/utils_provider.dart';
+import 'package:bhedhuk_app/provider/feed_list_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:bhedhuk_app/widgets/pagination_widget.dart';
+import 'package:bhedhuk_app/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
+import '../../utils/response_result.dart';
 
 class FeedListPage extends StatelessWidget {
   static const route = '/feeds_page';
   FeedListPage({super.key});
+
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -26,18 +29,17 @@ class FeedListPage extends StatelessWidget {
 
   Widget _buildListRestaurant(BuildContext context) {
     int itemsPerPage = 3;
-    return Consumer2<RestaurantProvider, FeedListPageProvider>(
-      builder: (context, restaurantProvider, feedListPageProvider, _) {
-        int selectedPage = feedListPageProvider.selectedPage;
-        if (restaurantProvider.responseResult == ResponseResult.loading) {
+    return Consumer2<FeedListProvider, UtilsProvider>(
+      builder: (context, feedListProvider, utilsProvider, _) {
+        int selectedPage = utilsProvider.selectedPage;
+        if (feedListProvider.responseResult == ResponseResult.loading) {
           return _buildShimmer();
-        } else if (restaurantProvider.responseResult ==
-            ResponseResult.hasData) {
+        } else if (feedListProvider.responseResult == ResponseResult.hasData) {
           int startIndex = (selectedPage - 1) * itemsPerPage;
           int endIndex = min(startIndex + itemsPerPage,
-              restaurantProvider.getListOfRestaurantObjectResponse.count);
+              feedListProvider.getListOfRestaurantObjectResponse.count);
 
-          var pageItems = restaurantProvider
+          var pageItems = feedListProvider
               .getListOfRestaurantObjectResponse.listobjectOfRestaurant
               .sublist(startIndex, endIndex);
           return ListView.builder(
@@ -50,27 +52,30 @@ class FeedListPage extends StatelessWidget {
                     NetworkImage(Images.instanceImages
                         .getImageSize(restaurant.pictureId, 'medium')),
                     context);
-                return FeedItemWidget(restaurant: restaurant);
+                return FeedItemWidget(
+                  restaurant: restaurant,
+                );
               } else {
                 return _buildPagination(
-                    restaurantProvider: restaurantProvider,
-                    selectedPage: selectedPage,
-                    itemsPerPage: itemsPerPage,
-                    feedListPageProvider: feedListPageProvider);
+                  feedListProvider: feedListProvider,
+                  selectedPage: selectedPage,
+                  itemsPerPage: itemsPerPage,
+                  utilsProvider: utilsProvider,
+                );
               }
             },
           );
-        } else if (restaurantProvider.responseResult == ResponseResult.noData) {
+        } else if (feedListProvider.responseResult == ResponseResult.noData) {
           return Center(
             child: Material(
-              child: Text(restaurantProvider.messageResponse),
+              child: Text(feedListProvider.messageResponse),
             ),
           );
-        } else if (restaurantProvider.responseResult == ResponseResult.error) {
-          print(restaurantProvider.messageResponse);
+        } else if (feedListProvider.responseResult == ResponseResult.error) {
+          print(feedListProvider.messageResponse);
           return Center(
             child: Material(
-              child: Text(restaurantProvider.messageResponse),
+              child: Text(feedListProvider.messageResponse),
             ),
           );
         } else {
@@ -84,15 +89,16 @@ class FeedListPage extends StatelessWidget {
     );
   }
 
-  Widget _buildPagination(
-      {required RestaurantProvider restaurantProvider,
-      required int selectedPage,
-      required int itemsPerPage,
-      required FeedListPageProvider feedListPageProvider}) {
+  Widget _buildPagination({
+    required FeedListProvider feedListProvider,
+    required int selectedPage,
+    required int itemsPerPage,
+    required UtilsProvider utilsProvider,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: PaginationWidget(
-        pageCount: (restaurantProvider.getListOfRestaurantObjectResponse
+        pageCount: (feedListProvider.getListOfRestaurantObjectResponse
                     .listobjectOfRestaurant.length /
                 itemsPerPage)
             .ceil(),
@@ -100,7 +106,17 @@ class FeedListPage extends StatelessWidget {
         itemToDisplay: 3,
         onChanged: (page) {
           if (page != selectedPage) {
-            feedListPageProvider.setSelectedPage(page);
+            // setState(() {
+            //   _showShimmer = true;
+            //   Future.delayed(const Duration(seconds: 1), () {
+            //     if (mounted) {
+            //       setState(() {
+            //         _showShimmer = false;
+            //       });
+            //     }
+            //   });
+            // });
+            utilsProvider.setSelectedPage(page);
             _scrollController.animateTo(
               0.0,
               duration: const Duration(milliseconds: 500),
@@ -113,9 +129,7 @@ class FeedListPage extends StatelessWidget {
   }
 
   Widget _buildShimmer() {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+    return CustomWidgetShimmer(
       child: ListView.builder(
         itemCount: 3,
         itemBuilder: (_, __) {
@@ -133,7 +147,7 @@ class FeedListPage extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           height: 200,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ),
                       const Padding(
@@ -144,7 +158,7 @@ class FeedListPage extends StatelessWidget {
                         child: Container(
                           width: double.infinity,
                           height: 40,
-                          color: Colors.white,
+                          color: whiteColor,
                         ),
                       ),
                     ],

@@ -20,7 +20,7 @@ class ListOfRestaurantObjectResponse extends ObjectOfApiResponse {
 
   factory ListOfRestaurantObjectResponse.fromJson(Map<String, dynamic> json) {
     return ListOfRestaurantObjectResponse(
-      error: json['error'] ?? '',
+      error: json['error'] ?? true,
       message: json['message'] ?? '',
       count: json['count'] ?? 0,
       founded: json['founded'] ?? 0,

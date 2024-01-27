@@ -1,15 +1,17 @@
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
+import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/icon_title_widget.dart';
 import 'package:bhedhuk_app/widgets/rating_bar_widget.dart';
+import 'package:bhedhuk_app/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 
 class FeedItemWidget extends StatelessWidget {
   final ObjectOfRestaurant restaurant;
+
   const FeedItemWidget({super.key, required this.restaurant});
 
   @override
@@ -48,8 +50,13 @@ class FeedItemWidget extends StatelessWidget {
         );
       },
       onTap: () {
-        // Navigator.pushNamed(context, FeedDetailPage.route,
-        //     arguments: restaurant);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FeedDetailPage(
+                restaurantId: restaurant.id,
+              ),
+            ));
       },
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -91,6 +98,13 @@ class FeedItemWidget extends StatelessWidget {
               Images.instanceImages.getImageSize(restaurant.pictureId, 'small'),
               color: Colors.amber[200],
               colorBlendMode: BlendMode.darken,
+              errorBuilder: (context, error, stackTrace) {
+                return _buildShimmerImage();
+              },
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return _buildShimmerImage();
+              },
             ),
             Positioned(
               bottom: 0,
@@ -101,12 +115,12 @@ class FeedItemWidget extends StatelessWidget {
                   topRight: Radius.circular(40),
                 ),
                 child: Container(
-                  color: Colors.white.withOpacity(0.3),
+                  color: whiteColor.withOpacity(0.3),
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Text(
                       restaurant.name,
-                      style: const TextStyle(color: Colors.white, fontSize: 35),
+                      style: const TextStyle(color: whiteColor, fontSize: 35),
                     ),
                   ),
                 ),
@@ -152,6 +166,19 @@ class FeedItemWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildShimmerImage() {
+    return CustomWidgetShimmer(
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          width: double.infinity,
+          height: 200,
+          color: whiteColor,
+        ),
       ),
     );
   }

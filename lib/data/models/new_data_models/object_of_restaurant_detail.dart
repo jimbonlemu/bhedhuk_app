@@ -1,11 +1,13 @@
+import 'package:bhedhuk_app/data/models/new_data_models/foods_and_drinks.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_of_menus.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 import 'package:bhedhuk_app/utils/model_parser.dart';
 
 class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
   String address;
   List<String> categories;
-  Map<String, dynamic> menus;
+  List<ObjectOfMenus> menus;
   List<ObjectOfCustomerReview> listObjectOfCustomerReviews;
 
   ObjectOfRestaurantDetail({
@@ -29,6 +31,8 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
         );
 
   factory ObjectOfRestaurantDetail.fromJson(Map<String, dynamic> parsed) {
+    var menusJson = parsed['menus'] as Map<String, dynamic>;
+    ObjectOfMenus objectOfmenus = ObjectOfMenus.fromJson(menusJson);
     return ObjectOfRestaurantDetail(
       id: parsed['id'] ?? '',
       name: parsed['name'] ?? '',
@@ -37,19 +41,23 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
       pictureId: parsed['pictureId'] ?? '',
       rating: parsed['rating'] ?? 0,
       address: parsed['address'] ?? '',
-      categories: parsed['categories'] ?? '',
-      menus: {
-        'foods': parser(parsed['menus']['foods'], (parsing) => parsing['name']),
-        // List<String>.from(parsed['menus']['foods'].map((x) => x['name'])),
-        'drinks':
-            parser(parsed['menus']['drinks'], (parsing) => parsing['name']),
-        // List<String>.from(parsed['menus']['drinks'].map((x) => x['name'])),
-      },
+      categories: parsed['categories'] != null
+          ? List<String>.from(parsed['categories'].map((x) => x['name']))
+          : [],
+      menus: [objectOfmenus],
       listObjectOfCustomerReviews:
           parser(parsed['customerReviews'], ObjectOfCustomerReview.fromJson),
-      // List<ObjectOfCustomerReview>.from(
-      //     parsed['customerReviews']
-      //         .map((x) => ObjectOfCustomerReview.fromJson(x))),
     );
+  }
+
+  List<dynamic> get getMenuFoods =>
+      _getMenuItems(menus, (menus) => menus.foods);
+
+  List<dynamic> get getMenuDrinks =>
+      _getMenuItems(menus, (menus) => menus.drinks);
+
+  List<dynamic> _getMenuItems(List<ObjectOfMenus> menus,
+      List<ObjectOfFoodsAndDrinks> Function(ObjectOfMenus) getter) {
+    return menus.expand(getter).map((item) => item.name).toList();
   }
 }

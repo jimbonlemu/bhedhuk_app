@@ -19,7 +19,7 @@ class ObjectOfCustomerReview extends ObjectOfApiResponse {
         );
   factory ObjectOfCustomerReview.fromJson(Map<String, dynamic> parsed) {
     return ObjectOfCustomerReview(
-      error: parsed['error'] ?? '',
+      error: parsed['error'] ?? true,
       message: parsed['message'] ?? '',
       restaurantId: parsed['id'] ?? '',
       name: parsed['name'] ?? '',

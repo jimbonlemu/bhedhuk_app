@@ -3,6 +3,7 @@ import 'package:bhedhuk_app/data/api/interface_api_service.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_response.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_response.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/restaurant_detail_object_response.dart';
+import 'package:bhedhuk_app/pages/utils_page/error_page.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -18,7 +19,7 @@ class ApiService implements InterfaceApiService {
     if (response.statusCode == 200) {
       return fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to Get Data');
+      throw Exception('Error ----');
     }
   }
 

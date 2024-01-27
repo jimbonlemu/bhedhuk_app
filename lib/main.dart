@@ -1,8 +1,6 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
-import 'package:bhedhuk_app/data/models/old_data_models/restaurant.dart';
-import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
-import 'package:bhedhuk_app/provider/feed_list_page_provider.dart';
-import 'package:bhedhuk_app/provider/restaurant_provider.dart';
+import 'package:bhedhuk_app/provider/utils_provider.dart';
+import 'package:bhedhuk_app/provider/feed_list_provider.dart';
 import 'package:bhedhuk_app/utils/navigation_service.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/pages/navbar_page.dart';
@@ -16,15 +14,16 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   ApiService apiService = ApiService();
-  runApp(
+    runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => RestaurantProvider(apiService: apiService),
+          create: (context) => FeedListProvider(apiService: apiService),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedListPageProvider(),
+          create: (context) => UtilsProvider(),
         ),
+        
       ],
       child: const BhedhukApp(),
     ),
@@ -75,10 +74,6 @@ class BhedhukApp extends StatelessWidget {
       routes: {
         SplashPage.route: (context) => const SplashPage(),
         NavBarPage.route: (context) => const NavBarPage(),
-        FeedDetailPage.route: (context) => FeedDetailPage(
-              restaurant:
-                  ModalRoute.of(context)?.settings.arguments as Restaurant,
-            ),
       },
     );
   }
