@@ -1,4 +1,3 @@
-import 'package:bhedhuk_app/data/api/api_service.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
 import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
@@ -10,7 +9,7 @@ import '../../provider/feed_search_provider.dart';
 
 class FeedSearchPage extends StatefulWidget {
   static const route = '/feed_search_page';
-  FeedSearchPage({super.key});
+  const FeedSearchPage({super.key});
 
   @override
   State<FeedSearchPage> createState() => _FeedSearchPageState();
@@ -34,7 +33,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
             floating: true,
             snap: true,
             bottom: const PreferredSize(
-                preferredSize: const Size.fromHeight(45.0), child: SizedBox()),
+                preferredSize: Size.fromHeight(45.0), child: SizedBox()),
             flexibleSpace: Padding(
               padding: const EdgeInsets.all(20),
               child: Container(
@@ -54,7 +53,8 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                       controller: searchController,
                       style: const TextStyle(fontSize: 20),
                       onSubmitted: (value) async {
-                        Provider.of<FeedSearchProvider>(context, listen: false).search(value);
+                        Provider.of<FeedSearchProvider>(context, listen: false)
+                            .search(value);
                       },
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
@@ -67,15 +67,13 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                           ),
                           suffixIcon: Material(
                             child: InkWell(
-                              onTap: () {
-
-                              },
+                              onTap: () {},
                               borderRadius: BorderRadius.circular(30),
                               child: Container(
                                   width: 30,
                                   height: 30,
-                                  padding: EdgeInsets.only(top: 12.0),
-                                  child: Icon(CupertinoIcons.search)),
+                                  padding: const EdgeInsets.only(top: 12.0),
+                                  child: const Icon(CupertinoIcons.search)),
                             ),
                           ),
                           hintText: 'Type your feed for today ..',
@@ -89,7 +87,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
           Consumer<FeedSearchProvider>(
             builder: (context, feedSearchProvider, child) {
               if (feedSearchProvider.isLoading) {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
                 );
               } else if (feedSearchProvider.listOfRestaurantObjectResponse !=
@@ -109,7 +107,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                   ),
                 );
               } else {
-                return SliverFillRemaining(
+                return const SliverFillRemaining(
                   child: Center(child: Text('No results')),
                 );
               }

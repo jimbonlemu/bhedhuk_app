@@ -15,8 +15,7 @@ import '../../widgets/menu_widget.dart';
 class FeedDetailPage extends StatelessWidget {
   static const route = '/feed_detail_page';
   final String restaurantId;
-  FeedDetailPage({super.key, required this.restaurantId});
-
+  const FeedDetailPage({super.key, required this.restaurantId});
 
   @override
   Widget build(BuildContext context) {

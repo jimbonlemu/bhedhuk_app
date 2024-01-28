@@ -28,6 +28,7 @@ class ObjectOfCustomerReview extends ObjectOfApiResponse {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
     return {
       "id": restaurantId,

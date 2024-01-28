@@ -16,14 +16,14 @@ class FeedSearchProvider extends ChangeNotifier {
 
   Future<void> search(String keyword) async {
     isLoading = true;
-    _responseResult = ResponseResult.loading; 
+    _responseResult = ResponseResult.loading;
 
     notifyListeners();
 
     try {
       listOfRestaurantObjectResponse =
           await apiService.searchListOfRestaurant(keyword);
-      _responseResult = ResponseResult.hasData; 
+      _responseResult = ResponseResult.hasData;
     } catch (e) {
       print("$e");
       _responseResult = ResponseResult.error;
@@ -33,7 +33,6 @@ class FeedSearchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
- 
   ResponseResult get responseResult => _responseResult;
 }
 
