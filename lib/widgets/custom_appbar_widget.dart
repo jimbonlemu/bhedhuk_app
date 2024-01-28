@@ -1,4 +1,5 @@
 import 'package:bhedhuk_app/utils/styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
@@ -9,23 +10,29 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final bool? disappearWhenScrolled;
   final bool? isUsingDefaultColorTheme;
   final List<Widget>? slivers;
-  final Image? image;
+  final Widget? image;
   final Color? color;
   final Widget? imageTitle;
+  final ScrollController? scrollController;
+  final IconThemeData? iconTheme;
+  final Widget? leading;
 
-  const CustomAppBarWidget(
-      {Key? key,
-      this.title,
-      this.titleWidget,
-      this.fontSize = 25,
-      this.centerTitle = true,
-      this.disappearWhenScrolled = false,
-      this.isUsingDefaultColorTheme = true,
-      this.slivers,
-      this.color,
-      this.image,
-      this.imageTitle})
-      : super(key: key);
+  const CustomAppBarWidget({
+    Key? key,
+    this.title,
+    this.titleWidget,
+    this.fontSize = 25,
+    this.centerTitle = true,
+    this.disappearWhenScrolled = false,
+    this.isUsingDefaultColorTheme = true,
+    this.slivers,
+    this.color,
+    this.image,
+    this.imageTitle,
+    this.scrollController,
+    this.iconTheme,
+    this.leading,
+  }) : super(key: key);
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -40,8 +47,14 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
     if (widget.disappearWhenScrolled == true) {
       return Scaffold(
         body: CustomScrollView(
+          controller: widget.scrollController,
           slivers: <Widget>[
             SliverAppBar(
+              leading: IconButton(
+                icon: const Icon(CupertinoIcons.back),
+                onPressed: () => Navigator.pop(context),
+              ),
+              iconTheme: widget.iconTheme,
               floating: true,
               backgroundColor: widget.isUsingDefaultColorTheme == true
                   ? primaryColor

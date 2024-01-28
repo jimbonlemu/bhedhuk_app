@@ -1,20 +1,25 @@
-import 'package:bhedhuk_app/data/api/api_service.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant_detail.dart';
-import 'package:flutter/material.dart';
+import '../data/api/api_service.dart';
+import '../data/models/new_data_models/object_of_restaurant_detail.dart';
+import 'feed_provider.dart';
 import '../data/models/new_data_models/restaurant_detail_object_response.dart';
-import '../utils/response_result.dart';
 
-class DetailFeedProvider extends ChangeNotifier {
+class DetailFeedProvider extends FeedProvider {
   final ApiService apiService;
-  final String id;
+  final String restaurantId;
 
-  DetailFeedProvider({required this.apiService, required this.id}) {
+  late ObjectOfRestaurantDetailObjectResponse
+      _objectOfRestaurantDetailObjectResponse;
+  ObjectOfRestaurantDetailObjectResponse
+      get objectOfRestaurantDetailObjectResponse =>
+          _objectOfRestaurantDetailObjectResponse;
+
+  DetailFeedProvider({required this.apiService, required this.restaurantId}) {
     _objectOfRestaurantDetailObjectResponse =
         ObjectOfRestaurantDetailObjectResponse(
       error: true,
       message: "",
       objectOfRestaurantDetail: ObjectOfRestaurantDetail(
-          id: id,
+          id: restaurantId,
           name: "",
           description: "",
           city: "",
@@ -25,44 +30,11 @@ class DetailFeedProvider extends ChangeNotifier {
           menus: [],
           listObjectOfCustomerReviews: []),
     );
-    _fetchDetailRestaurant(id);
-  }
-
-  late ObjectOfRestaurantDetailObjectResponse
-      _objectOfRestaurantDetailObjectResponse;
-
-  late ResponseResult _responseResult;
-
-  String _messageResponse = "";
-
-  ObjectOfRestaurantDetailObjectResponse
-      get objectOfRestaurantDetailObjectResponse =>
-          _objectOfRestaurantDetailObjectResponse;
-
-  ResponseResult get responseResult => _responseResult;
-
-  Future<dynamic> _fetchDetailRestaurant(String id) async {
-    try {
-      _responseResult = ResponseResult.loading;
-      notifyListeners();
-      final apiResponse = await apiService.getRestaurantDetail(id);
-
-      if (apiResponse.objectOfRestaurantDetail.id.isEmpty) {
-        _responseResult = ResponseResult.noData;
-        _messageResponse = 'Restaurant ID is Empty';
-        notifyListeners();
-        return _messageResponse;
-      } else {
-        _responseResult = ResponseResult.hasData;
-        notifyListeners();
-        return _objectOfRestaurantDetailObjectResponse = apiResponse;
-      }
-    } catch (e) {
-      _responseResult = ResponseResult.error;
-      _messageResponse = 'Error --> $e';
-      notifyListeners();
-      print(e);
-      return _messageResponse;
-    }
+    fetchData(
+      () async {
+        return _objectOfRestaurantDetailObjectResponse =
+            await apiService.getRestaurantDetail(restaurantId);
+      },
+    );
   }
 }

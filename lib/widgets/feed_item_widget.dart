@@ -102,7 +102,18 @@ class FeedItemWidget extends StatelessWidget {
                 return _buildShimmerImage();
               },
               loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
+                if (loadingProgress == null) {
+                  return FutureBuilder(
+                    future: Future.delayed(const Duration(seconds: 2)),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return child;
+                      } else {
+                        return _buildShimmerImage();
+                      }
+                    },
+                  );
+                }
                 return _buildShimmerImage();
               },
             ),

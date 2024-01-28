@@ -9,7 +9,7 @@ import 'package:bhedhuk_app/widgets/pagination_widget.dart';
 import 'package:bhedhuk_app/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../utils/response_result.dart';
+import '../../provider/feed_provider.dart';
 
 class FeedListPage extends StatelessWidget {
   static const route = '/feeds_page';

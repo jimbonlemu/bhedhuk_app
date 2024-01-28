@@ -1,4 +1,5 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
+import 'package:bhedhuk_app/provider/feed_search_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/provider/feed_list_provider.dart';
 import 'package:bhedhuk_app/utils/navigation_service.dart';
@@ -40,7 +41,7 @@ class BhedhukApp extends StatelessWidget {
     ]);
     return MaterialApp(
       navigatorKey: navigatorKey,
-      title: 'Bhedhuk App',
+      title: 'Feed Me',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: Theme.of(context).colorScheme.copyWith(
@@ -72,7 +73,7 @@ class BhedhukApp extends StatelessWidget {
       initialRoute: SplashPage.route,
       routes: {
         SplashPage.route: (context) => const SplashPage(),
-        NavBarPage.route: (context) => const NavBarPage(),
+        NavBarPage.route: (context) => NavBarPage(),
       },
     );
   }
