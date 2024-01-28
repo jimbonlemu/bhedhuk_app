@@ -4,19 +4,11 @@ import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/feed_search_provider.dart';
 
-class FeedSearchPage extends StatefulWidget {
+class FeedSearchPage extends StatelessWidget {
   static const route = '/feed_search_page';
   const FeedSearchPage({super.key});
-
-  @override
-  State<FeedSearchPage> createState() => _FeedSearchPageState();
-}
-
-class _FeedSearchPageState extends State<FeedSearchPage> {
-  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +42,10 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextField(
-                      controller: searchController,
+                      controller: Provider.of<FeedSearchProvider>(context)
+                          .searchController,
                       style: const TextStyle(fontSize: 20),
-                      onSubmitted: (value) async {
+                      onSubmitted: (value) {
                         Provider.of<FeedSearchProvider>(context, listen: false)
                             .search(value);
                       },
@@ -90,18 +83,18 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                 return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
                 );
-              } else if (feedSearchProvider.listOfRestaurantObjectResponse !=
+              } else if (feedSearchProvider.listOfRestaurantObjectApiResponse !=
                   null) {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       var restaurant = feedSearchProvider
-                          .listOfRestaurantObjectResponse!
+                          .listOfRestaurantObjectApiResponse!
                           .listobjectOfRestaurant[index];
                       return FeedItemWidget(restaurant: restaurant);
                     },
                     childCount: feedSearchProvider
-                        .listOfRestaurantObjectResponse!
+                        .listOfRestaurantObjectApiResponse!
                         .listobjectOfRestaurant
                         .length,
                   ),

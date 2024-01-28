@@ -1,12 +1,12 @@
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_api_response.dart';
 
-class ObjectOfCustomerReview extends ObjectOfApiResponse {
+class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
   String restaurantId;
   String name;
   String review;
   String date;
 
-  ObjectOfCustomerReview({
+  ObjectOfCustomerReviewApiResponse({
     required bool error,
     required String message,
     required this.restaurantId,
@@ -17,8 +17,8 @@ class ObjectOfCustomerReview extends ObjectOfApiResponse {
           error: error,
           message: message,
         );
-  factory ObjectOfCustomerReview.fromJson(Map<String, dynamic> parsed) {
-    return ObjectOfCustomerReview(
+  factory ObjectOfCustomerReviewApiResponse.fromJson(Map<String, dynamic> parsed) {
+    return ObjectOfCustomerReviewApiResponse(
       error: parsed['error'] ?? true,
       message: parsed['message'] ?? '',
       restaurantId: parsed['id'] ?? '',

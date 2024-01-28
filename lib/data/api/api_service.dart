@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:bhedhuk_app/data/api/interface_api_service.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/restaurant_detail_object_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_api_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_api_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_restaurant_detail_api_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -23,27 +23,27 @@ class ApiService implements InterfaceApiService {
   }
 
   @override
-  Future<ListOfRestaurantObjectResponse> getListOfRestaurant() async {
+  Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {
     return await _get(
-        _getListOfRestaurant, ListOfRestaurantObjectResponse.fromJson);
+        _getListOfRestaurant, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override
-  Future<ObjectOfRestaurantDetailObjectResponse> getRestaurantDetail(
+  Future<ObjectOfRestaurantDetailApiResponse> getRestaurantDetail(
       String restaurantId) async {
     return await _get(_getDetailOfRestaurant + restaurantId,
-        ObjectOfRestaurantDetailObjectResponse.fromJson);
+        ObjectOfRestaurantDetailApiResponse.fromJson);
   }
 
   @override
-  Future<ListOfRestaurantObjectResponse> searchListOfRestaurant(
+  Future<ListOfRestaurantObjectApiResponse> searchListOfRestaurant(
       String keyword) async {
     return await _get(_searchListOfRestaurant + keyword,
-        ListOfRestaurantObjectResponse.fromJson);
+        ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override
-  Future<ObjectOfCustomerReview> postCustomerReview(
+  Future<ObjectOfCustomerReviewApiResponse> postCustomerReview(
       String restaurantId, String reviewerName, String reviewerComment) async {
     final response = await http.post(
       Uri.parse(_baseUrl + _postReview),
@@ -58,7 +58,8 @@ class ApiService implements InterfaceApiService {
     );
 
     if (response.statusCode == 200) {
-      return ObjectOfCustomerReview.fromJson(jsonDecode(response.body));
+      return ObjectOfCustomerReviewApiResponse.fromJson(
+          jsonDecode(response.body));
     } else {
       throw Exception('Failed to Post Review');
     }

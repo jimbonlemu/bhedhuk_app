@@ -37,7 +37,7 @@ class FeedDetailPage extends StatelessWidget {
               return const Center(child: Text('An error occurred'));
             } else {
               final restaurantDetails =
-                  detailFeedProvider.objectOfRestaurantDetailObjectResponse;
+                  detailFeedProvider.objectOfRestaurantDetailApiResponse;
               return AnimatedBuilder(
                 animation: utilsProvider.scrollController,
                 builder: (context, child) {

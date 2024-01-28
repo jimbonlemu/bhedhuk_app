@@ -1,4 +1,5 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
+import 'package:bhedhuk_app/provider/feed_search_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/provider/feed_list_provider.dart';
 import 'package:bhedhuk_app/utils/navigation_service.dart';
@@ -23,6 +24,9 @@ Future main() async {
         ChangeNotifierProvider(
           create: (context) => UtilsProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => FeedSearchProvider(apiService: apiService),
+        )
       ],
       child: const BhedhukApp(),
     ),
@@ -77,115 +81,3 @@ class BhedhukApp extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-// import 'package:pagination_flutter/pagination.dart';
-
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: 'Flutter Demo',
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//         splashColor: Colors.transparent,
-//       ),
-//       home: const MyHomePage(),
-//     );
-//   }
-// }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key});
-
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   int selectedPage = 1;
-
-//   setSelectedPage(int index) {
-//     setState(() {
-//       selectedPage = index;
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//           title: const Text("Flutter Pagination"),
-//           backgroundColor: Colors.black),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Expanded(
-//               child: Pagination(
-//                 numOfPages: 10,
-//                 selectedPage: selectedPage,
-//                 pagesVisible: 3,
-//                 spacing: 1,
-//                 onPageChanged: (page) {
-//                   setState(() {
-//                     selectedPage = page;
-//                   });
-//                 },
-//                 nextIcon: const Icon(
-//                   Icons.chevron_right_rounded,
-//                   color: Colors.redAccent,
-//                   size: 20,
-//                 ),
-//                 previousIcon: const Icon(
-//                   Icons.chevron_left_rounded,
-//                   color: Colors.redAccent,
-//                   size: 20,
-//                 ),
-//                 activeTextStyle: const TextStyle(
-//                   color: Colors.white,
-//                   fontSize: 14,
-//                   fontWeight: FontWeight.w700,
-//                 ),
-//                 activeBtnStyle: ButtonStyle(
-//                   backgroundColor: MaterialStateProperty.all(Colors.redAccent),
-//                   shape: MaterialStateProperty.all(const CircleBorder(
-//                     side: BorderSide(
-//                       color: Colors.redAccent,
-//                       width: 1,
-//                     ),
-//                   )),
-//                 ),
-//                 inactiveBtnStyle: ButtonStyle(
-//                   elevation: MaterialStateProperty.all(0),
-//                   backgroundColor: MaterialStateProperty.all(Colors.white),
-//                   shape: MaterialStateProperty.all(const CircleBorder(
-//                     side: BorderSide(
-//                       color: Colors.redAccent,
-//                       width: 1,
-//                     ),
-//                   )),
-//                 ),
-//                 inactiveTextStyle: const TextStyle(
-//                   fontSize: 14,
-//                   color: Colors.redAccent,
-//                   fontWeight: FontWeight.w700,
-//                 ),
-//               ),
-//             ),
-//             const SizedBox(
-//               height: 30,
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

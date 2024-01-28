@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/new_data_models/foods_and_drinks.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_of_foods_and_drinks.dart';
 import 'package:bhedhuk_app/utils/model_parser.dart';
 
 class ObjectOfMenus {

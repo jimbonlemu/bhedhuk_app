@@ -28,6 +28,6 @@ abstract class FeedProvider extends ChangeNotifier {
     } finally {
       notifyListeners();
     }
-    return _messageResponse;
+    return throw Exception(_messageResponse);
   }
 }

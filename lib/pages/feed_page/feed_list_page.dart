@@ -37,10 +37,10 @@ class FeedListPage extends StatelessWidget {
         } else if (feedListProvider.responseResult == ResponseResult.hasData) {
           int startIndex = (selectedPage - 1) * itemsPerPage;
           int endIndex = min(startIndex + itemsPerPage,
-              feedListProvider.getListOfRestaurantObjectResponse.count);
+              feedListProvider.getListOfRestaurantObjectApiResponse.count);
 
           var pageItems = feedListProvider
-              .getListOfRestaurantObjectResponse.listobjectOfRestaurant
+              .getListOfRestaurantObjectApiResponse.listobjectOfRestaurant
               .sublist(startIndex, endIndex);
           return ListView.builder(
             controller: _scrollController,
@@ -98,7 +98,7 @@ class FeedListPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: PaginationWidget(
-        pageCount: (feedListProvider.getListOfRestaurantObjectResponse
+        pageCount: (feedListProvider.getListOfRestaurantObjectApiResponse
                     .listobjectOfRestaurant.length /
                 itemsPerPage)
             .ceil(),

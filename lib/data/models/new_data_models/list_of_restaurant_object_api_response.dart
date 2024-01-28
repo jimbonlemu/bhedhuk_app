@@ -2,12 +2,12 @@ import 'package:bhedhuk_app/data/models/new_data_models/object_of_api_response.d
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 import 'package:bhedhuk_app/utils/model_parser.dart';
 
-class ListOfRestaurantObjectResponse extends ObjectOfApiResponse {
+class ListOfRestaurantObjectApiResponse extends ObjectOfApiResponse {
   List<ObjectOfRestaurant> listobjectOfRestaurant;
   int count;
   int founded;
 
-  ListOfRestaurantObjectResponse({
+  ListOfRestaurantObjectApiResponse({
     required bool error,
     required String message,
     this.count = 0,
@@ -18,8 +18,9 @@ class ListOfRestaurantObjectResponse extends ObjectOfApiResponse {
           message: message,
         );
 
-  factory ListOfRestaurantObjectResponse.fromJson(Map<String, dynamic> json) {
-    return ListOfRestaurantObjectResponse(
+  factory ListOfRestaurantObjectApiResponse.fromJson(
+      Map<String, dynamic> json) {
+    return ListOfRestaurantObjectApiResponse(
       error: json['error'] ?? true,
       message: json['message'] ?? '',
       count: json['count'] ?? 0,

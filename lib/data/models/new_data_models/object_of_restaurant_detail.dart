@@ -1,5 +1,5 @@
-import 'package:bhedhuk_app/data/models/new_data_models/foods_and_drinks.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_response.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_of_foods_and_drinks.dart';
+import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_api_response.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_menus.dart';
 import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 import 'package:bhedhuk_app/utils/model_parser.dart';
@@ -8,7 +8,7 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
   String address;
   List<String> categories;
   List<ObjectOfMenus> menus;
-  List<ObjectOfCustomerReview> listObjectOfCustomerReviews;
+  List<ObjectOfCustomerReviewApiResponse> listObjectOfCustomerReviews;
 
   ObjectOfRestaurantDetail({
     required String id,
@@ -46,7 +46,7 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
           : [],
       menus: [objectOfmenus],
       listObjectOfCustomerReviews:
-          parser(parsed['customerReviews'], ObjectOfCustomerReview.fromJson),
+          parser(parsed['customerReviews'], ObjectOfCustomerReviewApiResponse.fromJson),
     );
   }
 
