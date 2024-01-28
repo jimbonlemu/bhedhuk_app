@@ -45,8 +45,8 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
           ? List<String>.from(parsed['categories'].map((x) => x['name']))
           : [],
       menus: [objectOfmenus],
-      listObjectOfCustomerReviews:
-          parser(parsed['customerReviews'], ObjectOfCustomerReviewApiResponse.fromJson),
+      listObjectOfCustomerReviews: parser(parsed['customerReviews'],
+          ObjectOfCustomerReviewApiResponse.fromJson),
     );
   }
 

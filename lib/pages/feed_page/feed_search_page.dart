@@ -46,8 +46,16 @@ class FeedSearchPage extends StatelessWidget {
                           .searchController,
                       style: const TextStyle(fontSize: 20),
                       onSubmitted: (value) {
-                        Provider.of<FeedSearchProvider>(context, listen: false)
-                            .search(value);
+                        if (Provider.of<FeedSearchProvider>(context)
+                                .searchController
+                                .value
+                                .text
+                                .length <
+                            3) {
+                          Provider.of<FeedSearchProvider>(
+                            context,
+                          ).search(value);
+                        }
                       },
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
@@ -79,7 +87,52 @@ class FeedSearchPage extends StatelessWidget {
           ),
           Consumer<FeedSearchProvider>(
             builder: (context, feedSearchProvider, child) {
-              if (feedSearchProvider.isLoading) {
+              // if (feedSearchProvider.isTriggeredToLoading) {
+              //   if (feedSearchProvider.responseResult ==
+              //       ResponseResult.loading) {
+              //     return const SliverFillRemaining(
+              //       child: Center(child: CircularProgressIndicator()),
+              //     );
+              //   } else if (feedSearchProvider.responseResult ==
+              //       ResponseResult.hasData) {
+              //     return SliverList(
+              //       delegate: SliverChildBuilderDelegate(
+              //         (BuildContext context, int index) {
+              //           var restaurant = feedSearchProvider
+              //               .listOfRestaurantObjectApiResponse!
+              //               .listobjectOfRestaurant[index];
+              //           return FeedItemWidget(restaurant: restaurant);
+              //         },
+              //         childCount: feedSearchProvider
+              //             .listOfRestaurantObjectApiResponse!
+              //             .listobjectOfRestaurant
+              //             .length,
+              //       ),
+              //     );
+              //   } else if (feedSearchProvider.responseResult ==
+              //       ResponseResult.noData) {
+              //     return const SliverFillRemaining(
+              //       child: Center(child: Text('No data')),
+              //     );
+              //   } else if (feedSearchProvider.responseResult ==
+              //       ResponseResult.error) {
+              //     return const SliverFillRemaining(
+              //       child: Center(child: Text('Error')),
+              //     );
+              //   } else {
+              //     return const SliverFillRemaining(
+              //       child:
+              //           Center(child: Text('Get a good Feed for Healthy lead')),
+              //     );
+              //   }
+              // } else {
+              //   return const SliverFillRemaining(
+              //     child:
+              //         Center(child: Text('Get a good Feed for Healthy lead')),
+              //   );
+              // }
+
+              if (feedSearchProvider.isTriggeredToLoading) {
                 return const SliverFillRemaining(
                   child: Center(child: CircularProgressIndicator()),
                 );

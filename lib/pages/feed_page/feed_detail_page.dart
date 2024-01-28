@@ -1,5 +1,4 @@
 import 'package:bhedhuk_app/utils/images.dart';
-
 import '../../data/api/api_service.dart';
 import '../../data/models/new_data_models/object_of_restaurant_detail.dart';
 import '../../provider/feed_provider.dart';

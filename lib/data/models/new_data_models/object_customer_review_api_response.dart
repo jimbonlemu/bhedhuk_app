@@ -17,7 +17,8 @@ class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
           error: error,
           message: message,
         );
-  factory ObjectOfCustomerReviewApiResponse.fromJson(Map<String, dynamic> parsed) {
+  factory ObjectOfCustomerReviewApiResponse.fromJson(
+      Map<String, dynamic> parsed) {
     return ObjectOfCustomerReviewApiResponse(
       error: parsed['error'] ?? true,
       message: parsed['message'] ?? '',
