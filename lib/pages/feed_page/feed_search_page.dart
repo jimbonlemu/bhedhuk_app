@@ -1,7 +1,12 @@
+import 'dart:math';
+
+import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
+import 'package:bhedhuk_app/widgets/pagination_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../provider/feed_search_provider.dart';
@@ -20,10 +25,14 @@ class FeedSearchPage extends StatefulWidget {
 class _FeedSearchPageState extends State<FeedSearchPage> {
   @override
   void initState() {
-    Provider.of<FeedSearchProvider>(context, listen: false).clearSearch();
     super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      Provider.of<FeedSearchProvider>(context, listen: false).clearSearch();
+    });
   }
 
+  TextEditingController searchController = TextEditingController();
+  // String _errorValidation = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +65,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextField(
+                      controller: searchController,
                       style: const TextStyle(fontSize: 20),
                       onSubmitted: (value) {
                         if (value.length >= 3) {
@@ -68,8 +78,17 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                               .clearSearch();
                         }
                       },
+                      // onChanged: (value) {
+                      //   if (value.length < 3) {
+                      //     _errorValidation =
+                      //         "Please fill in at least 3 character";
+                      //   } else {
+                      //     _errorValidation = "";
+                      //   }
+                      // },
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
+                          // errorText: _errorValidation,
                           contentPadding: const EdgeInsets.only(top: 12.0),
                           enabledBorder: const UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.transparent),
@@ -92,25 +111,71 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
               ),
             ),
           ),
-          Consumer<FeedSearchProvider>(
-            builder: (context, feedSearchProvider, child) {
+          Consumer2<FeedSearchProvider, UtilsProvider>(
+            builder: (context, feedSearchProvider, utilsProvider, child) {
               var searchResult =
                   feedSearchProvider.listOfRestaurantObjectApiResponse;
+              int itemsPerPage = 3;
+              int selectedPage = utilsProvider.selectedPage;
               if (feedSearchProvider.isTriggeredToLoading) {
                 return const SliverFillRemaining(
                   child: Center(child: GeneralShimmerWidget()),
                 );
               } else if (searchResult != null && searchResult.founded != 0) {
-                return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return FeedItemWidget(
-                          restaurant:
-                              searchResult.listobjectOfRestaurant[index]);
-                    },
-                    childCount: searchResult.listobjectOfRestaurant.length,
-                  ),
+                int startIndex = (selectedPage - 1) * itemsPerPage;
+                int endIndex = min(
+                    startIndex + itemsPerPage,
+                    feedSearchProvider
+                        .listOfRestaurantObjectApiResponse!.founded);
+
+                var pageItems = feedSearchProvider
+                    .listOfRestaurantObjectApiResponse!.listobjectOfRestaurant
+                    .sublist(startIndex, endIndex);
+
+                return SliverList.builder(
+                  itemCount: pageItems.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index < pageItems.length) {
+                      var result = pageItems[index];
+                      return FeedItemWidget(restaurant: result);
+                    } else {
+                      return PaginationWidget(
+                          pageCount: (feedSearchProvider
+                                      .listOfRestaurantObjectApiResponse!
+                                      .listobjectOfRestaurant
+                                      .length /
+                                  itemsPerPage)
+                              .ceil(),
+                          selectedPage: selectedPage,
+                          itemToDisplay: 3,
+                          onChanged: (page) {
+                            if (page != selectedPage) {
+                              utilsProvider.setSelectedPage(page);
+                            }
+                          });
+                    }
+                  },
                 );
+                // SliverList(
+                //   delegate: SliverChildBuilderDelegate(
+                //     (context, index) {
+                //       return Text('data');
+                //     },
+                //     childCount: 4,
+                //   ),
+                // ),
+                // SliverList(
+                //   delegate: SliverChildBuilderDelegate(
+                //     (BuildContext context, int index) {
+                //       return FeedItemWidget(
+                //           restaurant:
+                //               searchResult.listobjectOfRestaurant[index]);
+                //     },
+                //     childCount: searchResult.listobjectOfRestaurant.length,
+                //   ),
+                // ),
+                // SliverToBoxAdapter(
+                //     child: Text(searchResult.founded.toString())),
               } else if (searchResult != null && searchResult.founded == 0) {
                 return SliverFillRemaining(
                   child: Stack(
@@ -128,7 +193,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                   ),
                 );
               } else {
-                return SliverFillRemaining(
+                return SliverToBoxAdapter(
                   child: Center(
                     child: Text(
                       'Get a Good and Best Feed For You!',

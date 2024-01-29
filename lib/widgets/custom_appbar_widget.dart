@@ -18,7 +18,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final Widget? leading;
 
   const CustomAppBarWidget({
-    Key? key,
+    super.key,
     this.title,
     this.titleWidget,
     this.fontSize = 25,
@@ -32,7 +32,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
     this.scrollController,
     this.iconTheme,
     this.leading,
-  }) : super(key: key);
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);

@@ -10,7 +10,6 @@ import '../../widgets/feed_item_widget.dart';
 import '../../widgets/general_shimmer_widget.dart';
 import '../../widgets/pagination_widget.dart';
 
-
 class FeedListPage extends StatelessWidget {
   static const route = '/feeds_page';
   FeedListPage({super.key});
@@ -95,13 +94,13 @@ class FeedListPage extends StatelessWidget {
     required int itemsPerPage,
     required UtilsProvider utilsProvider,
   }) {
+    var objectLength = feedListProvider
+        .getListOfRestaurantObjectApiResponse.listobjectOfRestaurant.length;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
       child: PaginationWidget(
-        pageCount: (feedListProvider.getListOfRestaurantObjectApiResponse
-                    .listobjectOfRestaurant.length /
-                itemsPerPage)
-            .ceil(),
+        pageCount: (objectLength / itemsPerPage).ceil(),
         selectedPage: selectedPage,
         itemToDisplay: 3,
         onChanged: (page) {

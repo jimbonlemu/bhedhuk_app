@@ -8,15 +8,12 @@ class ListOfRestaurantObjectApiResponse extends ObjectOfApiResponse {
   int founded = 0;
 
   ListOfRestaurantObjectApiResponse({
-    required bool error,
-    required String message,
+    required super.error,
+    required super.message,
     this.count = 0,
     this.founded = 0,
     required this.listobjectOfRestaurant,
-  }) : super(
-          error: error,
-          message: message,
-        );
+  });
 
   factory ListOfRestaurantObjectApiResponse.fromJson(
       Map<String, dynamic> json) {

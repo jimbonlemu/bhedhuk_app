@@ -5,7 +5,6 @@ import 'package:bhedhuk_app/provider/connecivity_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/custom_alert_dialog_widget.dart';
 
 class NavBarPage extends StatelessWidget {
@@ -29,8 +28,8 @@ class NavBarPage extends StatelessWidget {
   ];
 
   final List<Widget> _listPage = [
-    FeedListPage(),
     const FeedSearchPage(),
+    FeedListPage(),
     const FavoritesListPage(),
   ];
 
@@ -39,13 +38,14 @@ class NavBarPage extends StatelessWidget {
     return Consumer<ConnectivityProvider>(
         builder: (context, connectionStatus, child) {
       if (!connectionStatus.isConnected) {
-        WidgetsBinding.instance.addPostFrameCallback((_) => showNoInternetDialog(context));
+        WidgetsBinding.instance
+            .addPostFrameCallback((_) => showNoInternetDialog(context));
       }
       return PopScope(
         canPop: false,
         onPopInvoked: (didPop) => showDialog(
           context: context,
-          builder: (context) => const CustomAlertDialog(),
+          builder: (context) => const CustomAlertDialog(purpose: 'exitAlert'),
         ),
         child: Consumer<UtilsProvider>(
           builder: (context, utilsProvider, child) {

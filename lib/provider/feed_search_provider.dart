@@ -13,9 +13,10 @@ class FeedSearchProvider extends ChangeNotifier {
   FeedSearchProvider({required this.apiService});
 
   Future<void> search(String keyword) async {
-    clearSearch();
     isTriggeredToLoading = true;
-    notifyListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
     try {
       listOfRestaurantObjectApiResponse =
           await apiService.searchListOfRestaurant(keyword);
@@ -24,7 +25,9 @@ class FeedSearchProvider extends ChangeNotifier {
       throw Exception("$e");
     }
     isTriggeredToLoading = false;
-    notifyListeners();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      notifyListeners();
+    });
   }
 
   void clearSearch() {

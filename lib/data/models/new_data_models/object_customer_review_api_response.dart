@@ -7,16 +7,13 @@ class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
   String date;
 
   ObjectOfCustomerReviewApiResponse({
-    required bool error,
-    required String message,
+    required super.error,
+    required super.message,
     required this.restaurantId,
     required this.name,
     required this.review,
     required this.date,
-  }) : super(
-          error: error,
-          message: message,
-        );
+  });
   factory ObjectOfCustomerReviewApiResponse.fromJson(
       Map<String, dynamic> parsed) {
     return ObjectOfCustomerReviewApiResponse(

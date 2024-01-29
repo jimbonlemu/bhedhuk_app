@@ -11,24 +11,17 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
   List<ObjectOfCustomerReviewApiResponse> listObjectOfCustomerReviews;
 
   ObjectOfRestaurantDetail({
-    required String id,
-    required String name,
-    required String description,
-    required String city,
-    required String pictureId,
-    required num rating,
+    required super.id,
+    required super.name,
+    required super.description,
+    required super.city,
+    required super.pictureId,
+    required super.rating,
     required this.address,
     required this.categories,
     required this.menus,
     required this.listObjectOfCustomerReviews,
-  }) : super(
-          id: id,
-          name: name,
-          description: description,
-          city: city,
-          pictureId: pictureId,
-          rating: rating,
-        );
+  });
 
   factory ObjectOfRestaurantDetail.fromJson(Map<String, dynamic> parsed) {
     var menusJson = parsed['menus'] as Map<String, dynamic>;

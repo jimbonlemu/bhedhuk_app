@@ -35,11 +35,11 @@ void showNoInternetDialog(BuildContext context) {
           }
         },
         child: AlertDialog(
-          title: Text('No Internet'),
-          content: Text('You have no internet connection.'),
+          title: const Text('No Internet'),
+          content: const Text('You have no internet connection.'),
           actions: <Widget>[
             ElevatedButton(
-              child: Text('Check Connection'),
+              child: const Text('Check Connection'),
               onPressed: () async {
                 bool isConnected =
                     await InternetConnectionChecker().hasConnection;

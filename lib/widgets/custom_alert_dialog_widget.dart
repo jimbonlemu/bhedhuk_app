@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
-  const CustomAlertDialog({super.key});
+  final String purpose;
+
+  const CustomAlertDialog({super.key, required this.purpose});
 
   @override
   Widget build(BuildContext context) {
+    switch (purpose) {
+      case 'exitAlert':
+        return _buildExitAlertDialog(context);
+
+      default:
+        throw ArgumentError("Invalid Purpose $purpose");
+    }
+  }
+
+  Widget _buildExitAlertDialog(BuildContext context) {
     return AlertDialog(
       title: const Text(
         'Are you sure?',

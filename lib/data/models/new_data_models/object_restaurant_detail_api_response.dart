@@ -5,13 +5,10 @@ class ObjectOfRestaurantDetailApiResponse extends ObjectOfApiResponse {
   ObjectOfRestaurantDetail objectOfRestaurantDetail;
 
   ObjectOfRestaurantDetailApiResponse({
-    required bool error,
-    required String message,
+    required super.error,
+    required super.message,
     required this.objectOfRestaurantDetail,
-  }) : super(
-          error: error,
-          message: message,
-        );
+  });
 
   factory ObjectOfRestaurantDetailApiResponse.fromJson(
       Map<String, dynamic> parsed) {
