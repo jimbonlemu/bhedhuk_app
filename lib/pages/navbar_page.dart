@@ -1,12 +1,12 @@
 import 'package:bhedhuk_app/pages/feed_page/favorites_feed_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_search_page.dart';
+import 'package:bhedhuk_app/provider/connecivity_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/custom_alert_dialog_widget.dart';
-
 
 class NavBarPage extends StatelessWidget {
   static const route = '/navbar_page';
@@ -36,26 +36,32 @@ class NavBarPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) => showDialog(
-        context: context,
-        builder: (context) => const CustomAlertDialog(),
-      ),
-      child: Consumer<UtilsProvider>(
-        builder: (context, utilsProvider, child) {
-          return Scaffold(
-            body: _listPage[utilsProvider.navBarIndex],
-            bottomNavigationBar: BottomNavigationBar(
-              items: _navBarPageItem,
-              currentIndex: utilsProvider.navBarIndex,
-              onTap: (selected) {
-                utilsProvider.toggleNavbar(selected);
-              },
-            ),
-          );
-        },
-      ),
-    );
+    return Consumer<ConnectivityProvider>(
+        builder: (context, connectionStatus, child) {
+      if (!connectionStatus.isConnected) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => showNoInternetDialog(context));
+      }
+      return PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) => showDialog(
+          context: context,
+          builder: (context) => const CustomAlertDialog(),
+        ),
+        child: Consumer<UtilsProvider>(
+          builder: (context, utilsProvider, child) {
+            return Scaffold(
+              body: _listPage[utilsProvider.navBarIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                items: _navBarPageItem,
+                currentIndex: utilsProvider.navBarIndex,
+                onTap: (selected) {
+                  utilsProvider.toggleNavbar(selected);
+                },
+              ),
+            );
+          },
+        ),
+      );
+    });
   }
 }

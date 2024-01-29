@@ -1,4 +1,5 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
+import 'package:bhedhuk_app/provider/connecivity_provider.dart';
 import 'package:bhedhuk_app/provider/feed_search_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/provider/feed_list_provider.dart';
@@ -19,6 +20,9 @@ Future main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => ConnectivityProvider(),
+        ),
+        ChangeNotifierProvider(
           create: (context) => FeedListProvider(apiService: apiService),
         ),
         ChangeNotifierProvider(
@@ -26,7 +30,7 @@ Future main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => FeedSearchProvider(apiService: apiService),
-        )
+        ),
       ],
       child: const BhedhukApp(),
     ),
@@ -81,3 +85,4 @@ class BhedhukApp extends StatelessWidget {
     );
   }
 }
+

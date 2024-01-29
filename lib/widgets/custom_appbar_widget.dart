@@ -45,40 +45,38 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.disappearWhenScrolled == true) {
-      return Scaffold(
-        body: CustomScrollView(
-          controller: widget.scrollController,
-          slivers: <Widget>[
-            SliverAppBar(
-              leading: IconButton(
-                icon: const Icon(CupertinoIcons.back),
-                onPressed: () => Navigator.pop(context),
-              ),
-              iconTheme: widget.iconTheme,
-              floating: true,
-              backgroundColor: widget.isUsingDefaultColorTheme == true
-                  ? primaryColor
-                  : Colors.transparent,
-              centerTitle: widget.centerTitle,
-              title: widget.titleWidget ??
-                  Text(
-                    widget.title ?? '',
-                    style: TextStyle(
-                      fontSize: widget.fontSize,
-                    ),
-                  ),
-              stretch: true,
-              elevation: 0,
-              pinned: true,
-              expandedHeight: 300,
-              flexibleSpace: FlexibleSpaceBar(
-                title: widget.imageTitle,
-                background: widget.image,
-              ),
+      return CustomScrollView(
+        controller: widget.scrollController,
+        slivers: <Widget>[
+          SliverAppBar(
+            leading: IconButton(
+              icon: const Icon(CupertinoIcons.back),
+              onPressed: () => Navigator.pop(context),
             ),
-            ...widget.slivers ?? [],
-          ],
-        ),
+            iconTheme: widget.iconTheme,
+            floating: true,
+            backgroundColor: widget.isUsingDefaultColorTheme == true
+                ? primaryColor
+                : Colors.transparent,
+            centerTitle: widget.centerTitle,
+            title: widget.titleWidget ??
+                Text(
+                  widget.title ?? '',
+                  style: TextStyle(
+                    fontSize: widget.fontSize,
+                  ),
+                ),
+            stretch: true,
+            elevation: 0,
+            pinned: true,
+            expandedHeight: 300,
+            flexibleSpace: FlexibleSpaceBar(
+              title: widget.imageTitle,
+              background: widget.image,
+            ),
+          ),
+          ...widget.slivers ?? [],
+        ],
       );
     }
     return AppBar(
