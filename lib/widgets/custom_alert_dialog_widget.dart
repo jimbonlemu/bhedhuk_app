@@ -32,7 +32,7 @@ class CustomAlertDialog extends StatelessWidget {
       onPressed: () => Navigator.of(context).pop(willPop),
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20), // radius of 20
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
       child: Text(

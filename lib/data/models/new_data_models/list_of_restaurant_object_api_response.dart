@@ -5,7 +5,7 @@ import 'package:bhedhuk_app/utils/model_parser.dart';
 class ListOfRestaurantObjectApiResponse extends ObjectOfApiResponse {
   List<ObjectOfRestaurant> listobjectOfRestaurant;
   int count;
-  int founded;
+  int founded = 0;
 
   ListOfRestaurantObjectApiResponse({
     required bool error,

@@ -1,14 +1,28 @@
+import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
-import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
-import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import '../../provider/feed_search_provider.dart';
+import '../../widgets/custom_appbar_widget.dart';
+import '../../widgets/feed_item_widget.dart';
+import '../../widgets/general_shimmer_widget.dart';
 
-class FeedSearchPage extends StatelessWidget {
+class FeedSearchPage extends StatefulWidget {
   static const route = '/feed_search_page';
   const FeedSearchPage({super.key});
+
+  @override
+  State<FeedSearchPage> createState() => _FeedSearchPageState();
+}
+
+class _FeedSearchPageState extends State<FeedSearchPage> {
+  @override
+  void initState() {
+    Provider.of<FeedSearchProvider>(context, listen: false).clearSearch();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +56,16 @@ class FeedSearchPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10.0),
                     child: TextField(
-                      controller: Provider.of<FeedSearchProvider>(context)
-                          .searchController,
                       style: const TextStyle(fontSize: 20),
                       onSubmitted: (value) {
-                        if (Provider.of<FeedSearchProvider>(context)
-                                .searchController
-                                .value
-                                .text
-                                .length <
-                            3) {
-                          Provider.of<FeedSearchProvider>(
-                            context,
-                          ).search(value);
+                        if (value.length >= 3) {
+                          Provider.of<FeedSearchProvider>(context,
+                                  listen: false)
+                              .search(value);
+                        } else {
+                          Provider.of<FeedSearchProvider>(context,
+                                  listen: false)
+                              .clearSearch();
                         }
                       },
                       textAlignVertical: TextAlignVertical.center,
@@ -67,15 +78,11 @@ class FeedSearchPage extends StatelessWidget {
                             borderSide: BorderSide(color: Colors.transparent),
                           ),
                           suffixIcon: Material(
-                            child: InkWell(
-                              onTap: () {},
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                  width: 30,
-                                  height: 30,
-                                  padding: const EdgeInsets.only(top: 12.0),
-                                  child: const Icon(CupertinoIcons.search)),
-                            ),
+                            child: Container(
+                                width: 30,
+                                height: 30,
+                                padding: const EdgeInsets.only(top: 12.0),
+                                child: const Icon(CupertinoIcons.search)),
                           ),
                           hintText: 'Type your feed for today ..',
                           hintStyle: bhedhukTextTheme.bodyLarge),
@@ -87,74 +94,47 @@ class FeedSearchPage extends StatelessWidget {
           ),
           Consumer<FeedSearchProvider>(
             builder: (context, feedSearchProvider, child) {
-              // if (feedSearchProvider.isTriggeredToLoading) {
-              //   if (feedSearchProvider.responseResult ==
-              //       ResponseResult.loading) {
-              //     return const SliverFillRemaining(
-              //       child: Center(child: CircularProgressIndicator()),
-              //     );
-              //   } else if (feedSearchProvider.responseResult ==
-              //       ResponseResult.hasData) {
-              //     return SliverList(
-              //       delegate: SliverChildBuilderDelegate(
-              //         (BuildContext context, int index) {
-              //           var restaurant = feedSearchProvider
-              //               .listOfRestaurantObjectApiResponse!
-              //               .listobjectOfRestaurant[index];
-              //           return FeedItemWidget(restaurant: restaurant);
-              //         },
-              //         childCount: feedSearchProvider
-              //             .listOfRestaurantObjectApiResponse!
-              //             .listobjectOfRestaurant
-              //             .length,
-              //       ),
-              //     );
-              //   } else if (feedSearchProvider.responseResult ==
-              //       ResponseResult.noData) {
-              //     return const SliverFillRemaining(
-              //       child: Center(child: Text('No data')),
-              //     );
-              //   } else if (feedSearchProvider.responseResult ==
-              //       ResponseResult.error) {
-              //     return const SliverFillRemaining(
-              //       child: Center(child: Text('Error')),
-              //     );
-              //   } else {
-              //     return const SliverFillRemaining(
-              //       child:
-              //           Center(child: Text('Get a good Feed for Healthy lead')),
-              //     );
-              //   }
-              // } else {
-              //   return const SliverFillRemaining(
-              //     child:
-              //         Center(child: Text('Get a good Feed for Healthy lead')),
-              //   );
-              // }
-
+              var searchResult =
+                  feedSearchProvider.listOfRestaurantObjectApiResponse;
               if (feedSearchProvider.isTriggeredToLoading) {
                 return const SliverFillRemaining(
-                  child: Center(child: CircularProgressIndicator()),
+                  child: Center(child: GeneralShimmerWidget()),
                 );
-              } else if (feedSearchProvider.listOfRestaurantObjectApiResponse !=
-                  null) {
+              } else if (searchResult != null && searchResult.founded != 0) {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
-                      var restaurant = feedSearchProvider
-                          .listOfRestaurantObjectApiResponse!
-                          .listobjectOfRestaurant[index];
-                      return FeedItemWidget(restaurant: restaurant);
+                      return FeedItemWidget(
+                          restaurant:
+                              searchResult.listobjectOfRestaurant[index]);
                     },
-                    childCount: feedSearchProvider
-                        .listOfRestaurantObjectApiResponse!
-                        .listobjectOfRestaurant
-                        .length,
+                    childCount: searchResult.listobjectOfRestaurant.length,
+                  ),
+                );
+              } else if (searchResult != null && searchResult.founded == 0) {
+                return SliverFillRemaining(
+                  child: Stack(
+                    alignment: AlignmentDirectional.topCenter,
+                    children: [
+                      LottieBuilder.asset(Images.lottieNoResult),
+                      Positioned(
+                        top: MediaQuery.of(context).size.height / 10 * 4 + 15,
+                        child: Text(
+                          'Looking for something?',
+                          style: bhedhukTextTheme.headlineSmall,
+                        ),
+                      ),
+                    ],
                   ),
                 );
               } else {
-                return const SliverFillRemaining(
-                  child: Center(child: Text('No results')),
+                return SliverFillRemaining(
+                  child: Center(
+                    child: Text(
+                      'Get a Good and Best Feed For You!',
+                      style: bhedhukTextTheme.headlineSmall,
+                    ),
+                  ),
                 );
               }
             },

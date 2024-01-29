@@ -42,6 +42,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   pagination_flutter: ^0.0.8
   provider: ^6.1.1
+  lottie: ^3.0.0
   
 
 dev_dependencies:
@@ -70,6 +71,7 @@ flutter:
   assets:
     - assets/images/
     - assets/local_restaurant.json
+    - assets/lotties/
     - .env
   #   - images/a_dot_ham.jpeg
 

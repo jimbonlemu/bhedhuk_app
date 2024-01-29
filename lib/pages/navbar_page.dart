@@ -2,9 +2,11 @@ import 'package:bhedhuk_app/pages/feed_page/favorites_feed_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_search_page.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
-import 'package:bhedhuk_app/widgets/custom_alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/custom_alert_dialog_widget.dart';
+
 
 class NavBarPage extends StatelessWidget {
   static const route = '/navbar_page';

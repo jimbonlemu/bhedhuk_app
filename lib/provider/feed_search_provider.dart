@@ -13,6 +13,7 @@ class FeedSearchProvider extends ChangeNotifier {
   FeedSearchProvider({required this.apiService});
 
   Future<void> search(String keyword) async {
+    clearSearch();
     isTriggeredToLoading = true;
     notifyListeners();
     try {
@@ -20,8 +21,14 @@ class FeedSearchProvider extends ChangeNotifier {
           await apiService.searchListOfRestaurant(keyword);
     } catch (e) {
       print("$e");
+      throw Exception("$e");
     }
     isTriggeredToLoading = false;
+    notifyListeners();
+  }
+
+  void clearSearch() {
+    listOfRestaurantObjectApiResponse = null;
     notifyListeners();
   }
 }

@@ -4,11 +4,11 @@ import '../../data/models/new_data_models/object_of_restaurant_detail.dart';
 import '../../provider/feed_provider.dart';
 import '../../provider/utils_provider.dart';
 import '../../utils/styles.dart';
-import '../../widgets/custom_appbar_widget.dart';
-import '../../widgets/icon_title_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../provider/detail_feed_item_provider.dart';
+import '../../widgets/custom_appbar_widget.dart';
+import '../../widgets/icon_title_widget.dart';
 import '../../widgets/menu_widget.dart';
 
 class FeedDetailPage extends StatelessWidget {
