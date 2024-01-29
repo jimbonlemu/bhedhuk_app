@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:bhedhuk_app/widgets/custom_alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -34,22 +35,38 @@ void showNoInternetDialog(BuildContext context) {
             return Future.delayed(Duration.zero, () => isConnected);
           }
         },
-        child: AlertDialog(
-          title: const Text('No Internet'),
-          content: const Text('You have no internet connection.'),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text('Check Connection'),
-              onPressed: () async {
-                bool isConnected =
-                    await InternetConnectionChecker().hasConnection;
-                if (isConnected) {
-                  Navigator.pop(context, 'Cancel');
-                }
-              },
-            ),
-          ],
+        child: CustomAlertDialog(
+          purpose: 'internetConnectionAlert',
+          onPressed: () async {
+            final Completer<bool> completer = Completer<bool>();
+            InternetConnectionChecker().hasConnection.then((isConnected) {
+              if (isConnected) {
+                completer.complete(true);
+              }
+            });
+            return completer.future.then((isConnected) {
+              if (isConnected && Navigator.canPop(context)) {
+                Navigator.pop(context, 'Cancel');
+              }
+            });
+          },
         ),
+        // AlertDialog(
+        //   title: const Text('No Internet'),
+        //   content: const Text('You have no internet connection.'),
+        //   actions: <Widget>[
+        //     ElevatedButton(
+        //       child: const Text('Check Connection'),
+        //       onPressed: () async {
+        //         bool isConnected =
+        //             await InternetConnectionChecker().hasConnection;
+        //         if (isConnected) {
+        //           Navigator.pop(context, 'Cancel');
+        //         }
+        //       },
+        //     ),
+        //   ],
+        // ),
       );
     },
   );

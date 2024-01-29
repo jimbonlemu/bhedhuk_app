@@ -45,7 +45,9 @@ class NavBarPage extends StatelessWidget {
         canPop: false,
         onPopInvoked: (didPop) => showDialog(
           context: context,
-          builder: (context) => const CustomAlertDialog(purpose: 'exitAlert'),
+          builder: (context) => CustomAlertDialog(
+            purpose: 'exitAlert',
+          ),
         ),
         child: Consumer<UtilsProvider>(
           builder: (context, utilsProvider, child) {
