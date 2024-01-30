@@ -28,8 +28,8 @@ class NavBarPage extends StatelessWidget {
   ];
 
   final List<Widget> _listPage = [
-    const FeedSearchPage(),
     FeedListPage(),
+    const FeedSearchPage(),
     const FavoritesListPage(),
   ];
 

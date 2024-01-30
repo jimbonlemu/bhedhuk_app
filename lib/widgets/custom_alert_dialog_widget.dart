@@ -1,7 +1,6 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:bhedhuk_app/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
@@ -10,8 +9,7 @@ class CustomAlertDialog extends StatelessWidget {
   CustomAlertDialog({
     super.key,
     required this.purpose,
-     this.onPressed,
-    // this.pressedAction,
+    this.onPressed,
   });
 
   @override
@@ -21,9 +19,44 @@ class CustomAlertDialog extends StatelessWidget {
         return _buildExitAlertDialog(context);
       case 'internetConnectionAlert':
         return _buildNoInternetDialog(context);
+      case 'addCommentAlert':
+        return _addCommentDialog(context);
       default:
         throw ArgumentError("Invalid Purpose $purpose");
     }
+  }
+
+  Widget _addCommentDialog(BuildContext context) {
+    return AlertDialog(
+      title: const Center(child: Text("Give us your review ")),
+      content: Card(
+        child: ListTile(
+          title: _styledTextField(
+            label: "Your name is?",
+          ),
+          subtitle: _styledTextField(
+            label: "Your review about us ?",
+          ),
+        ),
+      ),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            _styledElevatedButton(
+              context: context,
+              text: "Cancel",
+              onPressed: () => Navigator.of(context).pop(false),
+            ),
+            _styledElevatedButton(
+              context: context,
+              text: "Post your review",
+              onPressed: () => Navigator.of(context).pop(false),
+            )
+          ],
+        ),
+      ],
+    );
   }
 
   Widget _buildNoInternetDialog(BuildContext context) {
@@ -73,13 +106,13 @@ class CustomAlertDialog extends StatelessWidget {
           children: [
             _styledElevatedButton(
               context: context,
-              willPop: false,
               text: 'No',
+              onPressed: () => Navigator.of(context).pop(false),
             ),
             _styledElevatedButton(
               context: context,
-              willPop: true,
               text: 'Yes',
+              onPressed: () => Navigator.of(context).pop(true),
             )
           ],
         ),
@@ -89,13 +122,16 @@ class CustomAlertDialog extends StatelessWidget {
 
   Widget _styledElevatedButton({
     required BuildContext context,
-    bool? willPop = false,
     required String text,
+    required void Function()? onPressed,
   }) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.of(context).pop(willPop);
-      },
+      onPressed: onPressed
+      // () {
+      //   Navigator.of(context).pop(willPop);
+      // }
+      //
+      ,
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -105,6 +141,22 @@ class CustomAlertDialog extends StatelessWidget {
         text,
         style: const TextStyle(color: Colors.black),
       ),
+    );
+  }
+
+  Widget _styledTextField({
+    required String label,
+  }) {
+    return TextField(
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.only(top: 35, bottom: 25),
+        labelText: label,
+        labelStyle: const TextStyle(
+          color: blackColor,
+        ),
+      ),
+      minLines: 1,
+      maxLines: 5,
     );
   }
 }
