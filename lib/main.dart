@@ -1,5 +1,7 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
+import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/provider/connecivity_provider.dart';
+import 'package:bhedhuk_app/provider/feed_review_provider.dart';
 import 'package:bhedhuk_app/provider/feed_search_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/provider/feed_list_provider.dart';
@@ -31,6 +33,9 @@ Future main() async {
         ChangeNotifierProvider(
           create: (context) => FeedSearchProvider(apiService: apiService),
         ),
+        ChangeNotifierProvider(
+          create: (context) => FeedReviewProvider(apiService: apiService),
+        )
       ],
       child: const BhedhukApp(),
     ),
@@ -81,8 +86,11 @@ class BhedhukApp extends StatelessWidget {
       routes: {
         SplashPage.route: (context) => const SplashPage(),
         NavBarPage.route: (context) => NavBarPage(),
+        FeedDetailPage.route: (context) => FeedDetailPage(
+              restaurantId:
+                  (ModalRoute.of(context)?.settings.arguments as String?) ?? '',
+            ),
       },
     );
   }
 }
-

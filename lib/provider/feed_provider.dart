@@ -22,12 +22,12 @@ abstract class FeedProvider extends ChangeNotifier {
         _responseResult = ResponseResult.hasData;
         return apiResponse;
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
       _responseResult = ResponseResult.error;
-      _messageResponse = "Error ---> $e";
+      _messageResponse = "Error FROM FEED PROVIDER ---> $e\n$stackTrace";
     } finally {
       notifyListeners();
     }
-    return throw Exception(_messageResponse);
+    return throw Exception("FROM FEED PROVIDER ---->  $_messageResponse");
   }
 }

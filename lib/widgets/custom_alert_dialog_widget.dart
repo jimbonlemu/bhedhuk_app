@@ -1,15 +1,23 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
 
 import 'package:bhedhuk_app/utils/styles.dart';
+import 'package:bhedhuk_app/widgets/custom_elevated_button_widget.dart';
+import 'package:bhedhuk_app/widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String purpose;
   void Function()? onPressed;
+  CustomTextFieldWidget? reviewerNameTextField, reviewerCommentTextField;
+  List<Widget>? childrenInActions;
+
   CustomAlertDialog({
     super.key,
     required this.purpose,
     this.onPressed,
+    this.reviewerNameTextField,
+    this.reviewerCommentTextField,
+    this.childrenInActions,
   });
 
   @override
@@ -29,33 +37,20 @@ class CustomAlertDialog extends StatelessWidget {
   Widget _addCommentDialog(BuildContext context) {
     return AlertDialog(
       title: const Center(child: Text("Give us your review ")),
-      content: Card(
-        child: ListTile(
-          title: _styledTextField(
-            label: "Your name is?",
-          ),
-          subtitle: _styledTextField(
-            label: "Your review about us ?",
+      content: SizedBox(
+        width: MediaQuery.of(context).size.width * 1,
+        height: MediaQuery.of(context).size.height * 0.3,
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 25),
+            child: ListTile(
+              title: reviewerNameTextField,
+              subtitle: reviewerCommentTextField,
+            ),
           ),
         ),
       ),
-      actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _styledElevatedButton(
-              context: context,
-              text: "Cancel",
-              onPressed: () => Navigator.of(context).pop(false),
-            ),
-            _styledElevatedButton(
-              context: context,
-              text: "Post your review",
-              onPressed: () => Navigator.of(context).pop(false),
-            )
-          ],
-        ),
-      ],
+      actions: childrenInActions,
     );
   }
 
@@ -104,14 +99,12 @@ class CustomAlertDialog extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _styledElevatedButton(
-              context: context,
-              text: 'No',
+            CustomElevatedButtonWidget(
+              buttonLabel: 'No',
               onPressed: () => Navigator.of(context).pop(false),
             ),
-            _styledElevatedButton(
-              context: context,
-              text: 'Yes',
+            CustomElevatedButtonWidget(
+              buttonLabel: 'Yes',
               onPressed: () => Navigator.of(context).pop(true),
             )
           ],
@@ -120,43 +113,22 @@ class CustomAlertDialog extends StatelessWidget {
     );
   }
 
-  Widget _styledElevatedButton({
-    required BuildContext context,
-    required String text,
-    required void Function()? onPressed,
-  }) {
-    return ElevatedButton(
-      onPressed: onPressed
-      // () {
-      //   Navigator.of(context).pop(willPop);
-      // }
-      //
-      ,
-      style: ElevatedButton.styleFrom(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(color: Colors.black),
-      ),
-    );
-  }
-
-  Widget _styledTextField({
-    required String label,
-  }) {
-    return TextField(
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.only(top: 35, bottom: 25),
-        labelText: label,
-        labelStyle: const TextStyle(
-          color: blackColor,
-        ),
-      ),
-      minLines: 1,
-      maxLines: 5,
-    );
-  }
+  // Widget _styledElevatedButton({
+  //   required BuildContext context,
+  //   required String text,
+  //   required void Function()? onPressed,
+  // }) {
+  //   return ElevatedButton(
+  //     onPressed: onPressed,
+  //     style: ElevatedButton.styleFrom(
+  //       shape: RoundedRectangleBorder(
+  //         borderRadius: BorderRadius.circular(20),
+  //       ),
+  //     ),
+  //     child: Text(
+  //       text,
+  //       style: const TextStyle(color: Colors.black),
+  //     ),
+  //   );
+  // }
 }

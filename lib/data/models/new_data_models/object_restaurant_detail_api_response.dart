@@ -10,13 +10,18 @@ class ObjectOfRestaurantDetailApiResponse extends ObjectOfApiResponse {
     required this.objectOfRestaurantDetail,
   });
 
-  factory ObjectOfRestaurantDetailApiResponse.fromJson(
+  
+
+factory ObjectOfRestaurantDetailApiResponse.fromJson(
       Map<String, dynamic> parsed) {
     return ObjectOfRestaurantDetailApiResponse(
       error: parsed['error'],
       message: parsed['message'],
-      objectOfRestaurantDetail:
-          ObjectOfRestaurantDetail.fromJson(parsed['restaurant']),
+      objectOfRestaurantDetail: parsed['restaurant'] != null 
+          ? ObjectOfRestaurantDetail.fromJson(parsed['restaurant']) 
+          : ObjectOfRestaurantDetail.empty(),
     );
   }
+
+  
 }

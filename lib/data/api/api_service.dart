@@ -6,6 +6,8 @@ import 'package:bhedhuk_app/data/models/new_data_models/object_restaurant_detail
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+import '../../utils/response_decoder.dart';
+
 class ApiService implements InterfaceApiService {
   static final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
   static const String _getListOfRestaurant = 'list';
@@ -13,38 +15,33 @@ class ApiService implements InterfaceApiService {
   static const String _searchListOfRestaurant = 'search?q=';
   static const String _postReview = 'review';
 
-  Future<dynamic> _get(String url, Function fromJson) async {
-    var response = await http.get(Uri.parse(_baseUrl + url));
-    if (response.statusCode == 200) {
-      return fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Error ----');
-    }
-  }
+  
 
   @override
   Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {
-    return await _get(
-        _getListOfRestaurant, ListOfRestaurantObjectApiResponse.fromJson);
+    final response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
+    return responseDecoder(response, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override
   Future<ObjectOfRestaurantDetailApiResponse> getRestaurantDetail(
       String restaurantId) async {
-    return await _get(_getDetailOfRestaurant + restaurantId,
-        ObjectOfRestaurantDetailApiResponse.fromJson);
+    final response = await http
+        .get(Uri.parse(_baseUrl + _getDetailOfRestaurant + restaurantId));
+    return responseDecoder(response, ObjectOfRestaurantDetailApiResponse.fromJson);
   }
 
   @override
   Future<ListOfRestaurantObjectApiResponse> searchListOfRestaurant(
       String keyword) async {
-    return await _get(_searchListOfRestaurant + keyword,
-        ListOfRestaurantObjectApiResponse.fromJson);
+    final response =
+        await http.get(Uri.parse(_baseUrl + _searchListOfRestaurant + keyword));
+    return responseDecoder(response, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override
   Future<ObjectOfCustomerReviewApiResponse> postCustomerReview(
-      String restaurantId, String reviewerName, String reviewerComment) async {
+      String restaurantId, String name, String comment) async {
     final response = await http.post(
       Uri.parse(_baseUrl + _postReview),
       headers: <String, String>{
@@ -52,16 +49,11 @@ class ApiService implements InterfaceApiService {
       },
       body: jsonEncode(<String, String>{
         "id": restaurantId,
-        "name": reviewerName,
-        "review": reviewerComment,
+        "name": name,
+        "review": comment,
       }),
     );
-
-    if (response.statusCode == 200) {
-      return ObjectOfCustomerReviewApiResponse.fromJson(
-          jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to Post Review');
-    }
+    return ObjectOfCustomerReviewApiResponse.fromJson(
+        jsonDecode(response.body));
   }
 }

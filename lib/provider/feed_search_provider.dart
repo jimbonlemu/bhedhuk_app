@@ -8,8 +8,7 @@ class FeedSearchProvider extends ChangeNotifier {
   ListOfRestaurantObjectApiResponse? listOfRestaurantObjectApiResponse;
 
   bool isTriggeredToLoading = false;
-
-  TextEditingController searchController = TextEditingController();
+  
   FeedSearchProvider({required this.apiService});
 
   Future<void> search(String keyword) async {

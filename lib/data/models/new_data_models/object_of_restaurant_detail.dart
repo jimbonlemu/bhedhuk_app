@@ -43,6 +43,21 @@ class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
     );
   }
 
+  factory ObjectOfRestaurantDetail.empty() {
+    return ObjectOfRestaurantDetail(
+      id: "",
+      name: "",
+      description: "",
+      city: "",
+      pictureId: "",
+      rating: 0,
+      address: "",
+      categories: [],
+      menus: [],
+      listObjectOfCustomerReviews: [],
+    );
+  }
+
   List<dynamic> get getMenuFoods =>
       _getMenuItems(menus, (menus) => menus.foods);
 

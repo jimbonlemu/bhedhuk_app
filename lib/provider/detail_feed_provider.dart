@@ -15,22 +15,15 @@ class DetailFeedProvider extends FeedProvider {
     _objectOfRestaurantDetailApiResponse = ObjectOfRestaurantDetailApiResponse(
       error: true,
       message: "",
-      objectOfRestaurantDetail: ObjectOfRestaurantDetail(
-          id: restaurantId,
-          name: "",
-          description: "",
-          city: "",
-          pictureId: "",
-          rating: 0,
-          address: "",
-          categories: [],
-          menus: [],
-          listObjectOfCustomerReviews: []),
+      objectOfRestaurantDetail: ObjectOfRestaurantDetail.empty(),
     );
+    getDataOfDetail();
+  }
+  void getDataOfDetail() async {
     fetchData(
       () async {
-        return _objectOfRestaurantDetailApiResponse =
-            await apiService.getRestaurantDetail(restaurantId);
+        var response = await apiService.getRestaurantDetail(restaurantId);
+        return _objectOfRestaurantDetailApiResponse = response;
       },
     );
   }

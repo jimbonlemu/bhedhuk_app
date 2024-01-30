@@ -9,7 +9,7 @@ class ObjectOfApiResponse {
 
   factory ObjectOfApiResponse.fromJson(Map<String, dynamic> parsed) {
     return ObjectOfApiResponse(
-      error: parsed['error'] ?? true,
+      error: parsed['error'],
       message: parsed['message'] ?? '',
     );
   }
