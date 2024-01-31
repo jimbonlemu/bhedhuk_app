@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/utils/styles.dart';
+import '../utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:pagination_flutter/pagination.dart';
 

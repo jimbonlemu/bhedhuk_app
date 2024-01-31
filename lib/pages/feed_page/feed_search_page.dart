@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import '../../data/models/new_data_models/list_of_restaurant_object_api_response.dart';
+import '../../data/models/list_of_restaurant_object_api_response.dart';
 import '../../provider/utils_provider.dart';
 import '../../utils/images.dart';
 import '../../utils/styles.dart';

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../data/models/new_data_models/object_of_api_response.dart';
+import '../data/models/object_of_api_response.dart';
 
 Future<T> responseDecoder<T extends ObjectOfApiResponse>(
     http.Response response, T Function(Map<String, dynamic>) fromJson) async {

@@ -12,7 +12,6 @@ class CustomTextFieldWidget extends StatelessWidget {
     return TextField(
       controller: textController,
       decoration: InputDecoration(
-        // contentPadding: const EdgeInsets.only(top: 15, bottom: 10),
         labelText: label,
         labelStyle: const TextStyle(
           color: blackColor,

@@ -1,6 +1,7 @@
 import 'package:bhedhuk_app/data/api/api_service.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_api_response.dart';
 import 'package:flutter/material.dart';
+
+import '../data/models/object_customer_review_api_response.dart';
 
 class FeedReviewProvider extends ChangeNotifier {
   final ApiService apiService;

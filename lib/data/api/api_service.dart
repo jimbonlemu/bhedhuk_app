@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:bhedhuk_app/data/api/interface_api_service.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_api_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_api_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_restaurant_detail_api_response.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../utils/response_decoder.dart';
+import '../models/list_of_restaurant_object_api_response.dart';
+import '../models/object_customer_review_api_response.dart';
+import '../models/object_restaurant_detail_api_response.dart';
 
 class ApiService implements InterfaceApiService {
   static final String _baseUrl = dotenv.env['BASE_URL'] ?? '';

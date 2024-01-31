@@ -1,8 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:lottie/lottie.dart';
-import '../../../data/models/new_data_models/object_customer_review_api_response.dart';
-import '../../../data/models/new_data_models/object_restaurant_detail_api_response.dart';
 import '../../../provider/feed_review_provider.dart';
 import '../../../utils/images.dart';
 import '../../../widgets/custom_alert_dialog_widget.dart';
@@ -12,7 +10,6 @@ import '../../../widgets/custom_text_field_widget.dart';
 import '../../../widgets/pagination_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../data/api/api_service.dart';
-import '../../../data/models/new_data_models/object_of_restaurant_detail.dart';
 import '../../../provider/feed_provider.dart';
 import '../../../provider/utils_provider.dart';
 import '../../../utils/styles.dart';
@@ -23,6 +20,10 @@ import '../../../widgets/custom_appbar_widget.dart';
 import '../../../widgets/icon_title_widget.dart';
 import '../../../widgets/menu_widget.dart';
 import 'package:draggable_fab/draggable_fab.dart';
+
+import '../../data/models/object_customer_review_api_response.dart';
+import '../../data/models/object_of_restaurant_detail.dart';
+import '../../data/models/object_restaurant_detail_api_response.dart';
 
 class FeedDetailPage extends StatefulWidget {
   static const route = '/feed_detail_page';

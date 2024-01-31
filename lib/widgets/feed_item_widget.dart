@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
+import '../data/models/object_of_restaurant.dart';
 import 'icon_title_widget.dart';
 import 'rating_bar_widget.dart';
 import 'custom_shimmer_widget.dart';

@@ -112,23 +112,4 @@ class CustomAlertDialog extends StatelessWidget {
       ],
     );
   }
-
-  // Widget _styledElevatedButton({
-  //   required BuildContext context,
-  //   required String text,
-  //   required void Function()? onPressed,
-  // }) {
-  //   return ElevatedButton(
-  //     onPressed: onPressed,
-  //     style: ElevatedButton.styleFrom(
-  //       shape: RoundedRectangleBorder(
-  //         borderRadius: BorderRadius.circular(20),
-  //       ),
-  //     ),
-  //     child: Text(
-  //       text,
-  //       style: const TextStyle(color: Colors.black),
-  //     ),
-  //   );
-  // }
 }
