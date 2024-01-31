@@ -1,5 +1,5 @@
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_api_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant_detail.dart';
+import 'object_of_api_response.dart';
+import 'object_of_restaurant_detail.dart';
 
 class ObjectOfRestaurantDetailApiResponse extends ObjectOfApiResponse {
   ObjectOfRestaurantDetail objectOfRestaurantDetail;
@@ -10,18 +10,14 @@ class ObjectOfRestaurantDetailApiResponse extends ObjectOfApiResponse {
     required this.objectOfRestaurantDetail,
   });
 
-  
-
-factory ObjectOfRestaurantDetailApiResponse.fromJson(
+  factory ObjectOfRestaurantDetailApiResponse.fromJson(
       Map<String, dynamic> parsed) {
     return ObjectOfRestaurantDetailApiResponse(
       error: parsed['error'],
       message: parsed['message'],
-      objectOfRestaurantDetail: parsed['restaurant'] != null 
-          ? ObjectOfRestaurantDetail.fromJson(parsed['restaurant']) 
+      objectOfRestaurantDetail: parsed['restaurant'] != null
+          ? ObjectOfRestaurantDetail.fromJson(parsed['restaurant'])
           : ObjectOfRestaurantDetail.empty(),
     );
   }
-
-  
 }

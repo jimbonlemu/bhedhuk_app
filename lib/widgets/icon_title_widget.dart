@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class IconTitleWidget extends StatelessWidget {
   final IconData icon;
   final String text;
-
   const IconTitleWidget({
     super.key,
     required this.icon,

@@ -1,11 +1,10 @@
 import 'dart:math';
-
 import 'package:animated_snack_bar/animated_snack_bar.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/list_of_restaurant_object_api_response.dart';
-import 'package:bhedhuk_app/provider/utils_provider.dart';
-import 'package:bhedhuk_app/utils/images.dart';
-import 'package:bhedhuk_app/utils/styles.dart';
-import 'package:bhedhuk_app/widgets/pagination_widget.dart';
+import '../../data/models/new_data_models/list_of_restaurant_object_api_response.dart';
+import '../../provider/utils_provider.dart';
+import '../../utils/images.dart';
+import '../../utils/styles.dart';
+import '../../widgets/pagination_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -134,7 +133,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
       builder: (context, feedSearchProvider, utilsProvider, child) {
         var searchResult = feedSearchProvider.listOfRestaurantObjectApiResponse;
         int itemsPerPage = 3;
-        int selectedPage = utilsProvider.selectedPage;
+        int selectedPage = utilsProvider.selectedPageListOfSearch;
         if (feedSearchProvider.isTriggeredToLoading) {
           return const SliverFillRemaining(
             child: Center(child: GeneralShimmerWidget()),
@@ -205,7 +204,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                 itemToDisplay: 3,
                 onChanged: (page) {
                   if (page != selectedPage) {
-                    utilsProvider.setSelectedPage(page);
+                    utilsProvider.setSelectedPageListOfSearch(page);
                     _scrollController.animateTo(
                       0.0,
                       duration: const Duration(milliseconds: 500),

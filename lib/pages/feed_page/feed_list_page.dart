@@ -1,7 +1,9 @@
 import 'dart:math';
-import 'package:bhedhuk_app/provider/utils_provider.dart';
-import 'package:bhedhuk_app/provider/feed_list_provider.dart';
-import 'package:bhedhuk_app/utils/images.dart';
+import 'package:lottie/lottie.dart';
+
+import '../../provider/utils_provider.dart';
+import '../../provider/feed_list_provider.dart';
+import '../../utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../provider/feed_provider.dart';
@@ -30,7 +32,7 @@ class FeedListPage extends StatelessWidget {
     int itemsPerPage = 3;
     return Consumer2<FeedListProvider, UtilsProvider>(
       builder: (context, feedListProvider, utilsProvider, _) {
-        int selectedPage = utilsProvider.selectedPage;
+        int selectedPage = utilsProvider.selectedPageListOfRestaurant;
         if (feedListProvider.responseResult == ResponseResult.loading) {
           return const GeneralShimmerWidget();
         } else if (feedListProvider.responseResult == ResponseResult.hasData) {
@@ -65,27 +67,21 @@ class FeedListPage extends StatelessWidget {
             },
           );
         } else if (feedListProvider.responseResult == ResponseResult.noData) {
-          return Center(
-            child: Material(
-              child: Text(feedListProvider.messageResponse),
-            ),
-          );
+          return _buildErrorAndNoData();
         } else if (feedListProvider.responseResult == ResponseResult.error) {
-          print(feedListProvider.messageResponse);
-          return Center(
-            child: Material(
-              child: Text(feedListProvider.messageResponse),
-            ),
-          );
+          return _buildErrorAndNoData();
         } else {
-          return const Center(
-            child: Material(
-              child: Text(''),
-            ),
-          );
+          return _buildErrorAndNoData();
         }
       },
     );
+  }
+
+  Column _buildErrorAndNoData() {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      LottieBuilder.asset(Images.lottieError),
+      const Text('Sorry our service currently running out of service')
+    ]);
   }
 
   Widget _buildPagination({
@@ -105,7 +101,7 @@ class FeedListPage extends StatelessWidget {
         itemToDisplay: 3,
         onChanged: (page) {
           if (page != selectedPage) {
-            utilsProvider.setSelectedPage(page);
+            utilsProvider.setSelectedPageListOfRestaurant(page);
             _scrollController.animateTo(
               0.0,
               duration: const Duration(milliseconds: 500),

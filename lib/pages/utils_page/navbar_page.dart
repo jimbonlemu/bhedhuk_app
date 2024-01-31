@@ -5,7 +5,7 @@ import 'package:bhedhuk_app/provider/connecivity_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/custom_alert_dialog_widget.dart';
+import '../../widgets/custom_alert_dialog_widget.dart';
 
 class NavBarPage extends StatelessWidget {
   static const route = '/navbar_page';

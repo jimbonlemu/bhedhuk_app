@@ -1,10 +1,12 @@
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_api_response.dart';
+import 'object_of_api_response.dart';
+import 'package:flutter/material.dart';
 
 class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
   String restaurantId;
   String name;
   String review;
   String date;
+  Color backGroundColor;
 
   ObjectOfCustomerReviewApiResponse({
     required super.error,
@@ -13,6 +15,7 @@ class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
     required this.name,
     required this.review,
     required this.date,
+    this.backGroundColor = Colors.white,
   });
   factory ObjectOfCustomerReviewApiResponse.fromJson(
       Map<String, dynamic> parsed) {

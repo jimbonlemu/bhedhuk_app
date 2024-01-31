@@ -51,22 +51,6 @@ void showNoInternetDialog(BuildContext context) {
             });
           },
         ),
-        // AlertDialog(
-        //   title: const Text('No Internet'),
-        //   content: const Text('You have no internet connection.'),
-        //   actions: <Widget>[
-        //     ElevatedButton(
-        //       child: const Text('Check Connection'),
-        //       onPressed: () async {
-        //         bool isConnected =
-        //             await InternetConnectionChecker().hasConnection;
-        //         if (isConnected) {
-        //           Navigator.pop(context, 'Cancel');
-        //         }
-        //       },
-        //     ),
-        //   ],
-        // ),
       );
     },
   );

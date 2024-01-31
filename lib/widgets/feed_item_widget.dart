@@ -5,12 +5,9 @@ import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/material.dart';
-
 import 'icon_title_widget.dart';
 import 'rating_bar_widget.dart';
-import 'shimmer_widget.dart';
-
-
+import 'custom_shimmer_widget.dart';
 
 class FeedItemWidget extends StatelessWidget {
   final ObjectOfRestaurant restaurant;

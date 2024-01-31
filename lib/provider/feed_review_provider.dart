@@ -31,37 +31,11 @@ class FeedReviewProvider extends ChangeNotifier {
         throw Exception('Failed to post comment');
       }
     } catch (e) {
-      print("ERROR FROM FEED REVIEW PROVIDER ---- >$e");
+      print("ERROR FROM FEED REVIEW PROVIDER ---- >$e ");
       throw Exception("EXCEPTION FROM FEED REVIEW PROVIDER ---->  $e");
     } finally {
       isLoading = false;
       notifyListeners();
     }
   }
-
-  // bool isPostCommentLoading = false;
-  // bool isPostCommentSuccessful = false;
-
-  // Future<ObjectOfCustomerReviewApiResponse> postCustomerReview(
-  //     String restaurantId, String reviewerName, String reviewerComment) async {
-  //   isPostCommentLoading = true;
-  //   isPostCommentSuccessful = false;
-  //   notifyListeners();
-  //   try {
-  //     final apiResponse = await apiService.postCustomerReview(
-  //         restaurantId, reviewerName, reviewerComment);
-  //     isPostCommentSuccessful = true;
-  //     print("Berhasil KOMENTAR!!!!!!!!!!!!!!!!!!!!!");
-  //     print('isPostCommentSuccessful: $isPostCommentSuccessful');
-  //     return apiResponse;
-  //   } catch (error) {
-  //     print("INI GAGALLLL");
-  //     print("ERROR FROM PRINT IN FEED REVIEW PROVIDER----->>$error");
-  //     throw Exception(
-  //         "ERROR FROM EXCEPTION IN FEED REVIEW PROVIDER----->$error");
-  //   } finally {
-  //     isPostCommentLoading = false;
-  //     notifyListeners();
-  //   }
-  // }
 }

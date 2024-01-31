@@ -7,7 +7,7 @@ import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/provider/feed_list_provider.dart';
 import 'package:bhedhuk_app/utils/navigation_service.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
-import 'package:bhedhuk_app/pages/navbar_page.dart';
+import 'package:bhedhuk_app/pages/utils_page/navbar_page.dart';
 import 'package:bhedhuk_app/pages/utils_page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

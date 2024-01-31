@@ -1,7 +1,7 @@
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_foods_and_drinks.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_customer_review_api_response.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_menus.dart';
-import 'package:bhedhuk_app/data/models/new_data_models/object_of_restaurant.dart';
+import 'object_of_foods_and_drinks.dart';
+import 'object_customer_review_api_response.dart';
+import 'object_of_menus.dart';
+import 'object_of_restaurant.dart';
 import 'package:bhedhuk_app/utils/model_parser.dart';
 
 class ObjectOfRestaurantDetail extends ObjectOfRestaurant {

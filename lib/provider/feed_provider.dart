@@ -9,6 +9,10 @@ abstract class FeedProvider extends ChangeNotifier {
   String get messageResponse => _messageResponse;
   ResponseResult get responseResult => _responseResult;
 
+  FeedProvider() {
+    _responseResult = ResponseResult.loading;
+  }
+
   Future<dynamic> fetchData(Future<dynamic> Function() apiService) async {
     try {
       _responseResult = ResponseResult.loading;
@@ -29,5 +33,10 @@ abstract class FeedProvider extends ChangeNotifier {
       notifyListeners();
     }
     return throw Exception("FROM FEED PROVIDER ---->  $_messageResponse");
+  }
+
+  void updateResponseResult(ResponseResult result) {
+    _responseResult = result;
+    notifyListeners();
   }
 }

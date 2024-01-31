@@ -18,7 +18,8 @@ class ApiService implements InterfaceApiService {
   @override
   Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {
     final response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
-    return responseDecoder(response, ListOfRestaurantObjectApiResponse.fromJson);
+    return responseDecoder(
+        response, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override
@@ -26,7 +27,8 @@ class ApiService implements InterfaceApiService {
       String restaurantId) async {
     final response = await http
         .get(Uri.parse(_baseUrl + _getDetailOfRestaurant + restaurantId));
-    return responseDecoder(response, ObjectOfRestaurantDetailApiResponse.fromJson);
+    return responseDecoder(
+        response, ObjectOfRestaurantDetailApiResponse.fromJson);
   }
 
   @override
@@ -34,7 +36,8 @@ class ApiService implements InterfaceApiService {
       String keyword) async {
     final response =
         await http.get(Uri.parse(_baseUrl + _searchListOfRestaurant + keyword));
-    return responseDecoder(response, ListOfRestaurantObjectApiResponse.fromJson);
+    return responseDecoder(
+        response, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override

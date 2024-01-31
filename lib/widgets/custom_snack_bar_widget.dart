@@ -5,8 +5,9 @@ class CustomSnackBarWidget {
   final String snackBarMessage;
   final AnimatedSnackBarType snackBarType;
 
-  CustomSnackBarWidget._({required this.snackBarMessage, required this.snackBarType});
-  
+  CustomSnackBarWidget._(
+      {required this.snackBarMessage, required this.snackBarType});
+
   static void notice(BuildContext context, String snackBarMessage) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.warning,
@@ -20,6 +21,7 @@ class CustomSnackBarWidget {
             duration: const Duration(seconds: 5))
         .show(context);
   }
+
   static void problem(BuildContext context, String snackBarMessage) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.error,
