@@ -68,7 +68,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
               final restaurantDetails =
                   detailFeedProvider.objectOfRestaurantDetailApiResponse;
               int itemsPerPage = 3;
-              int selectedPage = utilsProvider.selectedPage;
+              int selectedPage = 1;
               int startIndex = (selectedPage - 1) * itemsPerPage;
               int endIndex = min(
                   startIndex + itemsPerPage,
@@ -143,43 +143,49 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                           ),
                         ),
                       ),
-                      SliverList.builder(
-                        itemCount: pageItems.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index < pageItems.length) {
-                            var result = pageItems[index];
-                            return Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Card(
-                                color: whiteColor,
-                                child: ListTile(
-                                  title: Text(result.name),
-                                  subtitle: Text(result.review),
-                                  trailing: Text(result.date),
+                      if (restaurantDetails.objectOfRestaurantDetail
+                          .listObjectOfCustomerReviews.isNotEmpty)
+                        SliverList.builder(
+                          itemCount: pageItems.length + 1,
+                          itemBuilder: (context, index) {
+                            if (index < pageItems.length) {
+                              var result = pageItems[index];
+                              return Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Card(
+                                  color: whiteColor,
+                                  child: ListTile(
+                                    title: Text(result.name),
+                                    subtitle: Text(result.review),
+                                    trailing: Text(result.date),
+                                  ),
                                 ),
-                              ),
-                            );
-                          } else {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: PaginationWidget(
-                                  pageCount: (restaurantDetails
-                                              .objectOfRestaurantDetail
-                                              .listObjectOfCustomerReviews
-                                              .length /
-                                          itemsPerPage)
-                                      .ceil(),
-                                  selectedPage: selectedPage,
-                                  itemToDisplay: 3,
-                                  onChanged: (page) {
-                                    if (page != selectedPage) {
-                                      utilsProvider.setSelectedPage(page);
-                                    }
-                                  }),
-                            );
-                          }
-                        },
-                      ),
+                              );
+                            } else {
+                              return Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: PaginationWidget(
+                                    pageCount: (restaurantDetails
+                                                .objectOfRestaurantDetail
+                                                .listObjectOfCustomerReviews
+                                                .length /
+                                            itemsPerPage)
+                                        .ceil(),
+                                    selectedPage: selectedPage,
+                                    itemToDisplay: 3,
+                                    onChanged: (page) {
+                                      if (page != selectedPage) {
+                                        utilsProvider.setSelectedPage(page);
+                                      }
+                                    }),
+                              );
+                            }
+                          },
+                        )
+                      else
+                        SliverToBoxAdapter(
+                          child: Container(),
+                        )
                     ],
                   );
                 },

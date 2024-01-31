@@ -15,8 +15,6 @@ class ApiService implements InterfaceApiService {
   static const String _searchListOfRestaurant = 'search?q=';
   static const String _postReview = 'review';
 
-  
-
   @override
   Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {
     final response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
