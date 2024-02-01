@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 enum ResponseResult { loading, noData, hasData, error }
 
@@ -29,10 +29,13 @@ abstract class FeedProvider extends ChangeNotifier {
     } catch (e, stackTrace) {
       _responseResult = ResponseResult.error;
       _messageResponse = "Error FROM FEED PROVIDER ---> $e\n$stackTrace";
+      if (kDebugMode) {
+        print('Caught error: $e');
+        print('Stack trace: $stackTrace');
+      }
     } finally {
       notifyListeners();
     }
-    return throw Exception("FROM FEED PROVIDER ---->  $_messageResponse");
   }
 
   void updateResponseResult(ResponseResult result) {

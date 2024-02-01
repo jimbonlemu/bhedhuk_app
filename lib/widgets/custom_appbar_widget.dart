@@ -1,6 +1,9 @@
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/utils_provider.dart';
 
 class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final String? title;
@@ -42,6 +45,11 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
+  void onBackButtonPressed() {
+    Provider.of<UtilsProvider>(context, listen: false).resetSelectedPages();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.disappearWhenScrolled == true) {
@@ -51,7 +59,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
           SliverAppBar(
             leading: IconButton(
               icon: const Icon(CupertinoIcons.back),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => onBackButtonPressed(),
             ),
             iconTheme: widget.iconTheme,
             floating: true,

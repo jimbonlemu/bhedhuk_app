@@ -37,13 +37,13 @@ Future main() async {
           create: (context) => FeedReviewProvider(apiService: apiService),
         )
       ],
-      child: const BhedhukApp(),
+      child: const FeedMeApp(),
     ),
   );
 }
 
-class BhedhukApp extends StatelessWidget {
-  const BhedhukApp({super.key});
+class FeedMeApp extends StatelessWidget {
+  const FeedMeApp({super.key});
 
   @override
   Widget build(BuildContext context) {

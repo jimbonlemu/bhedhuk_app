@@ -12,9 +12,16 @@ import '../../widgets/feed_item_widget.dart';
 import '../../widgets/general_shimmer_widget.dart';
 import '../../widgets/pagination_widget.dart';
 
-class FeedListPage extends StatelessWidget {
+class FeedListPage extends StatefulWidget {
   static const route = '/feeds_page';
-  FeedListPage({super.key});
+  const FeedListPage({super.key});
+
+  @override
+  State<FeedListPage> createState() => _FeedListPageState();
+}
+
+class _FeedListPageState extends State<FeedListPage> {
+
 
   final ScrollController _scrollController = ScrollController();
 
