@@ -325,7 +325,6 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                 text: objectOfRestaurantDetail.address,
                 style: bhedhukTextTheme.bodyMedium!.copyWith(
                   color: blackColor,
-                  // fontSize: 15,
                 ),
               ),
             ],
@@ -362,10 +361,6 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           ),
         ),
         const SizedBox(height: 10),
-        const SizedBox(height: 10),
-        MenuWidget(
-            title: 'Our Categories : ',
-            objectToList: objectOfRestaurantDetail.categories),
       ],
     );
   }
