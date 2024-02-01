@@ -479,6 +479,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                           CustomElevatedButtonWidget(
                             buttonLabel: "Cancel",
                             onPressed: () {
+                              reviewerNameController.text = "";
+                              reviewerCommentController.text = "";
                               Navigator.of(context).pop(false);
                             },
                           ),
