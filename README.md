@@ -1,6 +1,4 @@
-# bhedhuk_app
-
-A new Flutter project.
+# Feed Me
 
 ## Getting Started
 
