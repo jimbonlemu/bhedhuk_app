@@ -13,7 +13,7 @@ import '../../widgets/general_shimmer_widget.dart';
 import '../../widgets/pagination_widget.dart';
 
 class FeedListPage extends StatefulWidget {
-  static const route = '/feeds_page';
+  static const route = '/feeds_list_page';
   const FeedListPage({super.key});
 
   @override

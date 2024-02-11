@@ -49,6 +49,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
           duration: const Duration(seconds: 5),
         ).show(context);
       } else {
+        Provider.of<UtilsProvider>(context, listen: false).resetSelectedPages();
         Provider.of<FeedSearchProvider>(context, listen: false).clearSearch();
       }
     }
@@ -103,7 +104,6 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
               controller: searchController,
               style: const TextStyle(fontSize: 20),
               onSubmitted: (value) {
-                Provider.of<UtilsProvider>(context,listen: false).resetSelectedPages();
                 handleOnSubmitted(value);
               },
               textAlignVertical: TextAlignVertical.center,

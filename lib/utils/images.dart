@@ -6,6 +6,8 @@ class Images {
   static const String appLogo = 'assets/images/feed_me_logo.png';
   static const String lottieNoResult = "assets/lotties/lottie_no_result.json";
   static const String lottieError = "assets/lotties/error_lottie.json";
+  static const String lottieNoFavorites =
+      "assets/lotties/lottie_no_favorites.json";
 
   static final String _getSmallImage = dotenv.env['GET_IMAGE_SMALL'] ?? '';
   static final String _getMediumImage = dotenv.env['GET_IMAGE_MEDIUM'] ?? '';

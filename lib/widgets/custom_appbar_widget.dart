@@ -19,6 +19,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
   final ScrollController? scrollController;
   final IconThemeData? iconTheme;
   final Widget? leading;
+  final List<Widget>? actionList;
 
   const CustomAppBarWidget({
     super.key,
@@ -35,6 +36,7 @@ class CustomAppBarWidget extends StatefulWidget implements PreferredSizeWidget {
     this.scrollController,
     this.iconTheme,
     this.leading,
+    this.actionList,
   });
 
   @override
@@ -99,6 +101,7 @@ class _CustomAppBarWidgetState extends State<CustomAppBarWidget> {
               fontSize: widget.fontSize,
             ),
           ),
+      actions: widget.actionList,
     );
   }
 }

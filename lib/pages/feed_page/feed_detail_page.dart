@@ -143,6 +143,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
 
   Column _buildErrorAndNoData() {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LottieBuilder.asset(Images.lottieError),
         const Text("Sorry our service suddenly running out"),

@@ -1,3 +1,5 @@
+import 'package:bhedhuk_app/pages/feed_page/feed_settings_page.dart';
+
 import 'data/api/api_service.dart';
 import 'pages/feed_page/feed_detail_page.dart';
 import 'provider/connecivity_provider.dart';
@@ -90,6 +92,7 @@ class FeedMeApp extends StatelessWidget {
               restaurantId:
                   (ModalRoute.of(context)?.settings.arguments as String?) ?? '',
             ),
+        FeedSettingsPage.route: (context) => const FeedSettingsPage()
       },
     );
   }
