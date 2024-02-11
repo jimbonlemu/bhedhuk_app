@@ -21,9 +21,9 @@ class UtilsProvider extends ChangeNotifier {
   }
 
   void resetSelectedPages() {
-    // _selectedPageListOfRestaurant = 1;
     _selectedPageListOfSearch = 1;
     _selectedPageListComment = 1;
+    _selectedPageListOfSearch = 1;
     notifyListeners();
   }
 

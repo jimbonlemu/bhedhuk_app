@@ -102,7 +102,10 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
             child: TextField(
               controller: searchController,
               style: const TextStyle(fontSize: 20),
-              onSubmitted: (value) => handleOnSubmitted(value),
+              onSubmitted: (value) {
+                Provider.of<UtilsProvider>(context,listen: false).resetSelectedPages();
+                handleOnSubmitted(value);
+              },
               textAlignVertical: TextAlignVertical.center,
               decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(top: 12.0),

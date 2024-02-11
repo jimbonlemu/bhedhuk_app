@@ -21,8 +21,6 @@ class FeedListPage extends StatefulWidget {
 }
 
 class _FeedListPageState extends State<FeedListPage> {
-
-
   final ScrollController _scrollController = ScrollController();
 
   @override
