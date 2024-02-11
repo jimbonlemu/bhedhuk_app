@@ -77,7 +77,6 @@ class CustomAlertDialog extends StatelessWidget {
             ),
             child: const Text(
               'Reconnect',
-              style: TextStyle(color: Colors.black),
             ),
           ),
         ),

@@ -27,7 +27,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
             )
           : Text(
               buttonLabel,
-              style: bhedhukTextTheme.titleLarge?.copyWith(color: blackColor),
+              style: bhedhukTextTheme.titleLarge,
             ),
     );
   }

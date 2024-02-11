@@ -289,20 +289,21 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           child: Consumer<UtilsProvider>(
             builder: (context, utilsProvider, child) {
               return IconButton(
-                  onPressed: () {
-                    final isFavorite = utilsProvider.toggleFavorite();
-                    if (isFavorite) {
-                      CustomSnackBarWidget.facts(context,
-                          "Thanks for tagging ${objectOfRestaurantDetail.name} as your favorite restaurant.");
-                    }
-                  },
-                  icon: Icon(
-                    utilsProvider.isFavorite
-                        ? Icons.favorite
-                        : Icons.favorite_border,
-                    color: primaryColor,
-                    size: 50,
-                  ));
+                onPressed: () {
+                  final isFavorite = utilsProvider.toggleFavorite();
+                  if (isFavorite) {
+                    CustomSnackBarWidget.facts(context,
+                        "Thanks for tagging ${objectOfRestaurantDetail.name} as your favorite restaurant.");
+                  }
+                },
+                icon: IconTitleWidget(
+                  icon: utilsProvider.isFavorite
+                      ? Icons.favorite
+                      : Icons.favorite_border,
+                  text: "",
+                ),
+               
+              );
             },
           ),
         )

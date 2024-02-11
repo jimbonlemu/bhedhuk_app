@@ -58,8 +58,27 @@ class _FeedListPageState extends State<FeedListPage> {
                     NetworkImage(Images.instanceImages
                         .getImageSize(restaurant.pictureId, 'medium')),
                     context);
-                return FeedItemWidget(
-                  restaurant: restaurant,
+                return Stack(
+                  children: [
+                    FeedItemWidget(
+                      restaurant: restaurant,
+                    ),
+                    Positioned(
+                      top: 35, // adjust this value to move the icon down
+                      right:
+                          35, // adjust this value to move the icon to the right
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                          size: 50,
+                        ),
+                        onPressed: () {
+                          
+                        },
+                      ),
+                    ),
+                  ],
                 );
               } else {
                 return _buildPagination(
