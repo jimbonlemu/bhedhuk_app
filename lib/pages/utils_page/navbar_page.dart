@@ -28,9 +28,9 @@ class NavBarPage extends StatelessWidget {
   ];
 
   final List<Widget> _listPage = [
-    const FavoritesListPage(),
     const FeedListPage(),
     const FeedSearchPage(),
+    const FavoritesListPage(),
   ];
 
   @override
@@ -58,6 +58,7 @@ class NavBarPage extends StatelessWidget {
                 currentIndex: utilsProvider.navBarIndex,
                 onTap: (selected) {
                   utilsProvider.toggleNavbar(selected);
+                  utilsProvider.resetSelectedPages();
                 },
               ),
             );

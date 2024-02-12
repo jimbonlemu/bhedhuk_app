@@ -4,6 +4,7 @@ class UtilsProvider extends ChangeNotifier {
   int _selectedPageListOfRestaurant = 1;
   int _selectedPageListOfSearch = 1;
   int _selectedPageListComment = 1;
+  int _selectedPageListFavorited = 1;
   bool _isFavorite = false;
   int _navBarIndex = 0;
   final ScrollController _scrollController = ScrollController();
@@ -11,6 +12,7 @@ class UtilsProvider extends ChangeNotifier {
   int get selectedPageListOfRestaurant => _selectedPageListOfRestaurant;
   int get selectedPageListOfSearch => _selectedPageListOfSearch;
   int get selectedPageListOfComment => _selectedPageListComment;
+  int get selectedPageListFavorited => _selectedPageListFavorited;
   bool get isFavorite => _isFavorite;
   int get navBarIndex => _navBarIndex;
   ScrollController get scrollController => _scrollController;
@@ -24,6 +26,7 @@ class UtilsProvider extends ChangeNotifier {
     _selectedPageListOfSearch = 1;
     _selectedPageListComment = 1;
     _selectedPageListOfSearch = 1;
+    _selectedPageListFavorited = 1;
     notifyListeners();
   }
 
@@ -37,6 +40,10 @@ class UtilsProvider extends ChangeNotifier {
 
   void setSelectedPageListOfSearch(int index) {
     listenPageChange(() => _selectedPageListOfSearch = index);
+  }
+
+  void setSelectedPageListOfFavorited(int index) {
+    listenPageChange(() => _selectedPageListFavorited = index);
   }
 
   bool toggleFavorite() {
