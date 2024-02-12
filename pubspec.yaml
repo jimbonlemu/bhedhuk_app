@@ -47,6 +47,8 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   animated_snack_bar: ^0.4.0
   draggable_fab: ^0.1.4
+  sqflite: ^2.3.2
+  shared_preferences: ^2.2.2
   
 
 dev_dependencies:

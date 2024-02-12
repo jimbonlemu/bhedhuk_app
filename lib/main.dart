@@ -1,4 +1,7 @@
+import 'package:bhedhuk_app/data/database/feed_database_helper.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_settings_page.dart';
+import 'package:bhedhuk_app/provider/feed_database_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 import 'data/api/api_service.dart';
 import 'pages/feed_page/feed_detail_page.dart';
@@ -20,6 +23,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   ApiService apiService = ApiService();
+  resetDatabase();
   runApp(
     MultiProvider(
       providers: [
@@ -37,11 +41,20 @@ Future main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => FeedReviewProvider(apiService: apiService),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              FeedDatabaseProvider(feedDatabaseHelper: FeedDatabase()),
+        ),
       ],
       child: const FeedMeApp(),
     ),
   );
+}
+
+void resetDatabase() async {
+  var path = await getDatabasesPath();
+  await deleteDatabase('$path/feed_database.db');
 }
 
 class FeedMeApp extends StatelessWidget {
@@ -83,7 +96,6 @@ class FeedMeApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: const SplashPage(),
       initialRoute: SplashPage.route,
       routes: {
         SplashPage.route: (context) => const SplashPage(),

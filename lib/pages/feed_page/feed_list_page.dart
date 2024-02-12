@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:lottie/lottie.dart';
-
 import '../../provider/utils_provider.dart';
 import '../../provider/feed_list_provider.dart';
 import '../../utils/images.dart';
@@ -58,27 +57,8 @@ class _FeedListPageState extends State<FeedListPage> {
                     NetworkImage(Images.instanceImages
                         .getImageSize(restaurant.pictureId, 'medium')),
                     context);
-                return Stack(
-                  children: [
-                    FeedItemWidget(
-                      restaurant: restaurant,
-                    ),
-                    Positioned(
-                      top: 35, // adjust this value to move the icon down
-                      right:
-                          35, // adjust this value to move the icon to the right
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                          size: 50,
-                        ),
-                        onPressed: () {
-                          
-                        },
-                      ),
-                    ),
-                  ],
+                return FeedItemWidget(
+                  restaurant: restaurant,
                 );
               } else {
                 return _buildPagination(

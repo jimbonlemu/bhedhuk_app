@@ -23,7 +23,7 @@ class CustomElevatedButtonWidget extends StatelessWidget {
       ),
       child: isLoading
           ? const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white), //
+              valueColor: AlwaysStoppedAnimation<Color>(whiteColor), //
             )
           : Text(
               buttonLabel,

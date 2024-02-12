@@ -25,4 +25,18 @@ class ObjectOfRestaurant {
       rating: parsed['rating'] ?? 0,
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "pictureId": pictureId,
+        "city": city,
+        "rating": rating,
+      };
+
+  @override
+  String toString() {
+    return 'ObjectOfRestaurant {id: $id, name: $name, description: $description, pictureId: $pictureId, city: $city, rating: $rating}';
+  }
 }

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:bhedhuk_app/provider/feed_database_provider.dart';
 import 'package:lottie/lottie.dart';
 import '../../../provider/feed_review_provider.dart';
 import '../../../utils/images.dart';
@@ -20,8 +21,8 @@ import '../../../widgets/custom_appbar_widget.dart';
 import '../../../widgets/icon_title_widget.dart';
 import '../../../widgets/menu_widget.dart';
 import 'package:draggable_fab/draggable_fab.dart';
-
 import '../../data/models/object_customer_review_api_response.dart';
+import '../../data/models/object_of_restaurant.dart';
 import '../../data/models/object_of_restaurant_detail.dart';
 import '../../data/models/object_restaurant_detail_api_response.dart';
 
@@ -229,7 +230,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                   borderRadius: BorderRadius.circular(20),
                   child: Container(
                     padding: const EdgeInsets.all(50),
-                    color: Colors.white,
+                    color: whiteColor,
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -286,23 +287,48 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           ),
         ),
         Expanded(
-          child: Consumer<UtilsProvider>(
-            builder: (context, utilsProvider, child) {
-              return IconButton(
-                onPressed: () {
-                  final isFavorite = utilsProvider.toggleFavorite();
-                  if (isFavorite) {
-                    CustomSnackBarWidget.facts(context,
-                        "Thanks for tagging ${objectOfRestaurantDetail.name} as your favorite restaurant.");
-                  }
+          child: Consumer<FeedDatabaseProvider>(
+            builder: (context, feedDatabaseProvider, child) {
+              return FutureBuilder<bool>(
+                future: feedDatabaseProvider.isFavorited(widget.restaurantId),
+                builder: (context, snapshot) {
+                  var isFavorited = snapshot.data ?? false;
+                  var instanceObjectOfRestaurant = ObjectOfRestaurant(
+                      id: objectOfRestaurantDetail.id,
+                      name: objectOfRestaurantDetail.name,
+                      description: objectOfRestaurantDetail.description,
+                      pictureId: objectOfRestaurantDetail.pictureId,
+                      city: objectOfRestaurantDetail.city,
+                      rating: objectOfRestaurantDetail.rating);
+                  return isFavorited
+                      ? IconButton(
+                          onPressed: () {
+                            feedDatabaseProvider
+                                .removeFavoritedRestaurant(widget.restaurantId);
+                            CustomSnackBarWidget.facts(context,
+                                "You removed ${objectOfRestaurantDetail.name} from you're Favorited Feed");
+                          },
+                          color: Theme.of(context).colorScheme.secondary,
+                          icon: const Icon(
+                            Icons.favorite,
+                            size: 50,
+                            color: primaryColor,
+                          ))
+                      : IconButton(
+                          onPressed: () {
+                            feedDatabaseProvider.addFavoritedRestaurant(
+                                instanceObjectOfRestaurant);
+                            CustomSnackBarWidget.victory(context,
+                                "Success added ${objectOfRestaurantDetail.name} as you're Favorited Feed!");
+                          },
+                          color: Theme.of(context).colorScheme.secondary,
+                          icon: const Icon(
+                            Icons.favorite_border,
+                            size: 50,
+                            color: primaryColor,
+                          ),
+                        );
                 },
-                icon: IconTitleWidget(
-                  icon: utilsProvider.isFavorite
-                      ? Icons.favorite
-                      : Icons.favorite_border,
-                  text: "",
-                ),
-               
               );
             },
           ),

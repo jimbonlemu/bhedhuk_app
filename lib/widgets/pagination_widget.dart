@@ -36,7 +36,7 @@ class PaginationWidget extends StatelessWidget {
               size: 20,
             ),
       activeTextStyle: const TextStyle(
-        color: Colors.black,
+        color: blackColor,
         fontSize: 14,
         fontWeight: FontWeight.w700,
       ),
@@ -61,7 +61,7 @@ class PaginationWidget extends StatelessWidget {
       ),
       inactiveTextStyle: const TextStyle(
         fontSize: 14,
-        color: Colors.black,
+        color: blackColor,
         fontWeight: FontWeight.w700,
       ),
     );

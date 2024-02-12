@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
+import 'package:bhedhuk_app/provider/feed_database_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
+import 'package:bhedhuk_app/widgets/custom_snack_bar_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../data/models/object_of_restaurant.dart';
 import 'icon_title_widget.dart';
 import 'rating_bar_widget.dart';
@@ -16,7 +19,53 @@ class FeedItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _buildFeedItem(context, restaurant);
+    return Consumer<FeedDatabaseProvider>(
+      builder: (context, feedDatabaseProvider, child) {
+        return Stack(
+          children: [
+            _buildFeedItem(context, restaurant),
+            FutureBuilder<bool>(
+              future: feedDatabaseProvider.isFavorited(restaurant.id),
+              builder: (context, snapshot) {
+                var isFavorited = snapshot.data ?? false;
+                return Positioned(
+                  top: 35,
+                  right: 35,
+                  child: isFavorited
+                      ? IconButton(
+                          onPressed: () {
+                            feedDatabaseProvider
+                                .removeFavoritedRestaurant(restaurant.id);
+                            CustomSnackBarWidget.facts(context,
+                                "You've removed ${restaurant.name} from your Favorited Feed");
+                          },
+                          color: Theme.of(context).colorScheme.secondary,
+                          icon: const Icon(
+                            Icons.favorite,
+                            size: 50,
+                            color: primaryColor,
+                          ))
+                      : IconButton(
+                          onPressed: () {
+                            feedDatabaseProvider
+                                .addFavoritedRestaurant(restaurant);
+                            CustomSnackBarWidget.victory(context,
+                                "Success added ${restaurant.name} in you're Favorited Feed!");
+                          },
+                          color: Theme.of(context).colorScheme.secondary,
+                          icon: const Icon(
+                            Icons.favorite_border,
+                            size: 50,
+                            color: primaryColor,
+                          ),
+                        ),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildFeedItem(BuildContext context, ObjectOfRestaurant restaurant) {
