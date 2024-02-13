@@ -309,10 +309,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                                 "You removed ${objectOfRestaurantDetail.name} from you're Favorited Feed");
                           },
                           color: Theme.of(context).colorScheme.secondary,
-                          icon: const Icon(
-                            Icons.favorite,
-                            size: 50,
-                            color: primaryColor,
+                          icon: const IconTitleWidget(
+                            icon: Icons.favorite,
                           ))
                       : IconButton(
                           onPressed: () {
@@ -322,10 +320,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                                 "Success added ${objectOfRestaurantDetail.name} as you're Favorited Feed!");
                           },
                           color: Theme.of(context).colorScheme.secondary,
-                          icon: const Icon(
-                            Icons.favorite_border,
-                            size: 50,
-                            color: primaryColor,
+                          icon: const IconTitleWidget(
+                            icon: Icons.favorite_border,
                           ),
                         );
                 },

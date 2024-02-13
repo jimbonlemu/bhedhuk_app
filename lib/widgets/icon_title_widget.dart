@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 
 class IconTitleWidget extends StatelessWidget {
   final IconData icon;
-  final String text;
+  final String? text;
   const IconTitleWidget({
     super.key,
     required this.icon,
-    required this.text,
+     this.text,
   });
 
   @override
@@ -20,7 +20,7 @@ class IconTitleWidget extends StatelessWidget {
           size: 50,
         ),
         Text(
-          text,
+          text ?? "",
           style: bhedhukTextTheme.headlineSmall,
         ),
       ],

@@ -5,13 +5,13 @@ import 'package:bhedhuk_app/provider/feed_database_provider.dart';
 import 'package:bhedhuk_app/provider/feed_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
+import 'package:bhedhuk_app/widgets/custom_general_search_bar_widget.dart';
 import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:bhedhuk_app/widgets/general_shimmer_widget.dart';
 import 'package:bhedhuk_app/widgets/pagination_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-
 import '../../widgets/custom_appbar_widget.dart';
 
 class FavoritesListPage extends StatefulWidget {
@@ -25,6 +25,7 @@ class FavoritesListPage extends StatefulWidget {
 
 class _FavoritesListPageState extends State<FavoritesListPage> {
   final ScrollController _scrollController = ScrollController();
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -54,34 +55,62 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
 
             var pageItems = feedDatabaseProvider.listOfFavoritedRestaurant
                 .sublist(startIndex, endIndex);
-            return ListView.builder(
+            return CustomScrollView(
               controller: _scrollController,
-              itemCount: pageItems.length + 1,
-              itemBuilder: (context, index) {
-                if (index < pageItems.length) {
-                  var listFavorited = pageItems[index];
-                  return FeedItemWidget(restaurant: listFavorited);
-                } else {
-                  return PaginationWidget(
-                    pageCount:
-                        (feedDatabaseProvider.listOfFavoritedRestaurant.length /
-                                itemsPerPage)
-                            .ceil(),
-                    selectedPage: selectedPage,
-                    itemToDisplay: itemsPerPage,
-                    onChanged: (page) {
-                      if (page != selectedPage) {
-                        utilsProvider.setSelectedPageListOfFavorited(page);
-                        _scrollController.animateTo(
-                          0.0,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeOut,
+              slivers: [
+                CustomGeneralSliverSearchBarWidget(
+                    controller: searchController,
+                    hintText: "Find your favorite restaurant by name..",
+                    onSubmitted: (value) {
+                      feedDatabaseProvider
+                          .searchRestaurant(searchController.text)
+                          .then((value) =>
+                              utilsProvider.setSelectedPageListOfFavorited(1));
+                    }),
+                if (searchController.text.isNotEmpty)
+                  SliverList.builder(
+                    itemCount:
+                        feedDatabaseProvider.searchResultFavorited.length,
+                    itemBuilder: (context, index) {
+                      var listSearchedFavorited =
+                          feedDatabaseProvider.searchResultFavorited[index];
+                      return FeedItemWidget(restaurant: listSearchedFavorited);
+                    },
+                  ),
+                if (searchController.text.isEmpty)
+                  SliverList.builder(
+                    itemCount: pageItems.length + 1,
+                    itemBuilder: (context, index) {
+                      if (index < pageItems.length) {
+                        var listFavorited = pageItems[index];
+                        return FeedItemWidget(restaurant: listFavorited);
+                      } else {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: PaginationWidget(
+                            pageCount: (feedDatabaseProvider
+                                        .listOfFavoritedRestaurant.length /
+                                    itemsPerPage)
+                                .ceil(),
+                            selectedPage: selectedPage,
+                            itemToDisplay: itemsPerPage,
+                            onChanged: (page) {
+                              if (page != selectedPage) {
+                                utilsProvider
+                                    .setSelectedPageListOfFavorited(page);
+                                _scrollController.animateTo(
+                                  0.0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeOut,
+                                );
+                              }
+                            },
+                          ),
                         );
                       }
                     },
-                  );
-                }
-              },
+                  ),
+              ],
             );
           } else if (feedDatabaseProvider.result == ResponseResult.loading) {
             return const GeneralShimmerWidget();

@@ -4,8 +4,9 @@ import 'package:bhedhuk_app/provider/feed_provider.dart';
 import 'package:flutter/foundation.dart';
 
 class FeedDatabaseProvider extends ChangeNotifier {
-  final FeedDatabase feedDatabaseHelper;
+  final FeedDatabaseHelper feedDatabaseHelper;
   ResponseResult _result;
+
   FeedDatabaseProvider({required this.feedDatabaseHelper})
       : _result = ResponseResult.loading {
     _getListFavoritedRestaurant();
@@ -16,6 +17,9 @@ class FeedDatabaseProvider extends ChangeNotifier {
   String _response = "";
   String get response => _response;
 
+  List<ObjectOfRestaurant> _searchResultFavorited = [];
+  List<ObjectOfRestaurant> get searchResultFavorited => _searchResultFavorited;
+
   List<ObjectOfRestaurant> _listOfFavoritedRestaurant = [];
   List<ObjectOfRestaurant> get listOfFavoritedRestaurant =>
       _listOfFavoritedRestaurant;
@@ -23,8 +27,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
   void _getListFavoritedRestaurant() async {
     _listOfFavoritedRestaurant =
         await feedDatabaseHelper.getListFavoritedRestaurant();
-    print(
-        'List of Favorited Restaurant: $_listOfFavoritedRestaurant');
+    print('List of Favorited Restaurant: $_listOfFavoritedRestaurant');
 
     if (_listOfFavoritedRestaurant.isNotEmpty) {
       _result = ResponseResult.hasData;
@@ -65,5 +68,11 @@ class FeedDatabaseProvider extends ChangeNotifier {
       _response = "Error while removing favorited restaurant ----> $e";
       notifyListeners();
     }
+  }
+
+  Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
+    _searchResultFavorited =
+        await feedDatabaseHelper.searchRestaurant(query);
+    return _searchResultFavorited;
   }
 }

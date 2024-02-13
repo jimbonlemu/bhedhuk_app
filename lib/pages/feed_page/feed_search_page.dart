@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'package:animated_snack_bar/animated_snack_bar.dart';
+import '../../widgets/custom_general_search_bar_widget.dart';
 import '../../data/models/list_of_restaurant_object_api_response.dart';
 import '../../provider/utils_provider.dart';
 import '../../utils/images.dart';
 import '../../utils/styles.dart';
 import '../../widgets/pagination_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -41,7 +41,12 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
           .show(context);
     } else {
       if (value.length >= 3) {
-        Provider.of<FeedSearchProvider>(context, listen: false).search(value);
+        Provider.of<FeedSearchProvider>(context, listen: false)
+            .search(value)
+            .then((_) {
+          Provider.of<UtilsProvider>(context, listen: false)
+              .resetSelectedPages();
+        });
       } else if (value.length < 3) {
         AnimatedSnackBar.material(
           'Fill search with minimum 3 characters ...',
@@ -49,7 +54,6 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
           duration: const Duration(seconds: 5),
         ).show(context);
       } else {
-        Provider.of<UtilsProvider>(context, listen: false).resetSelectedPages();
         Provider.of<FeedSearchProvider>(context, listen: false).clearSearch();
       }
     }
@@ -68,65 +72,15 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          SliverAppBar(
-            forceMaterialTransparency: true,
-            elevation: 0,
-            backgroundColor: Colors.transparent,
-            floating: true,
-            snap: true,
-            bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(45.0), child: SizedBox()),
-            flexibleSpace: _buildSearchBar(),
+          CustomGeneralSliverSearchBarWidget(
+            controller: searchController,
+            hintText: 'Type your feed for today ..',
+            onSubmitted: (value) {
+              handleOnSubmitted(value);
+            },
           ),
           _buildSearchResponse()
         ],
-      ),
-    );
-  }
-
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Container(
-        margin: EdgeInsets.zero,
-        child: Container(
-          margin: EdgeInsets.zero,
-          width: MediaQuery.of(context).size.width,
-          height: 60,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(20) / 2,
-            color: whiteColor,
-          ),
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: TextField(
-              controller: searchController,
-              style: const TextStyle(fontSize: 20),
-              onSubmitted: (value) {
-                handleOnSubmitted(value);
-              },
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(top: 12.0),
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                  suffixIcon: Material(
-                    child: Container(
-                        width: 30,
-                        height: 30,
-                        padding: const EdgeInsets.only(top: 12.0),
-                        child: const Icon(CupertinoIcons.search)),
-                  ),
-                  hintText: 'Type your feed for today ..',
-                  hintStyle: bhedhukTextTheme.bodyLarge),
-            ),
-          ),
-        ),
       ),
     );
   }
