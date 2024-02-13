@@ -443,7 +443,6 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                         itemsPerPage)
                     .ceil(),
                 selectedPage: selectedPage,
-                itemToDisplay: 3,
                 onChanged: (page) {
                   if (page != selectedPage) {
                     utilsProvider.setSelectedPageListOfComment(page);

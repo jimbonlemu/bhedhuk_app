@@ -102,7 +102,6 @@ class _FeedListPageState extends State<FeedListPage> {
       child: PaginationWidget(
         pageCount: (objectLength / itemsPerPage).ceil(),
         selectedPage: selectedPage,
-        itemToDisplay: 3,
         onChanged: (page) {
           if (page != selectedPage) {
             utilsProvider.setSelectedPageListOfRestaurant(page);

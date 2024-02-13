@@ -3,13 +3,9 @@ import '../data/api/api_service.dart';
 import '../data/models/list_of_restaurant_object_api_response.dart';
 
 class FeedSearchProvider extends ChangeNotifier {
-  
-
   ListOfRestaurantObjectApiResponse? listOfRestaurantObjectApiResponse;
 
   bool isTriggeredToLoading = false;
-
-
 
   Future<void> search(String keyword) async {
     isTriggeredToLoading = true;

@@ -4,11 +4,9 @@ import 'package:bhedhuk_app/provider/feed_provider.dart';
 import 'package:flutter/foundation.dart';
 
 class FeedDatabaseProvider extends ChangeNotifier {
-  final FeedDatabaseHelper feedDatabaseHelper;
   ResponseResult _result;
 
-  FeedDatabaseProvider({required this.feedDatabaseHelper})
-      : _result = ResponseResult.loading {
+  FeedDatabaseProvider() : _result = ResponseResult.loading {
     _getListFavoritedRestaurant();
   }
 
@@ -26,7 +24,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   void _getListFavoritedRestaurant() async {
     _listOfFavoritedRestaurant =
-        await feedDatabaseHelper.getListFavoritedRestaurant();
+        await FeedDatabaseHelper().getListFavoritedRestaurant();
     print('List of Favorited Restaurant: $_listOfFavoritedRestaurant');
 
     if (_listOfFavoritedRestaurant.isNotEmpty) {
@@ -40,7 +38,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   void addFavoritedRestaurant(ObjectOfRestaurant objectOfRestaurant) async {
     try {
-      await feedDatabaseHelper
+      await FeedDatabaseHelper()
           .insertFavoritedRestaurant(objectOfRestaurant)
           .then((value) => print("add resto " + objectOfRestaurant.id));
       _getListFavoritedRestaurant();
@@ -53,13 +51,13 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   Future<bool> isFavorited(String restaurantId) async {
     final favoritedRestaurant =
-        await feedDatabaseHelper.getFavoritedRestaurantById(restaurantId);
+        await FeedDatabaseHelper().getFavoritedRestaurantById(restaurantId);
     return favoritedRestaurant.isNotEmpty;
   }
 
   void removeFavoritedRestaurant(String restaurantId) async {
     try {
-      await feedDatabaseHelper
+      await FeedDatabaseHelper()
           .removeFavoritedRestaurant(restaurantId)
           .then((value) => print("dell resto" + restaurantId));
       _getListFavoritedRestaurant();
@@ -71,8 +69,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
   }
 
   Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
-    _searchResultFavorited =
-        await feedDatabaseHelper.searchRestaurant(query);
+    _searchResultFavorited = await FeedDatabaseHelper().searchRestaurant(query);
     return _searchResultFavorited;
   }
 }

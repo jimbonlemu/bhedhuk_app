@@ -1,4 +1,3 @@
-import 'package:bhedhuk_app/data/database/feed_database_helper.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_settings_page.dart';
 import 'package:bhedhuk_app/provider/feed_database_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -40,8 +39,7 @@ Future main() async {
           create: (context) => FeedReviewProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) =>
-              FeedDatabaseProvider(feedDatabaseHelper: FeedDatabaseHelper()),
+          create: (context) => FeedDatabaseProvider(),
         ),
       ],
       child: const FeedMeApp(),

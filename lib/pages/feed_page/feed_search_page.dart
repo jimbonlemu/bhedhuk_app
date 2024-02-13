@@ -158,7 +158,6 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                     (searchResult.listobjectOfRestaurant.length / itemsPerPage)
                         .ceil(),
                 selectedPage: selectedPage,
-                itemToDisplay: 3,
                 onChanged: (page) {
                   if (page != selectedPage) {
                     utilsProvider.setSelectedPageListOfSearch(page);

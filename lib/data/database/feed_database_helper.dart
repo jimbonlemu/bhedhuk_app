@@ -9,16 +9,17 @@ class FeedDatabaseHelper {
     _instanceFeedDatabaseHelper = this;
   }
 
-  factory FeedDatabaseHelper() => _instanceFeedDatabaseHelper ?? FeedDatabaseHelper._internal();
+  factory FeedDatabaseHelper() =>
+      _instanceFeedDatabaseHelper ?? FeedDatabaseHelper._internal();
 
-  static const String _favoritedRestaurant = 'tags';
+  static const String _favoritedTable = 'favorited_table';
 
   Future<Database> _initializeFeedDatabase() async {
     var path = await getDatabasesPath();
     var feedDatabase = openDatabase(
       '$path/feed_database.db',
       onCreate: (feedDatabase, version) async {
-        await feedDatabase.execute('''CREATE TABLE $_favoritedRestaurant(
+        await feedDatabase.execute('''CREATE TABLE $_favoritedTable(
         id TEXT PRIMARY KEY,
         name TEXT,
         description TEXT,
@@ -40,12 +41,12 @@ class FeedDatabaseHelper {
   Future<void> insertFavoritedRestaurant(
       ObjectOfRestaurant singleRestaurant) async {
     final db = await databaseInitiate;
-    await db!.insert(_favoritedRestaurant, singleRestaurant.toJson());
+    await db!.insert(_favoritedTable, singleRestaurant.toJson());
   }
 
   Future<List<ObjectOfRestaurant>> getListFavoritedRestaurant() async {
     final db = await databaseInitiate;
-    List<Map<String, dynamic>> results = await db!.query(_favoritedRestaurant);
+    List<Map<String, dynamic>> results = await db!.query(_favoritedTable);
     return results
         .map((result) => ObjectOfRestaurant.fromJson(result))
         .toList();
@@ -55,7 +56,7 @@ class FeedDatabaseHelper {
     final db = await databaseInitiate;
 
     List<Map<String, dynamic>> results = await db!.query(
-      _favoritedRestaurant,
+      _favoritedTable,
       where: 'id = ?',
       whereArgs: [restaurantId],
     );
@@ -70,14 +71,14 @@ class FeedDatabaseHelper {
   Future<void> removeFavoritedRestaurant(String restaurantId) async {
     final db = await databaseInitiate;
 
-    await db!.delete(_favoritedRestaurant,
-        where: 'id = ?', whereArgs: [restaurantId]);
+    await db!
+        .delete(_favoritedTable, where: 'id = ?', whereArgs: [restaurantId]);
   }
 
   Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
     final db = await databaseInitiate;
     List<Map<String, dynamic>> results = await db!.query(
-      _favoritedRestaurant,
+      _favoritedTable,
       where: 'name LIKE ?',
       whereArgs: ['%$query%'],
     );

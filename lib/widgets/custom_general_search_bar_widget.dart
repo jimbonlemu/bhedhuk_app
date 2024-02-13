@@ -14,15 +14,14 @@ class CustomGeneralSliverSearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      forceMaterialTransparency: true,
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      floating: true,
-      snap: true,
-      bottom: const PreferredSize(
-          preferredSize: Size.fromHeight(45.0), child: SizedBox()),
-      flexibleSpace: _buildSearchBar(context)
-    );
+        forceMaterialTransparency: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        floating: true,
+        snap: true,
+        bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(45.0), child: SizedBox()),
+        flexibleSpace: _buildSearchBar(context));
   }
 
   Widget _buildSearchBar(BuildContext context) {

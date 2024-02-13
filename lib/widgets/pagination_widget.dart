@@ -5,13 +5,13 @@ import 'package:pagination_flutter/pagination.dart';
 class PaginationWidget extends StatelessWidget {
   final int pageCount;
   final int selectedPage;
-  final int itemToDisplay;
+  final int? buttonToDisplayPaginate;
   final Function onChanged;
   const PaginationWidget(
       {super.key,
       required this.pageCount,
       required this.selectedPage,
-      required this.itemToDisplay,
+      this.buttonToDisplayPaginate,
       required this.onChanged});
 
   @override
@@ -19,7 +19,7 @@ class PaginationWidget extends StatelessWidget {
     return Pagination(
       numOfPages: pageCount,
       selectedPage: selectedPage,
-      pagesVisible: itemToDisplay,
+      pagesVisible: buttonToDisplayPaginate ?? 3,
       onPageChanged: onChanged,
       nextIcon: selectedPage == pageCount
           ? const Icon(IconData(0, fontFamily: 'MaterialIcons'))

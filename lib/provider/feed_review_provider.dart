@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../data/models/object_customer_review_api_response.dart';
 
 class FeedReviewProvider extends ChangeNotifier {
-  
   bool isLoading = false;
   ObjectOfCustomerReviewApiResponse? apiResponse;
   bool isPostCommentSuccessful = false;

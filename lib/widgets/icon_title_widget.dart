@@ -7,7 +7,7 @@ class IconTitleWidget extends StatelessWidget {
   const IconTitleWidget({
     super.key,
     required this.icon,
-     this.text,
+    this.text,
   });
 
   @override

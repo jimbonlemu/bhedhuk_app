@@ -49,7 +49,7 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
           if (feedDatabaseProvider.result == ResponseResult.hasData) {
             int itemsPerPage = 3;
             int selectedPage = utilsProvider.selectedPageListFavorited;
-            int startIndex = (selectedPage - 1) * itemsPerPage;
+            int startIndex = (selectedPage - 1) * 3;
             int endIndex = min(startIndex + itemsPerPage,
                 feedDatabaseProvider.listOfFavoritedRestaurant.length);
 
@@ -93,7 +93,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
                                     itemsPerPage)
                                 .ceil(),
                             selectedPage: selectedPage,
-                            itemToDisplay: itemsPerPage,
                             onChanged: (page) {
                               if (page != selectedPage) {
                                 utilsProvider
