@@ -123,8 +123,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           builder: (context, detailFeedProvider, feedReviewProvider, child) {
             if (detailFeedProvider.responseResult == ResponseResult.hasData) {
               return ChangeNotifierProvider<FeedReviewProvider>(
-                create: (context) =>
-                    FeedReviewProvider(apiService: ApiService()),
+                create: (context) => FeedReviewProvider(),
                 child: Consumer<FeedReviewProvider>(
                   builder: (context, feedReviewProvider, child) =>
                       _buildCommentPopUp(

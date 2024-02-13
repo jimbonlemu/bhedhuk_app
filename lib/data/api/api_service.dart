@@ -9,11 +9,19 @@ import '../models/object_customer_review_api_response.dart';
 import '../models/object_restaurant_detail_api_response.dart';
 
 class ApiService implements InterfaceApiService {
+  static final ApiService _instanceApiService = ApiService._internal();
+
   static final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
   static const String _getListOfRestaurant = 'list';
   static const String _getDetailOfRestaurant = 'detail/';
   static const String _searchListOfRestaurant = 'search?q=';
   static const String _postReview = 'review';
+
+  ApiService._internal();
+
+  factory ApiService() {
+    return _instanceApiService;
+  }
 
   @override
   Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {

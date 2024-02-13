@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import '../data/models/object_customer_review_api_response.dart';
 
 class FeedReviewProvider extends ChangeNotifier {
-  final ApiService apiService;
-
-  FeedReviewProvider({required this.apiService});
-
+  
   bool isLoading = false;
   ObjectOfCustomerReviewApiResponse? apiResponse;
   bool isPostCommentSuccessful = false;
@@ -20,7 +17,7 @@ class FeedReviewProvider extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
       apiResponse =
-          await apiService.postCustomerReview(restaurantId, name, comment);
+          await ApiService().postCustomerReview(restaurantId, name, comment);
 
       if (apiResponse!.error == false) {
         isPostCommentSuccessful = true;
