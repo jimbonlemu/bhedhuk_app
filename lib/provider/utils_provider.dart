@@ -26,7 +26,6 @@ class UtilsProvider extends ChangeNotifier {
     _selectedPageListOfSearch = 1;
     _selectedPageListComment = 1;
     _selectedPageListOfSearch = 1;
-    _selectedPageListFavorited = 1;
     notifyListeners();
   }
 

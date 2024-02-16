@@ -3,6 +3,7 @@ import 'package:bhedhuk_app/pages/feed_page/feed_settings_page.dart';
 import 'package:bhedhuk_app/provider/feed_database_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
+import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_general_search_bar_widget.dart';
 import 'package:bhedhuk_app/widgets/feed_item_widget.dart';
 import 'package:bhedhuk_app/widgets/general_shimmer_widget.dart';
@@ -25,6 +26,7 @@ class FavoritesListPage extends StatefulWidget {
 class _FavoritesListPageState extends State<FavoritesListPage> {
   final ScrollController _scrollController = ScrollController();
   TextEditingController searchController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +116,16 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
             return const GeneralShimmerWidget();
           } else {
             return Center(
-              child: LottieBuilder.asset(Images.lottieNoFavorites),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  LottieBuilder.asset(Images.lottieNoFavorites),
+                  Text(
+                    "You haven't got any saved Feeds.",
+                    style: bhedhukTextTheme.headlineSmall,
+                  ),
+                ],
+              ),
             );
           }
         },

@@ -45,7 +45,6 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _feedNotificationService
         .configureSelectNotificationSubject(FeedDetailPage.route);
@@ -53,7 +52,6 @@ class _NavBarPageState extends State<NavBarPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     selectedFeedInNotification.close();
   }
@@ -84,6 +82,7 @@ class _NavBarPageState extends State<NavBarPage> {
                 onTap: (selected) {
                   utilsProvider.toggleNavbar(selected);
                   utilsProvider.resetSelectedPages();
+                  utilsProvider.setSelectedPageListOfFavorited(1);
                 },
               ),
             );
