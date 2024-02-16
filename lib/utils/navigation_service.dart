@@ -9,4 +9,10 @@ class Navigate {
       (Route<dynamic> route) => false,
     );
   }
+
+   static withGift(String routeName, Object arguments) {
+    navigatorKey.currentState?.pushNamed(routeName, arguments: arguments);
+  }
+
+  static back() => navigatorKey.currentState?.pop();
 }

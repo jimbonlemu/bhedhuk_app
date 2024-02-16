@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/api/api_service.dart';
 import '../data/models/object_of_restaurant_detail.dart';
 import '../data/models/object_restaurant_detail_api_response.dart';
+import '../utils/enum_state.dart';
 import 'feed_provider.dart';
 
 class DetailFeedProvider extends FeedProvider {

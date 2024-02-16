@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:bhedhuk_app/pages/feed_page/feed_settings_page.dart';
 import 'package:bhedhuk_app/provider/feed_database_provider.dart';
-import 'package:bhedhuk_app/provider/feed_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
 import 'package:bhedhuk_app/utils/images.dart';
 import 'package:bhedhuk_app/widgets/custom_general_search_bar_widget.dart';
@@ -12,6 +10,7 @@ import 'package:bhedhuk_app/widgets/pagination_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import '../../utils/enum_state.dart';
 import '../../widgets/custom_appbar_widget.dart';
 
 class FavoritesListPage extends StatefulWidget {

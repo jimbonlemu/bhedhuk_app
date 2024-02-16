@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
-enum ResponseResult { loading, noData, hasData, error }
+import '../utils/enum_state.dart';
+
 
 abstract class FeedProvider extends ChangeNotifier {
   late ResponseResult _responseResult;

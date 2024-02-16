@@ -1,16 +1,26 @@
 import 'package:bhedhuk_app/pages/feed_page/favorites_feed_list_page.dart';
+import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_list_page.dart';
 import 'package:bhedhuk_app/pages/feed_page/feed_search_page.dart';
 import 'package:bhedhuk_app/provider/connecivity_provider.dart';
 import 'package:bhedhuk_app/provider/utils_provider.dart';
+import 'package:bhedhuk_app/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/custom_alert_dialog_widget.dart';
 
-class NavBarPage extends StatelessWidget {
+class NavBarPage extends StatefulWidget {
   static const route = '/navbar_page';
 
-  NavBarPage({super.key});
+  const NavBarPage({super.key});
+
+  @override
+  State<NavBarPage> createState() => _NavBarPageState();
+}
+
+class _NavBarPageState extends State<NavBarPage> {
+  final FeedNotificationService _feedNotificationService =
+      FeedNotificationService();
 
   final List<BottomNavigationBarItem> _navBarPageItem = [
     const BottomNavigationBarItem(
@@ -32,6 +42,21 @@ class NavBarPage extends StatelessWidget {
     const FeedSearchPage(),
     const FavoritesListPage(),
   ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _feedNotificationService
+        .configureSelectNotificationSubject(FeedDetailPage.route);
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    selectedFeedInNotification.close();
+  }
 
   @override
   Widget build(BuildContext context) {

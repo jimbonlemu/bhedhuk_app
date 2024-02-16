@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.jimbonlemu.feed_me"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdkVersion 33
     ndkVersion flutter.ndkVersion
 
     compileOptions {
@@ -58,10 +58,22 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+     packagingOptions {
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+  }
 }
 
 flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+       constraints {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0") {
+            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+        }
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0") {
+            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+        }
+    }
+}

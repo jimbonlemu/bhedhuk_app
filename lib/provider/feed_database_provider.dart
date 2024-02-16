@@ -1,7 +1,8 @@
 import 'package:bhedhuk_app/data/database/feed_database_helper.dart';
 import 'package:bhedhuk_app/data/models/object_of_restaurant.dart';
-import 'package:bhedhuk_app/provider/feed_provider.dart';
 import 'package:flutter/foundation.dart';
+
+import '../utils/enum_state.dart';
 
 class FeedDatabaseProvider extends ChangeNotifier {
   ResponseResult _result;
@@ -40,7 +41,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
     try {
       await FeedDatabaseHelper()
           .insertFavoritedRestaurant(objectOfRestaurant)
-          .then((value) => print("add resto " + objectOfRestaurant.id));
+          .then((value) => print("add resto ${objectOfRestaurant.id}"));
       _getListFavoritedRestaurant();
     } catch (e) {
       _result = ResponseResult.error;
@@ -59,7 +60,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
     try {
       await FeedDatabaseHelper()
           .removeFavoritedRestaurant(restaurantId)
-          .then((value) => print("dell resto" + restaurantId));
+          .then((value) => print("dell resto$restaurantId"));
       _getListFavoritedRestaurant();
     } catch (e) {
       _result = ResponseResult.error;

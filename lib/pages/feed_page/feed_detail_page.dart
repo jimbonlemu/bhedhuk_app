@@ -11,7 +11,6 @@ import '../../../widgets/custom_text_field_widget.dart';
 import '../../../widgets/pagination_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../data/api/api_service.dart';
-import '../../../provider/feed_provider.dart';
 import '../../../provider/utils_provider.dart';
 import '../../../utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +24,7 @@ import '../../data/models/object_customer_review_api_response.dart';
 import '../../data/models/object_of_restaurant.dart';
 import '../../data/models/object_of_restaurant_detail.dart';
 import '../../data/models/object_restaurant_detail_api_response.dart';
+import '../../utils/enum_state.dart';
 
 class FeedDetailPage extends StatefulWidget {
   static const route = '/feed_detail_page';
@@ -38,6 +38,7 @@ class FeedDetailPage extends StatefulWidget {
 class _FeedDetailPageState extends State<FeedDetailPage> {
   TextEditingController reviewerNameController = TextEditingController();
   TextEditingController reviewerCommentController = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   bool validateUserInput(String nameValue, String commentValue) {
     if (nameValue.isEmpty) {
@@ -199,14 +200,14 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
     required int selectedPage,
   }) {
     return AnimatedBuilder(
-      animation: utilsProvider.scrollController,
+      animation: scrollController,
       builder: (context, child) {
         return CustomAppBarWidget(
-          iconTheme: utilsProvider.scrollController.hasClients &&
-                  utilsProvider.scrollController.position.pixels > 200
+          iconTheme: scrollController.hasClients &&
+                  scrollController.position.pixels > 200
               ? const IconThemeData(color: blackColor)
               : const IconThemeData(color: whiteColor),
-          scrollController: utilsProvider.scrollController,
+          scrollController: scrollController,
           disappearWhenScrolled: true,
           image: Image.network(
             Images.instanceImages.getImageSize(
@@ -215,8 +216,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           ),
           imageTitle: Text(
             restaurantDetails.objectOfRestaurantDetail.name,
-            style: utilsProvider.scrollController.hasClients &&
-                    utilsProvider.scrollController.position.pixels > 200
+            style: scrollController.hasClients &&
+                    scrollController.position.pixels > 200
                 ? bhedhukTextTheme.headlineSmall
                 : bhedhukTextTheme.headlineSmall!.copyWith(color: whiteColor),
           ),
@@ -230,26 +231,23 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                   child: Container(
                     padding: const EdgeInsets.all(50),
                     color: whiteColor,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          _buildLocationAndStar(
-                            objectOfRestaurantDetail:
-                                restaurantDetails.objectOfRestaurantDetail,
-                          ),
-                          const SizedBox(height: 20),
-                          _buildAboutRestaurant(
-                            objectOfRestaurantDetail:
-                                restaurantDetails.objectOfRestaurantDetail,
-                          ),
-                          const SizedBox(height: 20),
-                          _buildFoodAndDrink(
-                            objectOfRestaurantDetail:
-                                restaurantDetails.objectOfRestaurantDetail,
-                          ),
-                        ],
-                      ),
+                    child: Wrap(
+                      children: [
+                        _buildLocationAndStar(
+                          objectOfRestaurantDetail:
+                              restaurantDetails.objectOfRestaurantDetail,
+                        ),
+                        const SizedBox(height: 20),
+                        _buildAboutRestaurant(
+                          objectOfRestaurantDetail:
+                              restaurantDetails.objectOfRestaurantDetail,
+                        ),
+                        const SizedBox(height: 20),
+                        _buildFoodAndDrink(
+                          objectOfRestaurantDetail:
+                              restaurantDetails.objectOfRestaurantDetail,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -414,6 +412,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
     required int itemsPerPage,
     required int selectedPage,
     required UtilsProvider utilsProvider,
+
   }) {
     return SliverList.builder(
       itemCount: pageItems.length + 1,
