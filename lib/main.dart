@@ -1,4 +1,5 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:feed_me/provider/feed_list_provider.dart';
 import 'package:feed_me/provider/feed_notification_scheduling.dart';
 import 'pages/feed_page/feed_settings_page.dart';
 import 'provider/feed_database_provider.dart';
@@ -10,7 +11,6 @@ import 'provider/connecivity_provider.dart';
 import 'provider/feed_review_provider.dart';
 import 'provider/feed_search_provider.dart';
 import 'provider/utils_provider.dart';
-import 'provider/feed_list_provider.dart';
 import 'utils/feed_background_service.dart';
 import 'utils/navigation_service.dart';
 import 'utils/notification_service.dart';
@@ -55,7 +55,7 @@ Future main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => FeedNotificationScheduling(),
-        ),
+        ),  
       ],
       child: const FeedMeApp(),
     ),

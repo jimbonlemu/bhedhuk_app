@@ -1,7 +1,7 @@
 import 'dart:math';
+import 'package:feed_me/provider/feed_list_provider.dart';
 import 'package:lottie/lottie.dart';
 import '../../provider/utils_provider.dart';
-import '../../provider/feed_list_provider.dart';
 import '../../utils/enum_state.dart';
 import '../../utils/images.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +42,9 @@ class _FeedListPageState extends State<FeedListPage> {
         } else if (feedListProvider.responseResult == ResponseResult.hasData) {
           int startIndex = (selectedPage - 1) * itemsPerPage;
           int endIndex = min(startIndex + itemsPerPage,
-              feedListProvider.getListOfRestaurantObjectApiResponse.count);
-
+              feedListProvider.listOfRestaurantObjectApiResponse.count);
           var pageItems = feedListProvider
-              .getListOfRestaurantObjectApiResponse.listobjectOfRestaurant
+              .listOfRestaurantObjectApiResponse.listobjectOfRestaurant
               .sublist(startIndex, endIndex);
           return ListView.builder(
             controller: _scrollController,
@@ -95,7 +94,7 @@ class _FeedListPageState extends State<FeedListPage> {
     required UtilsProvider utilsProvider,
   }) {
     var objectLength = feedListProvider
-        .getListOfRestaurantObjectApiResponse.listobjectOfRestaurant.length;
+        .listOfRestaurantObjectApiResponse.listobjectOfRestaurant.length;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
