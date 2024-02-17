@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "bhedhuk_app" "\0"
+            VALUE "FileDescription", "feed_me" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "bhedhuk_app" "\0"
+            VALUE "InternalName", "feed_me" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "bhedhuk_app.exe" "\0"
-            VALUE "ProductName", "bhedhuk_app" "\0"
+            VALUE "OriginalFilename", "feed_me.exe" "\0"
+            VALUE "ProductName", "feed_me" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

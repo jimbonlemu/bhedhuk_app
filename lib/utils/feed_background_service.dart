@@ -1,9 +1,9 @@
 import 'dart:isolate';
 import 'dart:ui';
 
-import 'package:bhedhuk_app/data/api/api_service.dart';
-import 'package:bhedhuk_app/main.dart';
-import 'package:bhedhuk_app/utils/notification_service.dart';
+import 'package:feed_me/data/api/api_service.dart';
+import 'package:feed_me/main.dart';
+import 'package:feed_me/utils/notification_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 final ReceivePort receivePort = ReceivePort();

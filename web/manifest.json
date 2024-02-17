@@ -1,6 +1,6 @@
 {
-    "name": "bhedhuk_app",
-    "short_name": "bhedhuk_app",
+    "name": "feed_me",
+    "short_name": "feed_me",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

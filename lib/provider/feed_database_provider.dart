@@ -1,5 +1,5 @@
-import 'package:bhedhuk_app/data/database/feed_database_helper.dart';
-import 'package:bhedhuk_app/data/models/object_of_restaurant.dart';
+import 'package:feed_me/data/database/feed_database_helper.dart';
+import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:flutter/foundation.dart';
 
 import '../utils/enum_state.dart';

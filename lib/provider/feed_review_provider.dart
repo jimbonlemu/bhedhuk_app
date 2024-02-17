@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/api/api_service.dart';
+import 'package:feed_me/data/api/api_service.dart';
 import 'package:flutter/material.dart';
 
 import '../data/models/object_customer_review_api_response.dart';

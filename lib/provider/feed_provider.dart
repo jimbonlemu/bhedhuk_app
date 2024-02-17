@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 
 import '../utils/enum_state.dart';
 
-
 abstract class FeedProvider extends ChangeNotifier {
   late ResponseResult _responseResult;
   String _messageResponse = "";

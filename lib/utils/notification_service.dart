@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
-import 'package:bhedhuk_app/data/models/list_of_restaurant_object_api_response.dart';
-import 'package:bhedhuk_app/data/models/object_of_restaurant.dart';
-import 'package:bhedhuk_app/utils/navigation_service.dart';
+import 'package:feed_me/data/models/list_of_restaurant_object_api_response.dart';
+import 'package:feed_me/data/models/object_of_restaurant.dart';
+import 'package:feed_me/utils/navigation_service.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rxdart/rxdart.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:bhedhuk_app/data/api/interface_api_service.dart';
+import 'package:feed_me/data/api/interface_api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -10,7 +10,7 @@ import '../models/object_restaurant_detail_api_response.dart';
 
 class ApiService implements InterfaceApiService {
   ApiService._internal();
-  
+
   static final ApiService _instanceApiService = ApiService._internal();
 
   static final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
@@ -20,6 +20,9 @@ class ApiService implements InterfaceApiService {
   static const String _postReview = 'review';
 
   factory ApiService() {
+    if (_baseUrl.isEmpty) {
+      throw Exception("BASE_URL is not defined in .env file");
+    }
     return _instanceApiService;
   }
 

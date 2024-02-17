@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:bhedhuk_app/widgets/custom_alert_dialog_widget.dart';
+import 'package:feed_me/widgets/custom_alert_dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/data/models/object_of_restaurant.dart';
+import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FeedDatabaseService {

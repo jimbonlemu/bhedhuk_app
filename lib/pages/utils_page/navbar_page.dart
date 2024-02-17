@@ -1,10 +1,10 @@
-import 'package:bhedhuk_app/pages/feed_page/favorites_feed_list_page.dart';
-import 'package:bhedhuk_app/pages/feed_page/feed_detail_page.dart';
-import 'package:bhedhuk_app/pages/feed_page/feed_list_page.dart';
-import 'package:bhedhuk_app/pages/feed_page/feed_search_page.dart';
-import 'package:bhedhuk_app/provider/connecivity_provider.dart';
-import 'package:bhedhuk_app/provider/utils_provider.dart';
-import 'package:bhedhuk_app/utils/notification_service.dart';
+import 'package:feed_me/pages/feed_page/favorites_feed_list_page.dart';
+import 'package:feed_me/pages/feed_page/feed_detail_page.dart';
+import 'package:feed_me/pages/feed_page/feed_list_page.dart';
+import 'package:feed_me/pages/feed_page/feed_search_page.dart';
+import 'package:feed_me/provider/connecivity_provider.dart';
+import 'package:feed_me/provider/utils_provider.dart';
+import 'package:feed_me/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/custom_alert_dialog_widget.dart';

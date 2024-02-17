@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bhedhuk_app/utils/images.dart';
-import 'package:bhedhuk_app/pages/utils_page/navbar_page.dart';
-import 'package:bhedhuk_app/utils/navigation_service.dart';
+import 'package:feed_me/utils/images.dart';
+import 'package:feed_me/pages/utils_page/navbar_page.dart';
+import 'package:feed_me/utils/navigation_service.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {

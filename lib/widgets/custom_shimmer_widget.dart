@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/utils/styles.dart';
+import 'package:feed_me/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 

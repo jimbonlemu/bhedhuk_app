@@ -1,6 +1,5 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:bhedhuk_app/provider/feed_notification_scheduling.dart';
-
+import 'package:feed_me/provider/feed_notification_scheduling.dart';
 import 'pages/feed_page/feed_settings_page.dart';
 import 'provider/feed_database_provider.dart';
 import 'provider/feed_settings_preferences_provider.dart';

@@ -1,4 +1,4 @@
-import 'package:bhedhuk_app/utils/feed_background_service.dart';
+import 'package:feed_me/utils/feed_background_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import '../utils/date_time_service.dart';

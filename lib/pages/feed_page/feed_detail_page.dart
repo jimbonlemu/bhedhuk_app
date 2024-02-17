@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:bhedhuk_app/provider/feed_database_provider.dart';
+import 'package:feed_me/provider/feed_database_provider.dart';
 import 'package:lottie/lottie.dart';
 import '../../../provider/feed_review_provider.dart';
 import '../../../utils/images.dart';
@@ -10,7 +10,6 @@ import '../../../widgets/custom_snack_bar_widget.dart';
 import '../../../widgets/custom_text_field_widget.dart';
 import '../../../widgets/pagination_widget.dart';
 import 'package:shimmer/shimmer.dart';
-import '../../../data/api/api_service.dart';
 import '../../../provider/utils_provider.dart';
 import '../../../utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +77,6 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => DetailFeedProvider(
-        apiService: ApiService(),
         restaurantId: widget.restaurantId,
       ),
       child: Scaffold(

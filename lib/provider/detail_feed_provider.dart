@@ -7,7 +7,6 @@ import '../utils/enum_state.dart';
 import 'feed_provider.dart';
 
 class DetailFeedProvider extends FeedProvider {
-  final ApiService apiService;
   final String restaurantId;
 
   late ObjectOfRestaurantDetailApiResponse _objectOfRestaurantDetailApiResponse;
@@ -15,7 +14,7 @@ class DetailFeedProvider extends FeedProvider {
   ObjectOfRestaurantDetailApiResponse get objectOfRestaurantDetailApiResponse =>
       _objectOfRestaurantDetailApiResponse;
 
-  DetailFeedProvider({required this.apiService, required this.restaurantId}) {
+  DetailFeedProvider({required this.restaurantId}) {
     _objectOfRestaurantDetailApiResponse = ObjectOfRestaurantDetailApiResponse(
       error: true,
       message: "",
@@ -28,7 +27,7 @@ class DetailFeedProvider extends FeedProvider {
       super.updateResponseResult(ResponseResult.loading);
       fetchData(
         () async {
-          var response = await apiService.getRestaurantDetail(restaurantId);
+          var response = await ApiService().getRestaurantDetail(restaurantId);
           for (var element in response
               .objectOfRestaurantDetail.listObjectOfCustomerReviews) {
             element.backGroundColor =
