@@ -46,7 +46,7 @@ class ApiService extends InterfaceApiService {
 
   @override
   Future<ObjectOfCustomerReviewApiResponse> postCustomerReview(
-      String restaurantId, String name, String comment) async {
+      String restaurantId, String reviewerName, String reviewComment) async {
     final response = await http.post(
       Uri.parse(_baseUrl + _postReview),
       headers: <String, String>{
@@ -54,8 +54,8 @@ class ApiService extends InterfaceApiService {
       },
       body: jsonEncode(<String, String>{
         "id": restaurantId,
-        "name": name,
-        "review": comment,
+        "name": reviewerName,
+        "review": reviewComment,
       }),
     );
     return ObjectOfCustomerReviewApiResponse.fromJson(

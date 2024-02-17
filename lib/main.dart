@@ -46,7 +46,7 @@ Future main() async {
           create: (context) => FeedSearchProvider(apiService:  ApiService()),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedReviewProvider(),
+          create: (context) => FeedReviewProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(
           create: (context) => FeedDatabaseProvider(),

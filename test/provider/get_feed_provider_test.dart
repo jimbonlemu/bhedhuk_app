@@ -14,7 +14,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'feed_provider_test.mocks.dart';
+
+import 'get_feed_provider_test.mocks.dart';
 
 class InterfaceServiceTest extends Mock implements InterfaceApiService {}
 
@@ -251,6 +252,29 @@ ObjectOfRestaurantDetail sampleFetchedGetRestaurantDetail =
         date: "17 Februari 2024"),
   ],
 );
+
+const sampleReview = {
+  "error": false,
+  "message": "success",
+  "customerReviews": [
+    {
+      "name": "Andik",
+      "review": "Mantap Min Aseli",
+      "date": "18 Februari 2024",
+    },
+  ]
+};
+
+List<ObjectOfCustomerReviewApiResponse> sampleFetchedReview = [
+  ObjectOfCustomerReviewApiResponse(
+    error: false,
+    message: "success",
+    restaurantId: "rqdv5juczeskfw1e867",
+    name: "Andik",
+    review: "Mantap Min Aseli",
+    date: "18 Februari 2024",
+  ),
+];
 @GenerateMocks([InterfaceServiceTest])
 @GenerateMocks([ApiServiceTest])
 Future<void> main() async {
@@ -259,6 +283,7 @@ Future<void> main() async {
     late FeedListProvider feedListProvider;
     late FeedSearchProvider feedSearchProvider;
     late DetailFeedProvider detailFeedProvider;
+
     late ApiService apiService;
 
     setUp(() async {
@@ -344,9 +369,18 @@ Future<void> main() async {
               true);
         }
       }
-      expect(result.listObjectOfCustomerReviews[0].name == expected.listObjectOfCustomerReviews[0].name, true);
-      expect(result.listObjectOfCustomerReviews[0].review == expected.listObjectOfCustomerReviews[0].review, true);
-      expect(result.listObjectOfCustomerReviews[0].date == expected.listObjectOfCustomerReviews[0].date, true);
+      expect(
+          result.listObjectOfCustomerReviews[0].name ==
+              expected.listObjectOfCustomerReviews[0].name,
+          true);
+      expect(
+          result.listObjectOfCustomerReviews[0].review ==
+              expected.listObjectOfCustomerReviews[0].review,
+          true);
+      expect(
+          result.listObjectOfCustomerReviews[0].date ==
+              expected.listObjectOfCustomerReviews[0].date,
+          true);
     });
   });
 }

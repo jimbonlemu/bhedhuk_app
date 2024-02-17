@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
+import 'package:feed_me/data/api/api_service.dart';
 import 'package:feed_me/provider/feed_database_provider.dart';
 import 'package:lottie/lottie.dart';
 import '../../../provider/feed_review_provider.dart';
@@ -122,7 +123,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           builder: (context, detailFeedProvider, feedReviewProvider, child) {
             if (detailFeedProvider.responseResult == ResponseResult.hasData) {
               return ChangeNotifierProvider<FeedReviewProvider>(
-                create: (context) => FeedReviewProvider(),
+                create: (context) => FeedReviewProvider(apiService: ApiService()),
                 child: Consumer<FeedReviewProvider>(
                   builder: (context, feedReviewProvider, child) =>
                       _buildCommentPopUp(

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import '../data/models/object_customer_review_api_response.dart';
 
 class FeedReviewProvider extends ChangeNotifier {
+  ApiService apiService;
+  FeedReviewProvider({required this.apiService});
+
   bool isLoading = false;
-  ObjectOfCustomerReviewApiResponse? apiResponse;
+  ObjectOfCustomerReviewApiResponse? objectOfCustomerReviewApiResponse;
   bool isPostCommentSuccessful = false;
   Future<ObjectOfCustomerReviewApiResponse> postComment(
     String restaurantId,
@@ -15,13 +18,13 @@ class FeedReviewProvider extends ChangeNotifier {
     try {
       isLoading = true;
       notifyListeners();
-      apiResponse =
-          await ApiService().postCustomerReview(restaurantId, name, comment);
+      objectOfCustomerReviewApiResponse =
+          await apiService.postCustomerReview(restaurantId, name, comment);
 
-      if (apiResponse!.error == false) {
+      if (objectOfCustomerReviewApiResponse!.error == false) {
         isPostCommentSuccessful = true;
         notifyListeners();
-        return apiResponse!;
+        return objectOfCustomerReviewApiResponse!;
       } else {
         isPostCommentSuccessful = false;
         notifyListeners();
