@@ -2,13 +2,12 @@ import 'dart:convert';
 import 'package:feed_me/data/api/interface_api_service.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 import '../../utils/response_decoder.dart';
 import '../models/list_of_restaurant_object_api_response.dart';
 import '../models/object_customer_review_api_response.dart';
 import '../models/object_restaurant_detail_api_response.dart';
 
-class ApiService implements InterfaceApiService {
+class ApiService extends InterfaceApiService {
   ApiService._internal();
 
   static final ApiService _instanceApiService = ApiService._internal();

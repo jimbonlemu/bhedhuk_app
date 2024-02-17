@@ -6,11 +6,12 @@ import '../data/models/list_of_restaurant_object_api_response.dart';
 import '../utils/enum_state.dart';
 
 class FeedListProvider extends ChangeNotifier {
-  ApiService apiService;
+  final ApiService apiService;
 
   FeedListProvider({required this.apiService}) {
-    fetchAllResto();
+    getAllListOfRestaurant();
   }
+
   late ListOfRestaurantObjectApiResponse _listOfRestaurantObjectApiResponse;
   late ResponseResult _responseResult = ResponseResult.loading;
   String _message = "";
@@ -20,30 +21,24 @@ class FeedListProvider extends ChangeNotifier {
       _listOfRestaurantObjectApiResponse;
   String get message => _message;
 
-  Future<dynamic> fetchAllResto() async {
+  Future<void> getAllListOfRestaurant() async {
     try {
-      notifyListeners();
-
       final resultResto = await apiService.getListOfRestaurant();
-      if (resultResto.listobjectOfRestaurant.isEmpty == true) {
+      if (resultResto.listobjectOfRestaurant.isEmpty) {
         _responseResult = ResponseResult.noData;
-        notifyListeners();
         _message = "All Restaurant Data is Empty";
       } else {
         _responseResult = ResponseResult.hasData;
-        notifyListeners();
-        return _listOfRestaurantObjectApiResponse = resultResto;
+        _listOfRestaurantObjectApiResponse = resultResto;
       }
     } on SocketException {
       _responseResult = ResponseResult.error;
-      notifyListeners();
-
-      return _message = "Error --> No Internet Connection";
+      _message = "Error --> No Internet Connection";
     } catch (e) {
       _responseResult = ResponseResult.error;
+      _message = "Error --> $e";
+    } finally {
       notifyListeners();
-
-      return _message = "Error --> $e";
     }
   }
 }
