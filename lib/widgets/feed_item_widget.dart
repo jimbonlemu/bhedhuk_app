@@ -212,12 +212,12 @@ class FeedItemWidget extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             'Our Rating : ${restaurant.rating}/5',
-            style: bhedhukTextTheme.titleMedium,
+            style: feedMeTextTheme.titleMedium,
           ),
           const SizedBox(height: 5),
           Text(
             title,
-            style: bhedhukTextTheme.titleLarge,
+            style: feedMeTextTheme.titleLarge,
           ),
           const SizedBox(height: 5),
           Text(

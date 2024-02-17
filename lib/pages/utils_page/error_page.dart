@@ -13,12 +13,12 @@ class ErrorPage extends StatelessWidget {
         children: [
           Text(
             "Hi i'm sorry..",
-            style: bhedhukTextTheme.displaySmall,
+            style: feedMeTextTheme.displaySmall,
           ),
           Center(
             child: Text(
               'Something Went Wrong!',
-              style: bhedhukTextTheme.titleLarge,
+              style: feedMeTextTheme.titleLarge,
             ),
           ),
         ],

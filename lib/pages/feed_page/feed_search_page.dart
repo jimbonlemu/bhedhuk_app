@@ -112,7 +112,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
                   top: MediaQuery.of(context).size.height / 10 * 4 + 15,
                   child: Text(
                     'Looking for something?',
-                    style: bhedhukTextTheme.headlineSmall,
+                    style: feedMeTextTheme.headlineSmall,
                   ),
                 ),
               ],
@@ -123,7 +123,7 @@ class _FeedSearchPageState extends State<FeedSearchPage> {
             child: Center(
               child: Text(
                 'Get a Good and Best Feed For You!',
-                style: bhedhukTextTheme.headlineSmall,
+                style: feedMeTextTheme.headlineSmall,
               ),
             ),
           );

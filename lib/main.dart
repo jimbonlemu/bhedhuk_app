@@ -101,19 +101,8 @@ class FeedMeApp extends StatelessWidget {
           color: Colors.amber[400],
           elevation: 0,
         ),
-        textTheme: bhedhukTextTheme,
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
-            foregroundColor: blackColor,
-            textStyle: const TextStyle(),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(0),
-              ),
-            ),
-          ),
-        ),
+        textTheme: feedMeTextTheme,
+        elevatedButtonTheme: feedMeElevatedButtonThemeData,
       ),
       initialRoute: SplashPage.route,
       routes: {

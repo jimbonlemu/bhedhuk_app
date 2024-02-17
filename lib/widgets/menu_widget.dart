@@ -18,11 +18,11 @@ class MenuWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: bhedhukTextTheme.titleMedium,
+          style: feedMeTextTheme.titleMedium,
         ),
         Text(
           objectToList.map((object) => '- $object').join('\n'),
-          style: bhedhukTextTheme.bodyLarge,
+          style: feedMeTextTheme.bodyLarge,
         ),
       ],
     );

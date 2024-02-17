@@ -218,8 +218,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
             restaurantDetails.objectOfRestaurantDetail.name,
             style: scrollController.hasClients &&
                     scrollController.position.pixels > 200
-                ? bhedhukTextTheme.headlineSmall
-                : bhedhukTextTheme.headlineSmall!.copyWith(color: whiteColor),
+                ? feedMeTextTheme.headlineSmall
+                : feedMeTextTheme.headlineSmall!.copyWith(color: whiteColor),
           ),
           slivers: [
             SliverFillRemaining(
@@ -340,11 +340,11 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
             children: <TextSpan>[
               TextSpan(
                 text: 'Our Address : ',
-                style: bhedhukTextTheme.titleLarge!.copyWith(color: blackColor),
+                style: feedMeTextTheme.titleLarge!.copyWith(color: blackColor),
               ),
               TextSpan(
                 text: objectOfRestaurantDetail.address,
-                style: bhedhukTextTheme.bodyMedium!.copyWith(
+                style: feedMeTextTheme.bodyMedium!.copyWith(
                   color: blackColor,
                 ),
               ),
@@ -358,11 +358,11 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
               TextSpan(
                   text: 'Our food categories: ',
                   style:
-                      bhedhukTextTheme.titleLarge!.copyWith(color: blackColor)),
+                      feedMeTextTheme.titleLarge!.copyWith(color: blackColor)),
               TextSpan(
                   text: objectOfRestaurantDetail.categories.toList().join(', '),
                   style:
-                      bhedhukTextTheme.bodyMedium!.copyWith(color: blackColor)),
+                      feedMeTextTheme.bodyMedium!.copyWith(color: blackColor)),
             ],
           ),
         ),
@@ -373,11 +373,11 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
               TextSpan(
                   text: 'About ${objectOfRestaurantDetail.name} :\n',
                   style:
-                      bhedhukTextTheme.titleLarge!.copyWith(color: blackColor)),
+                      feedMeTextTheme.titleLarge!.copyWith(color: blackColor)),
               TextSpan(
                   text: objectOfRestaurantDetail.description,
                   style:
-                      bhedhukTextTheme.bodyMedium!.copyWith(color: blackColor)),
+                      feedMeTextTheme.bodyMedium!.copyWith(color: blackColor)),
             ],
           ),
         ),
@@ -412,7 +412,6 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
     required int itemsPerPage,
     required int selectedPage,
     required UtilsProvider utilsProvider,
-
   }) {
     return SliverList.builder(
       itemCount: pageItems.length + 1,

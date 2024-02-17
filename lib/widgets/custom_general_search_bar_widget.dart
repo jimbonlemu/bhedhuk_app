@@ -61,7 +61,7 @@ class CustomGeneralSliverSearchBarWidget extends StatelessWidget {
                         child: const Icon(CupertinoIcons.search)),
                   ),
                   hintText: hintText,
-                  hintStyle: bhedhukTextTheme.bodyLarge),
+                  hintStyle: feedMeTextTheme.bodyLarge),
             ),
           ),
         ),

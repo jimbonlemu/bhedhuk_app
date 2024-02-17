@@ -27,7 +27,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
   final ScrollController _scrollController = ScrollController();
   TextEditingController searchController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -122,7 +121,7 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
                   LottieBuilder.asset(Images.lottieNoFavorites),
                   Text(
                     "You haven't got any saved Feeds.",
-                    style: bhedhukTextTheme.headlineSmall,
+                    style: feedMeTextTheme.headlineSmall,
                   ),
                 ],
               ),

@@ -21,7 +21,7 @@ class IconTitleWidget extends StatelessWidget {
         ),
         Text(
           text ?? "",
-          style: bhedhukTextTheme.headlineSmall,
+          style: feedMeTextTheme.headlineSmall,
         ),
       ],
     );
