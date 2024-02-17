@@ -14,8 +14,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-
-import 'feed_list_provider_test.mocks.dart';
+import 'feed_provider_test.mocks.dart';
 
 class InterfaceServiceTest extends Mock implements InterfaceApiService {}
 

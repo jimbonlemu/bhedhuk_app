@@ -44,9 +44,7 @@ class UtilsProvider extends ChangeNotifier {
   void setSelectedPageListOfFavorited(int index) {
     listenPageChange(() => _selectedPageListFavorited = index);
   }
-
-
-
+  
   bool toggleFavorite() {
     _isFavorite = !_isFavorite;
     notifyListeners();
