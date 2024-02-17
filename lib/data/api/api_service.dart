@@ -12,23 +12,18 @@ class ApiService extends InterfaceApiService {
 
   static final ApiService _instanceApiService = ApiService._internal();
 
+  factory ApiService() => _instanceApiService;
+
   static final String _baseUrl = dotenv.env['BASE_URL'] ?? '';
   static const String _getListOfRestaurant = 'list';
   static const String _getDetailOfRestaurant = 'detail/';
   static const String _searchListOfRestaurant = 'search?q=';
   static const String _postReview = 'review';
-
-  factory ApiService() {
-    if (_baseUrl.isEmpty) {
-      throw Exception("BASE_URL is not defined in .env file");
-    }
-    return _instanceApiService;
-  }
-
   @override
   Future<ListOfRestaurantObjectApiResponse> getListOfRestaurant() async {
     final response = await http.get(Uri.parse(_baseUrl + _getListOfRestaurant));
-    return responseDecoder(response, ListOfRestaurantObjectApiResponse.fromJson);
+    return responseDecoder(
+        response, ListOfRestaurantObjectApiResponse.fromJson);
   }
 
   @override

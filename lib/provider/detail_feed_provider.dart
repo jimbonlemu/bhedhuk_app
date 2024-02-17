@@ -24,14 +24,14 @@ class DetailFeedProvider extends ChangeNotifier {
       message: "",
       objectOfRestaurantDetail: ObjectOfRestaurantDetail.empty(),
     );
-    fetchDataDetail(ApiService());
+    fetchDataDetail(restaurantId);
   }
 
-  Future<dynamic> fetchDataDetail(ApiService apiService) async {
+  Future<dynamic> fetchDataDetail(String id) async {
     try {
       _responseResult = ResponseResult.loading;
       notifyListeners();
-      final apiResponse = await apiService.getRestaurantDetail(restaurantId);
+      final apiResponse = await ApiService().getRestaurantDetail(id);
       for (var element
           in apiResponse.objectOfRestaurantDetail.listObjectOfCustomerReviews) {
         element.backGroundColor =
