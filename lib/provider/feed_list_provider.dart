@@ -6,8 +6,9 @@ import '../data/models/list_of_restaurant_object_api_response.dart';
 import '../utils/enum_state.dart';
 
 class FeedListProvider extends ChangeNotifier {
+  ApiService apiService;
 
-  FeedListProvider() {
+  FeedListProvider({required this.apiService}) {
     fetchAllResto();
   }
   late ListOfRestaurantObjectApiResponse _listOfRestaurantObjectApiResponse;
@@ -23,7 +24,7 @@ class FeedListProvider extends ChangeNotifier {
     try {
       notifyListeners();
 
-      final resultResto = await ApiService().getListOfRestaurant();
+      final resultResto = await apiService.getListOfRestaurant();
       if (resultResto.listobjectOfRestaurant.isEmpty == true) {
         _responseResult = ResponseResult.noData;
         notifyListeners();

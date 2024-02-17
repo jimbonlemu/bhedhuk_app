@@ -72,6 +72,7 @@ class _FeedListPageState extends State<FeedListPage> {
         } else if (feedListProvider.responseResult == ResponseResult.noData) {
           return _buildErrorAndNoData();
         } else if (feedListProvider.responseResult == ResponseResult.error) {
+          print(feedListProvider.message);
           return _buildErrorAndNoData();
         } else {
           return _buildErrorAndNoData();

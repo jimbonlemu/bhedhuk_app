@@ -1,4 +1,5 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import 'package:feed_me/data/api/api_service.dart';
 import 'package:feed_me/provider/feed_list_provider.dart';
 import 'package:feed_me/provider/feed_notification_scheduling.dart';
 import 'pages/feed_page/feed_settings_page.dart';
@@ -36,7 +37,7 @@ Future main() async {
           create: (context) => ConnectivityProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedListProvider(),
+          create: (context) => FeedListProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(
           create: (context) => UtilsProvider(),
