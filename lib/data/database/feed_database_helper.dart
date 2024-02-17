@@ -1,16 +1,14 @@
 import 'package:bhedhuk_app/data/models/object_of_restaurant.dart';
 import 'package:sqflite/sqflite.dart';
 
-class FeedDatabaseHelper {
-  static FeedDatabaseHelper? _instanceFeedDatabaseHelper;
+class FeedDatabaseService {
+  FeedDatabaseService._internal();
+  static final FeedDatabaseService _instanceFeedDatabaseService =
+      FeedDatabaseService._internal();
+
   static Database? _database;
 
-  FeedDatabaseHelper._internal() {
-    _instanceFeedDatabaseHelper = this;
-  }
-
-  factory FeedDatabaseHelper() =>
-      _instanceFeedDatabaseHelper ?? FeedDatabaseHelper._internal();
+  factory FeedDatabaseService() => _instanceFeedDatabaseService;
 
   static const String _favoritedTable = 'favorited_table';
 

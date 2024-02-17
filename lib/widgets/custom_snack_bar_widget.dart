@@ -8,31 +8,35 @@ class CustomSnackBarWidget {
   CustomSnackBarWidget._(
       {required this.snackBarMessage, required this.snackBarType});
 
-  static void notice(BuildContext context, String snackBarMessage) {
+  static void notice(BuildContext context, String snackBarMessage,
+      {int durationInSeconds = 3}) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.warning,
-            duration: const Duration(seconds: 5))
+            duration: Duration(seconds: durationInSeconds))
         .show(context);
   }
 
-  static void facts(BuildContext context, String snackBarMessage) {
+  static void facts(BuildContext context, String snackBarMessage,
+      {int durationInSeconds = 3}) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.info,
-            duration: const Duration(seconds: 5))
+            duration: Duration(seconds: durationInSeconds))
         .show(context);
   }
 
-  static void problem(BuildContext context, String snackBarMessage) {
+  static void problem(BuildContext context, String snackBarMessage,
+      {int durationInSeconds = 3}) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.error,
-            duration: const Duration(seconds: 5))
+            duration: Duration(seconds: durationInSeconds))
         .show(context);
   }
 
-  static void victory(BuildContext context, String snackBarMessage) {
+  static void victory(BuildContext context, String snackBarMessage,
+      {int durationInSeconds = 3}) {
     AnimatedSnackBar.material(snackBarMessage,
             type: AnimatedSnackBarType.success,
-            duration: const Duration(seconds: 5))
+            duration: Duration(seconds: durationInSeconds))
         .show(context);
   }
 }

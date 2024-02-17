@@ -37,3 +37,5 @@ final TextTheme bhedhukTextTheme = TextTheme(
   labelSmall: GoogleFonts.ebGaramond(
       fontSize: 10, fontWeight: FontWeight.w400, letterSpacing: 1.5),
 );
+
+

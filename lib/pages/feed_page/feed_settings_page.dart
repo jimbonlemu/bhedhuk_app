@@ -2,6 +2,7 @@ import 'package:bhedhuk_app/provider/feed_notification_scheduling.dart';
 import 'package:bhedhuk_app/provider/feed_settings_preferences_provider.dart';
 import 'package:bhedhuk_app/utils/styles.dart';
 import 'package:bhedhuk_app/widgets/custom_appbar_widget.dart';
+import 'package:bhedhuk_app/widgets/custom_snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,21 @@ class FeedSettingsPage extends StatefulWidget {
 }
 
 class _FeedSettingsPageState extends State<FeedSettingsPage> {
+  bool isEnableSnackBar(bool value) {
+    if (value) {
+      CustomSnackBarWidget.victory(context,
+          "You have just turned ON daily restaurant recommendations every 11 AM!");
+      return true;
+    } else {
+      CustomSnackBarWidget.facts(
+        context,
+        "You've just turned OFF the daily restaurant recommendations.",
+        durationInSeconds: 5,
+      );
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +69,7 @@ class _FeedSettingsPageState extends State<FeedSettingsPage> {
                             feedScheduling.scheduledFeed(value);
                             feedSettingsPreferencesProvider
                                 .enableDailyFeedNotification(value);
+                            isEnableSnackBar(value);
                           },
                         );
                       },

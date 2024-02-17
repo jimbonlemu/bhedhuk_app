@@ -25,7 +25,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   void _getListFavoritedRestaurant() async {
     _listOfFavoritedRestaurant =
-        await FeedDatabaseHelper().getListFavoritedRestaurant();
+        await FeedDatabaseService().getListFavoritedRestaurant();
     print('List of Favorited Restaurant: $_listOfFavoritedRestaurant');
 
     if (_listOfFavoritedRestaurant.isNotEmpty) {
@@ -39,7 +39,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   void addFavoritedRestaurant(ObjectOfRestaurant objectOfRestaurant) async {
     try {
-      await FeedDatabaseHelper()
+      await FeedDatabaseService()
           .insertFavoritedRestaurant(objectOfRestaurant)
           .then((value) => print("add resto ${objectOfRestaurant.id}"));
       _getListFavoritedRestaurant();
@@ -52,13 +52,13 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   Future<bool> isFavorited(String restaurantId) async {
     final favoritedRestaurant =
-        await FeedDatabaseHelper().getFavoritedRestaurantById(restaurantId);
+        await FeedDatabaseService().getFavoritedRestaurantById(restaurantId);
     return favoritedRestaurant.isNotEmpty;
   }
 
   void removeFavoritedRestaurant(String restaurantId) async {
     try {
-      await FeedDatabaseHelper()
+      await FeedDatabaseService()
           .removeFavoritedRestaurant(restaurantId)
           .then((value) => print("dell resto$restaurantId"));
       _getListFavoritedRestaurant();
@@ -70,7 +70,8 @@ class FeedDatabaseProvider extends ChangeNotifier {
   }
 
   Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
-    _searchResultFavorited = await FeedDatabaseHelper().searchRestaurant(query);
+    _searchResultFavorited =
+        await FeedDatabaseService().searchRestaurant(query);
     return _searchResultFavorited;
   }
 }

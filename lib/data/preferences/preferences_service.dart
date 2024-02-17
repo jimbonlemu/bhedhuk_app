@@ -2,12 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class PreferencesService {
   static const dailyFeedNotification = 'DAILY_FEED_NOTIFICATION';
-  
+
   PreferencesService._internal();
   static final PreferencesService _instance = PreferencesService._internal();
-  factory PreferencesService() {
-    return _instance;
-  }
+  factory PreferencesService() => _instance;
 
   Future<bool> get isDailyFeedNotificationActive async {
     final prefs = await SharedPreferences.getInstance();
@@ -18,4 +16,4 @@ class PreferencesService {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(dailyFeedNotification, value);
   }
-} 
+}

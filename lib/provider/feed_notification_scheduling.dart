@@ -1,6 +1,7 @@
 import 'package:bhedhuk_app/utils/feed_background_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+import '../utils/date_time_service.dart';
 
 class FeedNotificationScheduling extends ChangeNotifier {
   bool _isScheduled = false;
@@ -14,10 +15,10 @@ class FeedNotificationScheduling extends ChangeNotifier {
       print("Feed Scheduling Activated");
       notifyListeners();
       return await AndroidAlarmManager.periodic(
-        const Duration(minutes: 1),
+        const Duration(hours: 24),
         1,
         FeedBackgroundService.portCallback,
-        startAt: DateTime.now(),
+        startAt: DateTimeService.format(),
         exact: true,
         wakeup: true,
       );
