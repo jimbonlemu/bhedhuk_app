@@ -9,21 +9,21 @@ const Color shimmerHighligtColor = Color(0xFFF5F5F5);
 const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
 
-   ThemeData feedMeThemeData (BuildContext context)=> ThemeData(
-  colorScheme: Theme.of(context).colorScheme.copyWith(
-        primary: primaryColor,
-        onPrimary: onPrimaryColor,
-        secondary: secondaryColor,
+ThemeData feedMeThemeData(BuildContext context) => ThemeData(
+      colorScheme: Theme.of(context).colorScheme.copyWith(
+            primary: primaryColor,
+            onPrimary: onPrimaryColor,
+            secondary: secondaryColor,
+          ),
+      scaffoldBackgroundColor: Colors.white70,
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      appBarTheme: AppBarTheme(
+        color: Colors.amber[400],
+        elevation: 0,
       ),
-  scaffoldBackgroundColor: Colors.white70,
-  visualDensity: VisualDensity.adaptivePlatformDensity,
-  appBarTheme: AppBarTheme(
-    color: Colors.amber[400],
-    elevation: 0,
-  ),
-  textTheme: feedMeTextTheme,
-  elevatedButtonTheme: feedMeElevatedButtonThemeData,
-);
+      textTheme: feedMeTextTheme,
+      elevatedButtonTheme: feedMeElevatedButtonThemeData,
+    );
 
 final TextTheme feedMeTextTheme = TextTheme(
   displayLarge: GoogleFonts.lobsterTwo(

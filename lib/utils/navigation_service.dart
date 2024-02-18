@@ -10,7 +10,7 @@ class Navigate {
     );
   }
 
-   static withGift(String routeName, Object arguments) {
+  static withGift(String routeName, Object arguments) {
     navigatorKey.currentState?.pushNamed(routeName, arguments: arguments);
   }
 

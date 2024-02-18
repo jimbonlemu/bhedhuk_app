@@ -7,7 +7,8 @@ class FeedDatabaseProvider extends ChangeNotifier {
   final FeedDatabaseService feedDatabaseService;
   ResponseResult _result;
 
-  FeedDatabaseProvider({required this.feedDatabaseService}) : _result = ResponseResult.loading {
+  FeedDatabaseProvider({required this.feedDatabaseService})
+      : _result = ResponseResult.loading {
     getListFavoritedRestaurant();
   }
 
@@ -66,8 +67,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
   }
 
   Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
-    _searchResultFavorited =
-        await feedDatabaseService.searchRestaurant(query);
+    _searchResultFavorited = await feedDatabaseService.searchRestaurant(query);
     return _searchResultFavorited;
   }
 }

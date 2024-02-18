@@ -42,20 +42,21 @@ Future main() async {
           create: (context) => UtilsProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedSearchProvider(apiService:  ApiService()),
+          create: (context) => FeedSearchProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(
           create: (context) => FeedReviewProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedDatabaseProvider(feedDatabaseService: FeedDatabaseService()),
+          create: (context) =>
+              FeedDatabaseProvider(feedDatabaseService: FeedDatabaseService()),
         ),
         ChangeNotifierProvider(
           create: (context) => FeedSettingsPreferencesProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => FeedNotificationScheduling(),
-        ),  
+        ),
       ],
       child: const FeedMeApp(),
     ),
@@ -69,7 +70,6 @@ Future<void> initNotif() async {
   await AndroidAlarmManager.initialize();
   await notificationService.initNotification(flutterLocalNotificationsPlugin);
 }
-
 
 class FeedMeApp extends StatelessWidget {
   const FeedMeApp({super.key});

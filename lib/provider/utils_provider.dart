@@ -8,14 +8,12 @@ class UtilsProvider extends ChangeNotifier {
   bool _isFavorite = false;
   int _navBarIndex = 0;
 
-
   int get selectedPageListOfRestaurant => _selectedPageListOfRestaurant;
   int get selectedPageListOfSearch => _selectedPageListOfSearch;
   int get selectedPageListOfComment => _selectedPageListComment;
   int get selectedPageListFavorited => _selectedPageListFavorited;
   bool get isFavorite => _isFavorite;
   int get navBarIndex => _navBarIndex;
-
 
   void listenPageChange(void Function() updateChange) {
     updateChange();
@@ -44,7 +42,7 @@ class UtilsProvider extends ChangeNotifier {
   void setSelectedPageListOfFavorited(int index) {
     listenPageChange(() => _selectedPageListFavorited = index);
   }
-  
+
   bool toggleFavorite() {
     _isFavorite = !_isFavorite;
     notifyListeners();
