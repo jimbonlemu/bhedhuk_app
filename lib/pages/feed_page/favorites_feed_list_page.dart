@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -55,61 +56,12 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
 
             var pageItems = feedDatabaseProvider.listOfFavoritedRestaurant
                 .sublist(startIndex, endIndex);
-            return CustomScrollView(
-              controller: _scrollController,
-              slivers: [
-                CustomGeneralSliverSearchBarWidget(
-                    controller: searchController,
-                    hintText: "Find your favorite restaurant by name..",
-                    onSubmitted: (value) {
-                      feedDatabaseProvider
-                          .searchRestaurant(searchController.text)
-                          .then((value) =>
-                              utilsProvider.setSelectedPageListOfFavorited(1));
-                    }),
-                if (searchController.text.isNotEmpty)
-                  SliverList.builder(
-                    itemCount:
-                        feedDatabaseProvider.searchResultFavorited.length,
-                    itemBuilder: (context, index) {
-                      var listSearchedFavorited =
-                          feedDatabaseProvider.searchResultFavorited[index];
-                      return FeedItemWidget(restaurant: listSearchedFavorited);
-                    },
-                  ),
-                if (searchController.text.isEmpty)
-                  SliverList.builder(
-                    itemCount: pageItems.length + 1,
-                    itemBuilder: (context, index) {
-                      if (index < pageItems.length) {
-                        var listFavorited = pageItems[index];
-                        return FeedItemWidget(restaurant: listFavorited);
-                      } else {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: PaginationWidget(
-                            pageCount: (feedDatabaseProvider
-                                        .listOfFavoritedRestaurant.length /
-                                    itemsPerPage)
-                                .ceil(),
-                            selectedPage: selectedPage,
-                            onChanged: (page) {
-                              if (page != selectedPage) {
-                                utilsProvider
-                                    .setSelectedPageListOfFavorited(page);
-                                _scrollController.animateTo(
-                                  0.0,
-                                  duration: const Duration(milliseconds: 500),
-                                  curve: Curves.easeOut,
-                                );
-                              }
-                            },
-                          ),
-                        );
-                      }
-                    },
-                  ),
-              ],
+            return _buildAnyListOfFavoritedAndSearched(
+              feedDatabaseProvider: feedDatabaseProvider,
+              utilsProvider: utilsProvider,
+              pageItems: pageItems,
+              selectedPage: selectedPage,
+              itemsPerPage: itemsPerPage,
             );
           } else if (feedDatabaseProvider.result == ResponseResult.loading) {
             return const GeneralShimmerWidget();
@@ -129,6 +81,83 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
           }
         },
       ),
+    );
+  }
+
+  Widget _buildAnyListOfFavoritedAndSearched({
+    required FeedDatabaseProvider feedDatabaseProvider,
+    required UtilsProvider utilsProvider,
+    required List<ObjectOfRestaurant> pageItems,
+    required int selectedPage,
+    required int itemsPerPage,
+  }) {
+    return CustomScrollView(
+      controller: _scrollController,
+      slivers: [
+        CustomGeneralSliverSearchBarWidget(
+            controller: searchController,
+            hintText: "Find your favorite restaurant by name..",
+            onSubmitted: (value) {
+              feedDatabaseProvider.searchRestaurant(searchController.text).then(
+                  (value) => utilsProvider.setSelectedPageListOfFavorited(1));
+            }),
+        if (searchController.text.isNotEmpty)
+          SliverList.builder(
+            itemCount: feedDatabaseProvider.searchResultFavorited.length,
+            itemBuilder: (context, index) {
+              var listSearchedFavorited =
+                  feedDatabaseProvider.searchResultFavorited[index];
+              return FeedItemWidget(restaurant: listSearchedFavorited);
+            },
+          ),
+        if (searchController.text.isEmpty)
+          _buildListOfFavorited(
+            pageItems: pageItems,
+            feedDatabaseProvider: feedDatabaseProvider,
+            itemsPerPage: itemsPerPage,
+            selectedPage: selectedPage,
+            utilsProvider: utilsProvider,
+          ),
+      ],
+    );
+  }
+
+  Widget _buildListOfFavorited({
+    required List<ObjectOfRestaurant> pageItems,
+    required FeedDatabaseProvider feedDatabaseProvider,
+    required int itemsPerPage,
+    required int selectedPage,
+    required UtilsProvider utilsProvider,
+  }) {
+    return SliverList.builder(
+      itemCount: pageItems.length + 1,
+      itemBuilder: (context, index) {
+        if (index < pageItems.length) {
+          var listFavorited = pageItems[index];
+          return FeedItemWidget(restaurant: listFavorited);
+        } else {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: PaginationWidget(
+              pageCount:
+                  (feedDatabaseProvider.listOfFavoritedRestaurant.length /
+                          itemsPerPage)
+                      .ceil(),
+              selectedPage: selectedPage,
+              onChanged: (page) {
+                if (page != selectedPage) {
+                  utilsProvider.setSelectedPageListOfFavorited(page);
+                  _scrollController.animateTo(
+                    0.0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeOut,
+                  );
+                }
+              },
+            ),
+          );
+        }
+      },
     );
   }
 }
