@@ -30,7 +30,6 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   initNotif();
-  resetDatabase();
   runApp(
     MultiProvider(
       providers: [
@@ -72,10 +71,6 @@ Future<void> initNotif() async {
   await notificationService.initNotification(flutterLocalNotificationsPlugin);
 }
 
-void resetDatabase() async {
-  var path = await getDatabasesPath();
-  await deleteDatabase('$path/feed_database.db');
-}
 
 class FeedMeApp extends StatelessWidget {
   const FeedMeApp({super.key});
