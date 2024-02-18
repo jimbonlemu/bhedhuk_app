@@ -3,7 +3,7 @@ import 'object_of_restaurant.dart';
 import '../../utils/model_parser.dart';
 
 class ListOfRestaurantObjectApiResponse extends ObjectOfApiResponse {
-  List<ObjectOfRestaurant> listobjectOfRestaurant;
+  final List<ObjectOfRestaurant> listobjectOfRestaurant;
   int count;
   int founded = 0;
 
