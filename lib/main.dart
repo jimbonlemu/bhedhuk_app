@@ -1,5 +1,6 @@
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:feed_me/data/api/api_service.dart';
+import 'package:feed_me/data/database/feed_database_service.dart';
 import 'package:feed_me/provider/feed_list_provider.dart';
 import 'package:feed_me/provider/feed_notification_scheduling.dart';
 import 'pages/feed_page/feed_settings_page.dart';
@@ -49,7 +50,7 @@ Future main() async {
           create: (context) => FeedReviewProvider(apiService: ApiService()),
         ),
         ChangeNotifierProvider(
-          create: (context) => FeedDatabaseProvider(),
+          create: (context) => FeedDatabaseProvider(feedDatabaseService: FeedDatabaseService()),
         ),
         ChangeNotifierProvider(
           create: (context) => FeedSettingsPreferencesProvider(),

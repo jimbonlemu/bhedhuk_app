@@ -1,14 +1,15 @@
-import 'package:feed_me/data/database/feed_database_helper.dart';
+import 'package:feed_me/data/database/feed_database_service.dart';
 import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:flutter/foundation.dart';
 
 import '../utils/enum_state.dart';
 
 class FeedDatabaseProvider extends ChangeNotifier {
+  final FeedDatabaseService feedDatabaseService;
   ResponseResult _result;
 
-  FeedDatabaseProvider() : _result = ResponseResult.loading {
-    _getListFavoritedRestaurant();
+  FeedDatabaseProvider({required this.feedDatabaseService}) : _result = ResponseResult.loading {
+    getListFavoritedRestaurant();
   }
 
   ResponseResult get result => _result;
@@ -23,9 +24,9 @@ class FeedDatabaseProvider extends ChangeNotifier {
   List<ObjectOfRestaurant> get listOfFavoritedRestaurant =>
       _listOfFavoritedRestaurant;
 
-  void _getListFavoritedRestaurant() async {
+  void getListFavoritedRestaurant() async {
     _listOfFavoritedRestaurant =
-        await FeedDatabaseService().getListFavoritedRestaurant();
+        await feedDatabaseService.getListFavoritedRestaurant();
 
     if (_listOfFavoritedRestaurant.isNotEmpty) {
       _result = ResponseResult.hasData;
@@ -38,9 +39,9 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   void addFavoritedRestaurant(ObjectOfRestaurant objectOfRestaurant) async {
     try {
-      await FeedDatabaseService().insertFavoritedRestaurant(objectOfRestaurant);
+      await feedDatabaseService.insertFavoritedRestaurant(objectOfRestaurant);
 
-      _getListFavoritedRestaurant();
+      getListFavoritedRestaurant();
     } catch (e) {
       _result = ResponseResult.error;
       _response = "Error getting data -----> $e";
@@ -50,14 +51,14 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   Future<bool> isFavorited(String restaurantId) async {
     final favoritedRestaurant =
-        await FeedDatabaseService().getFavoritedRestaurantById(restaurantId);
+        await feedDatabaseService.getFavoritedRestaurantById(restaurantId);
     return favoritedRestaurant.isNotEmpty;
   }
 
   void removeFavoritedRestaurant(String restaurantId) async {
     try {
-      await FeedDatabaseService().removeFavoritedRestaurant(restaurantId);
-      _getListFavoritedRestaurant();
+      await feedDatabaseService.removeFavoritedRestaurant(restaurantId);
+      getListFavoritedRestaurant();
     } catch (e) {
       _result = ResponseResult.error;
       _response = "Error while removing favorited restaurant ----> $e";
@@ -67,7 +68,7 @@ class FeedDatabaseProvider extends ChangeNotifier {
 
   Future<List<ObjectOfRestaurant>> searchRestaurant(String query) async {
     _searchResultFavorited =
-        await FeedDatabaseService().searchRestaurant(query);
+        await feedDatabaseService.searchRestaurant(query);
     return _searchResultFavorited;
   }
 }

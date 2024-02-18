@@ -123,7 +123,8 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
           builder: (context, detailFeedProvider, feedReviewProvider, child) {
             if (detailFeedProvider.responseResult == ResponseResult.hasData) {
               return ChangeNotifierProvider<FeedReviewProvider>(
-                create: (context) => FeedReviewProvider(apiService: ApiService()),
+                create: (context) =>
+                    FeedReviewProvider(apiService: ApiService()),
                 child: Consumer<FeedReviewProvider>(
                   builder: (context, feedReviewProvider, child) =>
                       _buildCommentPopUp(
@@ -456,6 +457,7 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
     required FeedReviewProvider feedReviewProvider,
   }) {
     return DraggableFab(
+      key: const Key("floatingButton"),
       securityBottom: 100,
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -477,8 +479,10 @@ class _FeedDetailPageState extends State<FeedDetailPage> {
                 builder: (context) => BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                   child: CustomAlertDialog(
+                    key: const Key("customAlertDialog"),
                     purpose: "addCommentAlert",
                     reviewerNameTextField: CustomTextFieldWidget(
+                      key: const Key("customTextFieldWidget"),
                       label: "Your name is ?",
                       textController: reviewerNameController,
                     ),
