@@ -7,7 +7,6 @@ import 'pages/feed_page/feed_settings_page.dart';
 import 'provider/feed_database_provider.dart';
 import 'provider/feed_settings_preferences_provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:sqflite/sqflite.dart';
 import 'pages/feed_page/feed_detail_page.dart';
 import 'provider/connecivity_provider.dart';
 import 'provider/feed_review_provider.dart';
@@ -85,21 +84,7 @@ class FeedMeApp extends StatelessWidget {
       navigatorKey: navigatorKey,
       title: 'Feed Me',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: Theme.of(context).colorScheme.copyWith(
-              primary: primaryColor,
-              onPrimary: onPrimaryColor,
-              secondary: secondaryColor,
-            ),
-        scaffoldBackgroundColor: Colors.white70,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        appBarTheme: AppBarTheme(
-          color: Colors.amber[400],
-          elevation: 0,
-        ),
-        textTheme: feedMeTextTheme,
-        elevatedButtonTheme: feedMeElevatedButtonThemeData,
-      ),
+      theme: feedMeThemeData(context),
       initialRoute: SplashPage.route,
       routes: {
         SplashPage.route: (context) => const SplashPage(),
