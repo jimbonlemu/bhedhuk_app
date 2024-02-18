@@ -1,5 +1,5 @@
-import 'object_of_api_response.dart';
 import 'package:flutter/material.dart';
+import 'object_of_api_response.dart';
 
 class ObjectOfCustomerReviewApiResponse extends ObjectOfApiResponse {
   String restaurantId;

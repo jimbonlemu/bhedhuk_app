@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import '../utils/styles.dart';
 import 'custom_shimmer_widget.dart';
+import '../utils/styles.dart';
 
 class GeneralShimmerWidget extends StatelessWidget {
   const GeneralShimmerWidget({super.key});

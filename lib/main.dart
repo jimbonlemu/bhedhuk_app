@@ -1,11 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'data/api/api_service.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
-import 'package:feed_me/data/api/api_service.dart';
-import 'package:feed_me/data/database/feed_database_service.dart';
-import 'package:feed_me/provider/feed_list_provider.dart';
-import 'package:feed_me/provider/feed_notification_scheduling.dart';
 import 'pages/feed_page/feed_settings_page.dart';
-import 'provider/feed_database_provider.dart';
-import 'provider/feed_settings_preferences_provider.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'pages/feed_page/feed_detail_page.dart';
 import 'provider/connecivity_provider.dart';
@@ -18,10 +16,12 @@ import 'utils/notification_service.dart';
 import 'utils/styles.dart';
 import 'pages/utils_page/navbar_page.dart';
 import 'pages/utils_page/splash_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
+import '../provider/feed_database_provider.dart';
+import '../provider/feed_settings_preferences_provider.dart';
+import '../data/database/feed_database_service.dart';
+import '../provider/feed_list_provider.dart';
+import '../provider/feed_notification_scheduling.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();

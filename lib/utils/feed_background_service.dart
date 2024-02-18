@@ -1,6 +1,5 @@
 import 'dart:isolate';
 import 'dart:ui';
-
 import 'package:feed_me/data/api/api_service.dart';
 import 'package:feed_me/main.dart';
 import 'package:feed_me/utils/notification_service.dart';

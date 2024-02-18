@@ -1,12 +1,12 @@
-import 'package:feed_me/pages/feed_page/favorites_feed_list_page.dart';
-import 'package:feed_me/pages/feed_page/feed_detail_page.dart';
-import 'package:feed_me/pages/feed_page/feed_list_page.dart';
-import 'package:feed_me/pages/feed_page/feed_search_page.dart';
-import 'package:feed_me/provider/connecivity_provider.dart';
-import 'package:feed_me/provider/utils_provider.dart';
-import 'package:feed_me/utils/notification_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../feed_page/favorites_feed_list_page.dart';
+import '../feed_page/feed_detail_page.dart';
+import '../feed_page/feed_list_page.dart';
+import '../feed_page/feed_search_page.dart';
+import '../../provider/connecivity_provider.dart';
+import '../../provider/utils_provider.dart';
+import '../../utils/notification_service.dart';
 import '../../widgets/custom_alert_dialog_widget.dart';
 
 class NavBarPage extends StatefulWidget {

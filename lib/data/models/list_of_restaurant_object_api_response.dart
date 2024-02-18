@@ -1,6 +1,6 @@
 import 'object_of_api_response.dart';
 import 'object_of_restaurant.dart';
-import 'package:feed_me/utils/model_parser.dart';
+import '../../utils/model_parser.dart';
 
 class ListOfRestaurantObjectApiResponse extends ObjectOfApiResponse {
   List<ObjectOfRestaurant> listobjectOfRestaurant;

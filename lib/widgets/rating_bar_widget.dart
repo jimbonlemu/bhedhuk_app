@@ -1,6 +1,6 @@
-import '../utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import '../utils/styles.dart';
 
 class RatingBarWidget extends StatelessWidget {
   final double? rating;

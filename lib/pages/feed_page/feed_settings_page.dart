@@ -1,10 +1,10 @@
-import 'package:feed_me/provider/feed_notification_scheduling.dart';
-import 'package:feed_me/provider/feed_settings_preferences_provider.dart';
-import 'package:feed_me/utils/styles.dart';
-import 'package:feed_me/widgets/custom_appbar_widget.dart';
-import 'package:feed_me/widgets/custom_snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import "../../provider/feed_notification_scheduling.dart";
+import '../../provider/feed_settings_preferences_provider.dart';
+import '../../utils/styles.dart';
+import '../../widgets/custom_appbar_widget.dart';
+import '../../widgets/custom_snack_bar_widget.dart';
 
 class FeedSettingsPage extends StatefulWidget {
   static const route = '/feed_settings_page';

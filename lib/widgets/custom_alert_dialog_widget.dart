@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, must_be_immutable
-
-import 'package:feed_me/utils/styles.dart';
-import 'package:feed_me/widgets/custom_elevated_button_widget.dart';
-import 'package:feed_me/widgets/custom_text_field_widget.dart';
 import 'package:flutter/material.dart';
+import '../utils/styles.dart';
+import 'custom_elevated_button_widget.dart';
+import 'custom_text_field_widget.dart';
 
 class CustomAlertDialog extends StatelessWidget {
   final String purpose;

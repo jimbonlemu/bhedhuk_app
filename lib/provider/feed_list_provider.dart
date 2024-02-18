@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:feed_me/data/api/api_service.dart';
+import '../data/api/api_service.dart';
 import 'package:flutter/foundation.dart';
 import '../data/models/list_of_restaurant_object_api_response.dart';
 import '../utils/enum_state.dart';

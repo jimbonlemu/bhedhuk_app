@@ -1,5 +1,5 @@
-import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:sqflite/sqflite.dart';
+import '../models/object_of_restaurant.dart';
 
 class FeedDatabaseService {
   FeedDatabaseService._internal();

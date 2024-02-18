@@ -1,7 +1,6 @@
 import 'package:feed_me/data/database/feed_database_service.dart';
 import 'package:feed_me/data/models/object_of_restaurant.dart';
 import 'package:flutter/foundation.dart';
-
 import '../utils/enum_state.dart';
 
 class FeedDatabaseProvider extends ChangeNotifier {

@@ -1,5 +1,5 @@
 import 'object_of_foods_and_drinks.dart';
-import 'package:feed_me/utils/model_parser.dart';
+import '../../utils/model_parser.dart';
 
 class ObjectOfMenus {
   final List<ObjectOfFoodsAndDrinks> foods;

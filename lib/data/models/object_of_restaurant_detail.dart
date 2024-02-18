@@ -2,7 +2,7 @@ import 'object_of_foods_and_drinks.dart';
 import 'object_customer_review_api_response.dart';
 import 'object_of_menus.dart';
 import 'object_of_restaurant.dart';
-import 'package:feed_me/utils/model_parser.dart';
+import '../../utils/model_parser.dart';
 
 class ObjectOfRestaurantDetail extends ObjectOfRestaurant {
   String address;

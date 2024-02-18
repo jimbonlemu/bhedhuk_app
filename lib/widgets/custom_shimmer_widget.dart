@@ -1,6 +1,6 @@
-import 'package:feed_me/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../utils/styles.dart';
 
 class CustomWidgetShimmer extends StatelessWidget {
   final Widget child;

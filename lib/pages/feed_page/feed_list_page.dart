@@ -1,11 +1,11 @@
 import 'dart:math';
-import 'package:feed_me/provider/feed_list_provider.dart';
 import 'package:lottie/lottie.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../provider/feed_list_provider.dart';
 import '../../provider/utils_provider.dart';
 import '../../utils/enum_state.dart';
 import '../../utils/images.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../widgets/custom_appbar_widget.dart';
 import '../../widgets/feed_item_widget.dart';
 import '../../widgets/general_shimmer_widget.dart';

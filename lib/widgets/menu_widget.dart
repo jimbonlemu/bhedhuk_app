@@ -1,5 +1,5 @@
-import '../utils/styles.dart';
 import 'package:flutter/material.dart';
+import '../utils/styles.dart';
 
 class MenuWidget extends StatelessWidget {
   final String title;

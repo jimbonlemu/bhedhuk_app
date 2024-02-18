@@ -1,6 +1,6 @@
-import '../utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:pagination_flutter/pagination.dart';
+import '../utils/styles.dart';
 
 class PaginationWidget extends StatelessWidget {
   final int pageCount;

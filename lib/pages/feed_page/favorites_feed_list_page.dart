@@ -1,16 +1,16 @@
 import 'dart:math';
-import 'package:feed_me/pages/feed_page/feed_settings_page.dart';
-import 'package:feed_me/provider/feed_database_provider.dart';
-import 'package:feed_me/provider/utils_provider.dart';
-import 'package:feed_me/utils/images.dart';
-import 'package:feed_me/utils/styles.dart';
-import 'package:feed_me/widgets/custom_general_search_bar_widget.dart';
-import 'package:feed_me/widgets/feed_item_widget.dart';
-import 'package:feed_me/widgets/general_shimmer_widget.dart';
-import 'package:feed_me/widgets/pagination_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import '../feed_page/feed_settings_page.dart';
+import '../../provider/feed_database_provider.dart';
+import '../../provider/utils_provider.dart';
+import '../../utils/images.dart';
+import '../../utils/styles.dart';
+import '../../widgets/custom_general_search_bar_widget.dart';
+import '../../widgets/feed_item_widget.dart';
+import '../../widgets/general_shimmer_widget.dart';
+import '../../widgets/pagination_widget.dart';
 import '../../utils/enum_state.dart';
 import '../../widgets/custom_appbar_widget.dart';
 

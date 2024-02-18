@@ -1,5 +1,5 @@
-import 'package:feed_me/utils/styles.dart';
 import 'package:flutter/material.dart';
+import '../utils/styles.dart';
 
 class CustomElevatedButtonWidget extends StatelessWidget {
   final String buttonLabel;

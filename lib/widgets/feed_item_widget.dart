@@ -1,16 +1,16 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:feed_me/pages/feed_page/feed_detail_page.dart';
-import 'package:feed_me/provider/feed_database_provider.dart';
-import 'package:feed_me/utils/images.dart';
-import 'package:feed_me/utils/styles.dart';
-import 'package:feed_me/widgets/custom_snack_bar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../data/models/object_of_restaurant.dart';
 import 'icon_title_widget.dart';
 import 'rating_bar_widget.dart';
 import 'custom_shimmer_widget.dart';
+import '../pages/feed_page/feed_detail_page.dart';
+import '../provider/feed_database_provider.dart';
+import '../utils/images.dart';
+import '../utils/styles.dart';
+import '../widgets/custom_snack_bar_widget.dart';
+import '../data/models/object_of_restaurant.dart';
 
 class FeedItemWidget extends StatelessWidget {
   final ObjectOfRestaurant restaurant;
