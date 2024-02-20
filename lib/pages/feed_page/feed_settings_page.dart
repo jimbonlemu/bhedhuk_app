@@ -1,8 +1,8 @@
+import 'package:feed_me/widgets/custom_switch_adaptive_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import "../../provider/feed_notification_scheduling.dart";
 import '../../provider/feed_settings_preferences_provider.dart';
-import '../../utils/styles.dart';
 import '../../widgets/custom_appbar_widget.dart';
 import '../../widgets/custom_snack_bar_widget.dart';
 
@@ -51,19 +51,8 @@ class _FeedSettingsPageState extends State<FeedSettingsPage> {
                     title: const Text('Enable Daily Recommendation'),
                     trailing: Consumer<FeedNotificationScheduling>(
                       builder: (context, feedScheduling, _) {
-                        return Switch.adaptive(
-                          activeTrackColor: primaryColor,
-                          inactiveTrackColor: blackColor,
-                          activeColor: blackColor,
-                          inactiveThumbColor: primaryColor,
-                          trackOutlineColor:
-                              MaterialStateColor.resolveWith((states) {
-                            if (states.contains(MaterialState.selected)) {
-                              return primaryColor;
-                            }
-                            return blackColor;
-                          }),
-                          value: feedSettingsPreferencesProvider
+                        return CustomSwitchAdaptiveWidget(
+                          changedValue: feedSettingsPreferencesProvider
                               .isDailyFeedNotificationActive,
                           onChanged: (value) async {
                             feedScheduling.scheduledFeed(value);
