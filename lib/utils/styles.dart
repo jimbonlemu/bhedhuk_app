@@ -8,6 +8,7 @@ const Color shimmerBaseColor = Color(0xFFE0E0E0);
 const Color shimmerHighligtColor = Color(0xFFF5F5F5);
 const Color whiteColor = Colors.white;
 const Color blackColor = Colors.black;
+const int itemsPerPage = 3;
 
 ThemeData feedMeThemeData(BuildContext context) => ThemeData(
       colorScheme: Theme.of(context).colorScheme.copyWith(

@@ -48,7 +48,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
       body: Consumer2<FeedDatabaseProvider, UtilsProvider>(
         builder: (context, feedDatabaseProvider, utilsProvider, child) {
           if (feedDatabaseProvider.result == ResponseResult.hasData) {
-            int itemsPerPage = 3;
             int selectedPage = utilsProvider.selectedPageListFavorited;
             int startIndex = (selectedPage - 1) * 3;
             int endIndex = min(startIndex + itemsPerPage,
@@ -61,7 +60,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
               utilsProvider: utilsProvider,
               pageItems: pageItems,
               selectedPage: selectedPage,
-              itemsPerPage: itemsPerPage,
             );
           } else if (feedDatabaseProvider.result == ResponseResult.loading) {
             return const GeneralShimmerWidget();
@@ -89,7 +87,7 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
     required UtilsProvider utilsProvider,
     required List<ObjectOfRestaurant> pageItems,
     required int selectedPage,
-    required int itemsPerPage,
+
   }) {
     return CustomScrollView(
       controller: _scrollController,
@@ -114,7 +112,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
           _buildListOfFavorited(
             pageItems: pageItems,
             feedDatabaseProvider: feedDatabaseProvider,
-            itemsPerPage: itemsPerPage,
             selectedPage: selectedPage,
             utilsProvider: utilsProvider,
           ),
@@ -125,7 +122,6 @@ class _FavoritesListPageState extends State<FavoritesListPage> {
   Widget _buildListOfFavorited({
     required List<ObjectOfRestaurant> pageItems,
     required FeedDatabaseProvider feedDatabaseProvider,
-    required int itemsPerPage,
     required int selectedPage,
     required UtilsProvider utilsProvider,
   }) {
